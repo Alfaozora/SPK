@@ -7,15 +7,15 @@
             <li><a href="{{ route('home') }}">
                     <em class="fa fa-home"></em>
                 </a></li>
-            <li class="breadcrumb-item"><a href="{{ route('kriteria.index') }}">Kriteria</a></li>
-            <li class="breadcrumb-item active" aria-current="page"> Tambah Kriteria</li>
+            <li class="breadcrumb-item"><a href="{{ route('crips.index') }}">Nilai Kriteria</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> Tambah Nilai Kriteria</li>
         </ol>
     </div>
     <!--/.row-->
 
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header">Tambah Kriteria</h2>
+            <h2 class="page-header">Tambah Nilai Kriteria</h2>
         </div>
     </div>
 </div>
@@ -33,33 +33,29 @@
             </ul>
         </div>
         @endif
-        <form class="needs-validation" method="post" action="{{ route('kriteria.store') }} " validate>
+        <form class="needs-validation" method="post" action="{{ route('crips.store') }} " validate>
             @csrf
-            <h5 class="card-header">Kriteria</h5>
+            <h5 class="card-header">Nilai Kriteria</h5>
             <div class="form-row" style="text-align: center">
                 <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="kode">Kode</label>
+                    <label for="nama">Nama Kriteria</label>
                     <span class="text-danger">*</span>
-                    <input type="text" name="kode" value="{{ old('kode') }}" id="kode" class="form-control input-lg dynamic" data-dependent="kode" data-dynamic="kode">
-                </div>
-                <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="nama_kriteria">Nama Kriteria</label>
-                    <span class="text-danger">*</span>
-                    <input type="text" value="{{ old('nama_kriteria') }}" name="nama_kriteria" id="nama_kriteria" class="form-control input-lg dynamic" data-dependent="nama_kriteria" data-dynamic="nama_kriteria">
-                </div>
-                <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="atribut">Atribut</label>
-                    <span class="text-danger">*</span>
-                    <select name="atribut" value="{{ old('atribut') }}" id="atribut" class="form-control input-lg" data-dependent="atribut">
-                        <option disabled selected>--Pilih Atribut--</option>
-                        <option>Benefit</option>
-                        <option>Cost</option>
+                    <select name="nama" class="form-control input-lg" data-dependent="nama">
+                        <option disabled selected>--Pilih Kriteria--</option>
+                        @foreach ($kriteria as $k)
+                        <option value="{{ $k->nama_kriteria }}">{{ $k->nama_kriteria }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="bobot">Bobot</label>
+                    <label for="keterangan">Keterangan</label>
                     <span class="text-danger">*</span>
-                    <input name="bobot" value="{{ old('bobot') }}" id="bobot" class="form-control input-lg dynamic" data-dependent="bobot" data-dynamic="bobot">
+                    <input type="text" value="{{ old('keterangan') }}" name="keterangan" id="keterangan" class="form-control input-lg dynamic" data-dependent="keterangan" data-dynamic="keterangan">
+                </div>
+                <div class="col-md-3 mb-3 input-group-sm">
+                    <label for="nilai">Nilai</label>
+                    <span class="text-danger">*</span>
+                    <input type="text" value="{{ old('nilai') }}" name="nilai" id="nilai" class="form-control input-lg dynamic" data-dependent="nilai" data-dynamic="nilai">
                 </div>
                 <br>
                 <br>

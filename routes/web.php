@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\CripsController;
+use Route as GlobalRoute;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 #Kriteria
 Route::resource('kriteria', KriteriaController::class);
+
+#Crips
+Route::resource('crips', CripsController::class);
+Route::post('/crips/fetch', [CripsController::class, 'fetcs'])->name('crips.dependent');

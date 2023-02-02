@@ -10,6 +10,8 @@
     <link href="{{asset ('css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset ('css/datepicker3.css')}}" rel="stylesheet">
     <link href="{{asset ('css/styles.css')}}" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <!--Custom Font-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">

@@ -17,7 +17,7 @@
                 Dashboard
             </a>
         </li>
-        <li class="{{ request()->is('kriteria*' && 'nilaikriteria*') ? 'active' : '' }}, parent">
+        <li class="{{ request()->is('kriteria*' && 'crips*') ? 'active' : '' }}, parent">
             <a href="#sub-item-1" data-toggle="collapse" aria-expanded="false">
                 <em class="fa fa-navicon ">&nbsp;</em>
                 Kriteria
@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="" href="">
+                    <a class="{{ request()->is('crips*') ? 'active' : '' }}" href="{{route ('crips.index') }}">
                         <span class="fa fa-book">&nbsp;</span>
                         Nilai Kriteria
                     </a>
