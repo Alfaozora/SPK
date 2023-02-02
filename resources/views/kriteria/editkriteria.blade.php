@@ -50,11 +50,11 @@
                     <label>Atribut</label>
                     <select name="atribut" class="form-control">
                         <option value="{{ old('atribut', $kriteria->atribut) }}" selected>
-                            {{ old('atribur', $kriteria->atribut) }}
+                            {{ old('atribut', $kriteria->atribut) }}
                         </option>
                         <option>------------------------------------------------------</option>
-                        <option value="Benefit" required="">Benefit</option>
-                        <option value="Cost" required="">Cost</option>
+                        <option value="Benefit">Benefit</option>
+                        <option value="Cost">Cost</option>
                     </select>
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
