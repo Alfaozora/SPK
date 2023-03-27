@@ -50,7 +50,7 @@
             </a>
             <ul class="children collapse" id="sub-item-2">
                 <li>
-                    <a class="" href="">
+                    <a class="{{ request()->is('alternatif*') ? 'active' : '' }}" href="{{ route('alternatif.index') }}">
                         <span class="fa fa-user-o">&nbsp;</span>
                         Alternatif
                     </a>

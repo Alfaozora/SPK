@@ -7,7 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class crips extends Model
 {
-    use HasFactory;
-    protected $guarded = [];
-    protected $primaryKey = 'id';
+    //use HasFactory;
+    public $incrementing = false;
+    protected $primaryKey = 'id_crips';
+
+    protected $fillable = [
+        'id_crips',
+        'id_kriteria',
+        'nama',
+        'keterangan',
+        'nilai'
+    ];
+
+    // public function Kriteria()
+    // {
+    //     return $this->belongsTo(Kriteria::class);
+    // }
 }

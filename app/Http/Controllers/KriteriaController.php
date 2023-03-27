@@ -15,8 +15,9 @@ class KriteriaController extends Controller
      */
     public function index()
     {
-        $kriteria = kriteria::all();
-        return view('kriteria.tampilkriteria', compact('kriteria'));
+        return view('kriteria.tampilkriteria', [
+            'kriteria' => Kriteria::all()
+        ]);
     }
 
     /**
@@ -38,14 +39,14 @@ class KriteriaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'kode' => 'required',
+            'id_kriteria' => 'required|numeric',
             'nama_kriteria' => 'required',
             'atribut' => 'required',
             'bobot' =>  'required|numeric'
         ]);
 
-        $kriteria = kriteria::create([
-            'kode' => $request->kode,
+        $kriteria = Kriteria::create([
+            'id_kriteria' => $request->id_kriteria,
             'nama_kriteria' => $request->nama_kriteria,
             'atribut' => $request->atribut,
             'bobot' => $request->bobot
@@ -76,9 +77,9 @@ class KriteriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($kriteria)
     {
-        $kriteria = kriteria::find($id);
+        $kriteria = Kriteria::find($kriteria);
         return view('kriteria.editkriteria', compact('kriteria'));
     }
 
@@ -92,15 +93,13 @@ class KriteriaController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'kode' => 'required',
             'nama_kriteria' => 'required',
             'atribut' => 'required',
             'bobot' =>  'required|numeric'
         ]);
 
-        $kriteria = kriteria::find($id);
+        $kriteria = Kriteria::find($id);
         $kriteria->update([
-            'kode' => $request->kode,
             'nama_kriteria' => $request->nama_kriteria,
             'atribut' => $request->atribut,
             'bobot' => $request->bobot
@@ -122,7 +121,7 @@ class KriteriaController extends Controller
      */
     public function destroy($id)
     {
-        $kriteria = kriteria::find($id);
+        $kriteria = Kriteria::find($id);
         $kriteria->delete();
         return response()->json(['status' => 'Kriteria Berhasil di hapus!']);
     }

@@ -8,14 +8,14 @@
                 <li><a href="{{ route('home') }}">
                         <em class="fa fa-home"></em>
                     </a></li>
-                <li class="active">Kriteria</li>
+                <li class="active">Alternatif</li>
             </ol>
         </div>
         <!--/.row-->
 
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Kriteria</h2>
+                <h2 class="page-header">Alternatif</h2>
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
                             <div class="form-group">
                             </div>
                             <div class="form-group">
-                                <a type="button" class="btn btn-danger" href="{{route('kriteria.create')}}"><i class="fa fa-plus"></i> Tambah</a>
+                                <a type="button" class="btn btn-danger" href="{{route('alternatif.create')}}"><i class="fa fa-plus"></i> Tambah</a>
                             </div>
                             <div class="form-group">
                                 <a type="button" class="btn btn-info" href=""><i class="fa fa-print"></i> Cetak</a>
@@ -43,10 +43,9 @@
                             <thead class="text-center" style="vertical-align:middle;">
                                 <tr>
                                     <th rowspan="2">No</th>
-                                    <th rowspan="2">Id Kriteria</th>
-                                    <th rowspan="2">Nama Kriteria</th>
-                                    <th rowspan="2">Atribut</th>
-                                    <th rowspan="2">Bobot</th>
+                                    <th rowspan="2">Kode</th>
+                                    <th rowspan="2">Nama Alternatif</th>
+                                    <th rowspan="2">keterangan</th>
                                     <th colspan="2">Action</th>
                                 </tr>
                                 <tr>
@@ -55,21 +54,20 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center" style="vertical-align:middle;">
-                                @foreach ($kriteria as $k)
+                                @foreach ($alternatifs as $a)
                                 <tr>
-                                    <input type="hidden" class="delete_id" value="{{ $k->id_kriteria}}">
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $k->id_kriteria }}</td>
-                                    <td>{{ $k->nama_kriteria }}</td>
-                                    <td>{{ $k->atribut }}</td>
-                                    <td>{{ $k->bobot }}</td>
+                                    <input type="hidden" class="delete_id" value="{{ $a->id }}">
+                                    <td>{{ $a->id }}</td>
+                                    <td>{{ $a->kode }}</td>
+                                    <td>{{ $a->nama }}</td>
+                                    <td>{{ $a->keterangan }}</td>
                                     <td>
-                                        <a href="{{ route('kriteria.edit', $k->id_kriteria) }}" class="btn btn-warning">
+                                        <a href="{{ route('alternatif.edit', $a->id) }}" class="btn btn-warning">
                                             <i class="fa fa-edit"></i> Edit
                                         </a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('kriteria.destroy', $k->id_kriteria) }}" method="POST">
+                                        <form action="{{ route('alternatif.destroy', $a->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btndelete"><i class="fa fa-trash"></i> Hapus</button>
@@ -121,7 +119,7 @@
                         };
                         $.ajax({
                             type: "DELETE",
-                            url: 'kriteria/' + deleteid,
+                            url: 'alternatif/' + deleteid,
                             data: data,
                             success: function(response) {
                                 swal(response.status, {

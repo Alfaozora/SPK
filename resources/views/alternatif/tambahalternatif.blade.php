@@ -7,15 +7,15 @@
             <li><a href="{{ route('home') }}">
                     <em class="fa fa-home"></em>
                 </a></li>
-            <li class="breadcrumb-item"><a href="{{ route('kriteria.index') }}">Kriteria</a></li>
-            <li class="breadcrumb-item active" aria-current="page"> Tambah Kriteria</li>
+            <li class="breadcrumb-item"><a href="{{ route('alternatif.index') }}">Alternatif</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> Tambah Alternatif</li>
         </ol>
     </div>
     <!--/.row-->
 
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header">Tambah Kriteria</h2>
+            <h2 class="page-header">Tambah Alternatif</h2>
         </div>
     </div>
 </div>
@@ -33,33 +33,24 @@
             </ul>
         </div>
         @endif
-        <form class="needs-validation" method="post" action="{{ route('kriteria.store') }} " validate>
+        <form class="needs-validation" method="post" action="{{ route('alternatif.store') }} " validate>
             @csrf
-            <h5 class="card-header">Kriteria</h5>
+            <h5 class="card-header">Alternatif</h5>
             <div class="form-row" style="text-align: center">
                 <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="id_kriteria">Id Kriteria</label>
+                    <label for="kode">Kode</label>
                     <span class="text-danger">*</span>
-                    <input type="text" name="id_kriteria" value="{{ old('id_kriteria') }}" id="id_kriteria" class="form-control input-lg">
+                    <input type="text" name="kode" value="{{ old('kode') }}" id="kode" class="form-control input-lg">
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="nama_kriteria">Nama Kriteria</label>
+                    <label for="nama_kriteria">Nama Alternatif</label>
                     <span class="text-danger">*</span>
-                    <input type="text" value="{{ old('nama_kriteria') }}" name="nama_kriteria" id="nama_kriteria" class="form-control input-lg">
+                    <input type="text" value="{{ old('nama') }}" name="nama" id="nama" class="form-control input-lg">
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="atribut">Atribut</label>
+                    <label for="atribut">keterangan</label>
                     <span class="text-danger">*</span>
-                    <select name="atribut" value="{{ old('atribut') }}" id="atribut" class="form-control input-lg">
-                        <option disabled selected>--Pilih Atribut--</option>
-                        <option>Benefit</option>
-                        <option>Cost</option>
-                    </select>
-                </div>
-                <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="bobot">Bobot</label>
-                    <span class="text-danger">*</span>
-                    <input name="bobot" value="{{ old('bobot') }}" id="bobot" class="form-control input-lg">
+                    <input type="text" value="{{ old('keterangan') }}" name="keterangan" id="keterangan" class="form-control input-lg">
                 </div>
                 <br>
                 <br>

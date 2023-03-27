@@ -14,7 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kriterias', function (Blueprint $table) {
-            $table->id();
+            $table->engine = 'InnoDB';
+            $table->integer('id_kriteria');
+            $table->primary('id_kriteria');
+            $table->string('nama_kriteria');
+            $table->string('atribut');
+            $table->double('bobot');
             $table->timestamps();
         });
     }
