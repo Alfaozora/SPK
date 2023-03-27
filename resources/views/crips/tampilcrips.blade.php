@@ -31,14 +31,14 @@
                             <div class="form-group">
                                 <a type="button" class="btn btn-danger" href="{{route('crips.create')}}"><i class="fa fa-plus"></i> Tambah</a>
                             </div>
-                            <div class="form-group">
-                                <select class="form-control dynamic" name="kriteria" id="kriteria" data-dependent="nama" data-dynamic="keterangan" data-dynamic1="nilai">
-                                    <option disabled selected>--Pilih Kriteria--</option>
-                                    @foreach($kriterias as $k)
-                                    <option value="{{ $k->nama_kriteria }}">{{$k->nama_kriteria}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            <select class="form-control" id="kriterias" name="kriterias">
+                                <option disabled selected>--Pilih Kriteria--</option>
+                                @if(count($kriterias) > 0)
+                                @foreach($kriterias as $k)
+                                <option value="{{ $k['id_kriteria'] }}">{{$k->nama_kriteria}}</option>
+                                @endforeach
+                                @endif
+                            </select>
                         </form>
                     </div>
                     <div class="table-responsive">
@@ -46,6 +46,7 @@
                             <thead class="text-center" style="vertical-align:middle;">
                                 <tr>
                                     <th rowspan="2">No</th>
+                                    <th rowspan="2">Kode</th>
                                     <th rowspan="2">Nama Kriteria</th>
                                     <th rowspan="2">Keterangan</th>
                                     <th rowspan="2">Nilai</th>
@@ -56,25 +57,23 @@
                                     <th>Delete</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-center" style="vertical-align:middle;" id="tbody">
+                            <tbody id="tbody">
                                 @if(count($crips) > 0)
                                 @foreach ($crips as $c)
                                 <tr>
-                                    <input type="hidden" class="delete_id" value="{{ $c->id }}">
-                                    <td>{{ $c->id }}</td>
-                                    <td>{{ $c->nama }}</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $c->id_crips }}</td>
+                                    <td>{{ $c->nama}}</td>
                                     <td>{{ $c->keterangan }}</td>
                                     <td>{{ $c->nilai }}</td>
-                                    <td>
-                                        <a href="{{ route('crips.edit', $c->id) }}" class="btn btn-warning">
-                                            <i class="fa fa-edit"></i> Edit
-                                        </a>
+                                    <td class="text-center">
+                                        <a href="{{ route('crips.edit', $c->id_crips) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
                                     </td>
-                                    <td>
-                                        <form action="{{ route('crips.destroy', $c->id) }}" method="POST">
+                                    <td class="text-center">
+                                        <form action="{{ route('crips.destroy', $c->id_crips) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-danger btndelete"><i class="fa fa-trash"></i> Hapus</button>
+                                            <button type="submit" class="btn btn-danger btn-sm btndelete"><i class="fa fa-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -143,31 +142,37 @@
 
     });
 </script>
-<script>
+
+<script type="text/javascript">
     $(document).ready(function() {
-        $('.dynamic').change(function() {
-            if ($(this).val() != '') {
-                var select = $(this).attr("id");
-                var value = $(this).val();
-                var dependent = $(this).data('dependent');
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url: "{{ route('crips.dependent') }}",
-                    method: "POST",
-                    data: {
-                        select: select,
-                        value: value,
-                        _token: _token,
-                        dependent: dependent,
-                    },
-                    success: function(result) {
-                        $('#tbody' + dependent).html(result);
+        $('#kriterias').on('change', function() {
+            var kriteria = $(this).val();
+            $.ajax({
+                url: "{{ route('crips.index') }}",
+                type: "GET",
+                data: {
+                    'kriterias': kriteria
+                },
+                success: function(data) {
+                    console.log(data);
+                    var crips = data.crips;
+                    var html = '';
+                    if (crips.length > 0) {
+                        for (let i = 0; i < crips.length; i++) {
+                            html += '<tr>\
+                                     <td>' + i + '</td>\
+                                     <td>' + crips[i][id_crips] + '</td>\
+                                     <td>' + crips[i][nama] + '</td>\
+                                     <td>' + crips[i][keterangan] + '</td>\
+                                     <td>' + crips[i][nilai] + '</td>\
+                                     </tr>';
+                        }
+                    } else {
+                        html += '';
                     }
-                })
-            }
-        });
-        $('#kode').change(function() {
-            $('#nama').val('');
+                    $('#tbody').html(html);
+                }
+            });
         });
     });
 </script>

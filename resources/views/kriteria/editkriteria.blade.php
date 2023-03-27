@@ -32,7 +32,7 @@
         </ul>
     </div>
     @endif
-    <form method="POST" action="{{ route('kriteria.update', $kriteria->id) }}">
+    <form method="POST" action="{{ route('kriteria.update', $kriteria->id_kriteria) }}">
         @csrf
         @method('PUT')
         <div class="row">
@@ -40,7 +40,7 @@
             <div class="form-row">
                 <div class="col-md-3 mb-3 input-group-sm">
                     <label>Kode</label>
-                    <input type="text" name="kode" class="form-control" placeholder="" value="{{ old('kode', $kriteria->kode) }}">
+                    <input type="text" name="id_kriteria" class="form-control" placeholder="" value="{{ old('id_kriteria', $kriteria->id_kriteria) }}">
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
                     <label>Nama Kriteria</label>

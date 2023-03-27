@@ -38,12 +38,27 @@
             <h5 class="card-header">Nilai Kriteria</h5>
             <div class="form-row" style="text-align: center">
                 <div class="col-md-3 mb-3 input-group-sm">
+                    <label for="id_crips">ID Crips</label>
+                    <span class="text-danger">*</span>
+                    <input type="text" value="{{ old('id_crips') }}" name="id_crips" id="id_crips" class="form-control input-lg">
+                </div>
+                <div class="col-md-3 mb-3 input-group-sm">
+                    <label for="id_kriteria">ID kriteria</label>
+                    <span class="text-danger">*</span>
+                    <select name="id_kriteria" id="id_kriteria" class="form-control input-lg">
+                        <option value="">Pilih Id</option>
+                        @foreach ($kriterias as $k)
+                        <option value="{{ $k->id_kriteria}}">{{ $k->id_kriteria }}-{{ $k->nama_kriteria }} </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3 input-group-sm">
                     <label for="nama">Nama Kriteria</label>
                     <span class="text-danger">*</span>
-                    <select name="nama" class="form-control input-lg" data-dependent="nama">
-                        <option disabled selected>--Pilih Kriteria--</option>
-                        @foreach ($kriteria as $k)
-                        <option value="{{ $k->nama_kriteria }}">{{ $k->nama_kriteria }}</option>
+                    <select name="nama" id="nama" class="form-control input-lg">
+                        <option value="">Pilih Kriteria</option>
+                        @foreach ($kriterias as $k)
+                        <option value="{{ $k->nama_kriteria}}">{{ $k->nama_kriteria }}</option>
                         @endforeach
                     </select>
                 </div>

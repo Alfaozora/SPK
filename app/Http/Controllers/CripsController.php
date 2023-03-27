@@ -17,9 +17,14 @@ class CripsController extends Controller
      */
     public function index(Request $request)
     {
-        $crips = Crips::all();
-        $kriterias = kriteria::all();
-        return view('crips.tampilcrips', compact('crips', 'kriterias'));
+        $kriterias = Kriteria::all();
+        $query = Crips::query();
+        if ($request->ajax()) {
+            $crips = $query->where(['id_kriteria' => $request->kriteria])->get();
+            return response()->json(['crips' => $crips]);
+        }
+        $crips = $query->get();
+        return view('crips.tampilcrips', compact('kriterias', 'crips'));
     }
 
     /**
@@ -29,8 +34,8 @@ class CripsController extends Controller
      */
     public function create()
     {
-        $kriteria = Kriteria::all();
-        return view('crips.tambahcrips', compact('kriteria'));
+        $kriterias = Kriteria::all();
+        return view('crips.tambahcrips', compact('kriterias'));
     }
 
     /**
@@ -42,17 +47,25 @@ class CripsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'id_crips' => 'required|numeric',
+            'id_kriteria' => 'required|numeric',
             'nama' => 'required',
             'keterangan' => 'required',
-            'nilai' => 'required|numeric'
+            'nilai' =>  'required|numeric'
         ]);
 
-        $crips = Crips::create([$request->all()]);
+        $crips = Crips::create([
+            'id_crips' => $request->id_crips,
+            'id_kriteria' => $request->id_kriteria,
+            'nama' => $request->nama,
+            'keterangan' => $request->keterangan,
+            'nilai' => $request->nilai
+        ]);
         if ($crips) {
-            Alert::success('Nilai Kriteria Berhasil Ditambahkan', 'Selamat');
+            Alert::success('Data Crips Berhasil Ditambahkan', 'Selamat');
             return redirect()->route('crips.index');
         } else {
-            Alert::error('Nilai Kriteria Berhasil Ditambahkan', 'Maaf');
+            Alert::error('Data Crips Gagal Ditambahkan', 'Maaf');
             return redirect()->route('crips.create');
         }
     }
@@ -91,6 +104,7 @@ class CripsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'id_crips' => 'required' | 'numeric',
             'nama' => 'required',
             'keterangan' => 'required',
             'nilai' => 'required|numeric'
@@ -98,6 +112,7 @@ class CripsController extends Controller
 
         $crips = Crips::find($id);
         $crips->update([
+            'id_crips' => $request->id_crips,
             'nama' => $request->nama,
             'keterangan' => $request->keterangan,
             'nilai' => $request->nilai,
@@ -122,20 +137,5 @@ class CripsController extends Controller
         $crips = Crips::find($id);
         $crips->delete();
         return response()->json(['status' => 'Kriteria Berhasil di hapus!']);
-    }
-
-    function fetch(Request $request)
-    {
-        $select = $request->get('select');
-        $value = $request->get('value');
-        $dependent = $request->get('dependent');
-        $data = DB::table('crips')
-            ->where($select, $value)
-            ->groupBy($dependent)
-            ->get();
-        foreach ($data as $row) {
-            $output = '<option value="' . $row->$dependent . '" name="nama" selected>' . ucfirst($row->$dependent) . '</option>';
-        }
-        echo $output;
     }
 }
