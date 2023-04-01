@@ -1858,3 +1858,12 @@ p.back-link {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
+.jumbotron{
+    position: relative;
+    background:url(https://www.les-terrasses-du-lac.com/wp-content/uploads/2019/03/terrasse-du-lac-1.jpg);
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    overflow: hidden;
+}
