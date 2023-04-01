@@ -24,8 +24,8 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <div class="large"><strong>Rp.@idr</strong></div>
-                        <div class="text"><strong> Pemasukan</strong></div>
+                        <div class="large"><strong>{{$penduduks}}</strong></div>
+                        <div class="text"><strong> Penduduk Mendapatkan Bantuan</strong></div>
                     </div>
                     <div class="icon">
                         <i class="fa fa-arrow-up"></i>
