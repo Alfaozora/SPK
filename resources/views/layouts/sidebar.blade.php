@@ -44,6 +44,6 @@
             </ul>
         </li>
         <li class=""><a href="index.html"><em class="fa fa-calculator">&nbsp;</em> Hasil</a></li>
-        <li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+        <li><a href="/sesi/logout"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
     </ul>
 </div><!--/.sidebar-->
