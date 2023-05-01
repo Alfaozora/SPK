@@ -19,7 +19,9 @@ use Route as GlobalRoute;
 |
 */
 #Login
-Route::get('/login', [LoginController::class, 'login']);
+Route::get('/sesi', [LoginController::class, 'login']);
+Route::post('/sesi/login', [LoginController::class, 'postLogin']);
+Route::get('/sesi/logout', [LoginController::class, 'logout']);
 
 #Dashboard
 Route::get('/', [HomeController::class, 'index'])->name('home');

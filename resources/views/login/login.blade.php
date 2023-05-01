@@ -31,9 +31,10 @@
                     <div class="card fat">
                         <div class="card-body">
                             <h3 class="card-title">Login</h3>
-                            <form method="POST" class="my-login-validation" novalidate="">
+                            <form action="/sesi/login" method="POST" class="my-login-validation" novalidate="">
+                                @csrf
                                 <div class="form-group">
-                                    <label for="email">E-Mail</label>
+                                    <label for="email">Email</label>
                                     <input id="email" type="email" class="form-control" name="email" value="" required autofocus>
                                     <div class="invalid-feedback">
                                         Email is invalid
@@ -47,8 +48,8 @@
                                     </label>
                                     <input id="password" type="password" class="form-control" name="password" required data-eye>
                                     <div class="invalid-feedback">
-                                        Password is required </div>
-
+                                        Password is required
+                                    </div>
                                     <div class="form-group">
                                         <div class="custom-checkbox custom-control">
                                             <input type="checkbox" name="remember" id="remember" class="custom-control-input">
@@ -61,15 +62,13 @@
                                             Login
                                         </button>
                                     </div>
-                                    <div class="mt-4 text-center">
-                                        Don't have an account? <a href="register.html">Create One</a>
-                                    </div>
                             </form>
                         </div>
                     </div>
-                    <div class="footer">
-                        Copyright &copy; 2023 &mdash; SPK GEDONGBOYOUNTUNG
-                    </div>
+
+                </div>
+                <div class="footer">
+                    Copyright &copy; 2023 &mdash; SPK GEDONGBOYOUNTUNG
                 </div>
             </div>
         </div>
