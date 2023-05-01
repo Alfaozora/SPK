@@ -10,6 +10,7 @@
         <div class="clear"></div>
     </div>
     <div class="divider"></div>
+
     <ul class="nav menu">
         <li class="{{ request()->is('/') ? 'active' : '' }}">
             <a href="{{ route('home') }}">
@@ -17,48 +18,27 @@
                 Dashboard
             </a>
         </li>
-        <li class="{{ request()->is('kriteria*' && 'crips*') ? 'active' : '' }}, parent">
-            <a href="#sub-item-1" data-toggle="collapse" aria-expanded="false">
-                <em class="fa fa-navicon ">&nbsp;</em>
-                Kriteria
-                <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right">
-                    <em class="fa fa-plus"></em>
-                </span>
-            </a>
-            <ul class="children collapse" id="sub-item-1">
-                <li>
-                    <a class="{{ request()->is('kriteria*') ? 'active' : '' }}" href="{{route ('kriteria.index') }}">
-                        <span class="fa fa-cubes">&nbsp;</span>
-                        Kriteria
-                    </a>
-                </li>
-                <li>
-                    <a class="{{ request()->is('crips*') ? 'active' : '' }}" href="{{route ('crips.index') }}">
-                        <span class="fa fa-book">&nbsp;</span>
-                        Nilai Kriteria
-                    </a>
-                </li>
-            </ul>
-        </li>
+        <li class="{{ request()->is('kriteria*') ? 'active' : '' }}"><a href="{{route ('kriteria.index') }}"><em class="fa fa-cubes">&nbsp;</em> Kriteria</a></li>
+        <li class="{{ request()->is('alternatif*') ? 'active' : '' }}"><a href="{{route ('alternatif.index') }}"><em class="fa fa-user-o">&nbsp;</em> Alternatif</a></li>
         <li class="parent">
-            <a href="#sub-item-2" data-toggle="collapse" aria-expanded="false">
+            <a href="#sub-item-3" data-toggle="collapse" aria-expanded="false">
                 <em class="fa fa-navicon ">&nbsp;</em>
-                Alternatif
-                <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right">
+                Nilai Bobot
+                <span data-toggle="collapse" href="#sub-item-3" class="icon pull-right">
                     <em class="fa fa-plus"></em>
                 </span>
             </a>
-            <ul class="children collapse" id="sub-item-2">
+            <ul class="children collapse" id="sub-item-3">
                 <li>
-                    <a class="{{ request()->is('alternatif*') ? 'active' : '' }}" href="{{ route('alternatif.index') }}">
+                    <a class="{{ request()->is('crips*') ? 'active' : '' }}" href="{{ route('crips.index') }}">
                         <span class="fa fa-user-o">&nbsp;</span>
-                        Alternatif
+                        Nilai Bobot Kriteria
                     </a>
                 </li>
                 <li>
                     <a class="" href="">
                         <span class="fa fa-book">&nbsp;</span>
-                        Nilai Alternatif
+                        Nilai Bobot Alternatif
                     </a>
                 </li>
             </ul>
