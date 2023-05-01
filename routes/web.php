@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\CripsController;
 use App\Http\Controllers\AlternatifController;
+use App\Http\Controllers\LoginController;
 use Route as GlobalRoute;
 
 /*
@@ -17,6 +18,8 @@ use Route as GlobalRoute;
 | contains the "web" middleware group. Now create something great!
 |
 */
+#Login
+Route::get('/login', [LoginController::class, 'login']);
 
 #Dashboard
 Route::get('/', [HomeController::class, 'index'])->name('home');

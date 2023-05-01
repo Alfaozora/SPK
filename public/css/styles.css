@@ -19,10 +19,9 @@ p {
     color: #777;
 }
 
-a,
 a:hover,
 a:focus {
-    color: blue;
+    color: #007bff;
 }
 
 h1,
