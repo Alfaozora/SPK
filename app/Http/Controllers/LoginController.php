@@ -32,9 +32,11 @@ class LoginController extends Controller
             return redirect('sesi')->withErrors(['Pesan' => 'Email atau Password Salah!']);
         }
     }
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect('sesi');
     }
 }
