@@ -20,21 +20,21 @@ use Route as GlobalRoute;
 |
 */
 #Login
-Route::get('/sesi', [LoginController::class, 'login']);
+Route::get('/sesi', [LoginController::class, 'login'])->name('login');
 Route::post('/sesi/login', [LoginController::class, 'postLogin']);
 Route::get('/sesi/logout', [LoginController::class, 'logout']);
 
 #Dashboard
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
 #Kriteria
-Route::resource('kriteria', KriteriaController::class);
+Route::resource('kriteria', KriteriaController::class)->middleware('auth');
 
 #Crips
-Route::resource('crips', CripsController::class);
+Route::resource('crips', CripsController::class)->middleware('auth');
 
 #Alternatif
-Route::resource('alternatif', AlternatifController::class);
+Route::resource('alternatif', AlternatifController::class)->middleware('auth');
 
 #Register
-Route::resource('register', RegisterController::class);
+Route::resource('register', RegisterController::class)->middleware('auth');
