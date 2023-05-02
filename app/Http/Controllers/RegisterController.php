@@ -63,7 +63,7 @@ class RegisterController extends Controller
             return redirect()->route('register.index');
         } else {
             Alert::error('Data Gagal Ditambahkan', 'Maaf');
-            return redirect()->route('register.index');
+            return redirect()->route('register');
         }
     }
 
