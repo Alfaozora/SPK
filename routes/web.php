@@ -6,6 +6,7 @@ use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\CripsController;
 use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Route as GlobalRoute;
 
 /*
@@ -34,3 +35,6 @@ Route::resource('crips', CripsController::class);
 
 #Alternatif
 Route::resource('alternatif', AlternatifController::class);
+
+#Register
+Route::resource('register', RegisterController::class);
