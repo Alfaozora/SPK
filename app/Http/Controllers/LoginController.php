@@ -29,7 +29,7 @@ class LoginController extends Controller
         if (Auth::attempt($infologin)) {
             return redirect('/');
         } else {
-            return redirect('sesi')->withErrors(['Pesan' => 'Email atau Password Salah!']);
+            return redirect('login')->withErrors(['Pesan' => 'Email atau Password Salah!']);
         }
     }
     public function logout(Request $request)
@@ -37,6 +37,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('sesi');
+        return redirect('login');
     }
 }
