@@ -20,9 +20,9 @@ use Route as GlobalRoute;
 |
 */
 #Login
-Route::get('/sesi', [LoginController::class, 'login'])->name('login')->middleware('guest');
-Route::post('/sesi/login', [LoginController::class, 'postLogin'])->middleware('guest');
-Route::get('/sesi/logout', [LoginController::class, 'logout'])->middleware('auth');
+Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/login/action', [LoginController::class, 'postLogin'])->middleware('guest');
+Route::get('/login/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 #Dashboard
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');

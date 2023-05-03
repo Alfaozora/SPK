@@ -31,7 +31,7 @@
                     <div class="card fat">
                         <div class="card-body">
                             <h3 class="card-title">Login</h3>
-                            <form action="/sesi/login" method="POST" class="my-login-validation" novalidate="">
+                            <form action="/login/action" method="POST" class="my-login-validation" novalidate="">
                                 @csrf
                                 <div class="form-group">
                                     <label for="email">Email</label>
@@ -43,7 +43,7 @@
                                 <div class="form-group">
                                     <label for="password">Password
                                         <a href="#" class="float-right">
-                                            Forgot Password?
+                                            Lupa Kata Sandi?
                                         </a>
                                     </label>
                                     <input id="password" type="password" class="form-control" name="password" required data-eye>
