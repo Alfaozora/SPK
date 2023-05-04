@@ -7,6 +7,8 @@ use App\Models\User;
 use Hash;
 use Session;
 use Alert;
+use Auth;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -58,6 +60,8 @@ class RegisterController extends Controller
             'password' =>  Hash::make($request->password)
         ];
         User::create($data);
+        event(new Registered($data));
+        Auth::login($data);
         if ($data) {
             Alert::success('Data Berhasil Ditambahkan', 'Selamat');
             return redirect()->route('register.index');

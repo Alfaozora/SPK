@@ -7,6 +7,8 @@ use App\Http\Controllers\CripsController;
 use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SendEmailController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Route as GlobalRoute;
 
 /*
@@ -38,3 +40,15 @@ Route::resource('alternatif', AlternatifController::class)->middleware('auth');
 
 #Register
 Route::resource('register', RegisterController::class)->middleware('auth');
+
+#Email Verification
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+#Send Email
+Route::get('send-email', [SendEmailController::class, 'index']);
