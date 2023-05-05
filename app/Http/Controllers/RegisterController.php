@@ -7,6 +7,9 @@ use App\Models\User;
 use Hash;
 use Session;
 use Alert;
+use Auth;
+use Illuminate\Auth\Events\Registered;
+use App\Models\role;
 
 class RegisterController extends Controller
 {
@@ -17,7 +20,8 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('login.register');
+        $roles = role::all();
+        return view('login.register', compact('roles'));
     }
 
     /**
@@ -43,28 +47,33 @@ class RegisterController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8',
+            'role' => 'required'
         ], [
             'name.required' => 'Nama tidak boleh kosong',
             'email.required' => 'Email tidak boleh kosong',
             'email.email' => 'Email tidak valid',
             'email.unique' => 'Email sudah terdaftar',
             'password.required' => 'Password tidak boleh kosong',
-            'password.min' => 'Password minimal 8 karakter'
+            'password.min' => 'Password minimal 8 karakter',
+            'role.required' => 'Role tidak boleh kosong'
         ]);
-        $data = [
+        $user = User::create([
+            'role' => $request->role,
             'name' => $request->name,
             'email' => $request->email,
-            'password' =>  Hash::make($request->password)
-        ];
-        User::create($data);
-        if ($data) {
-            Alert::success('Data Berhasil Ditambahkan', 'Selamat');
-            return redirect()->route('register.index');
+            'password' => Hash::make($request->password)
+        ]);
+        if ($user) {
+            Alert::success('Berhasil', 'Berhasil Mendaftar');
+            return redirect()->route('home');
         } else {
-            Alert::error('Data Gagal Ditambahkan', 'Maaf');
-            return redirect()->route('register');
+            Alert::error('Gagal', 'Gagal Mendaftar');
+            return redirect()->route('register.index');
         }
+        // event(new Registered($user));
+        // Auth::login($user);
+        // return redirect('/email/verify');
     }
 
     /**

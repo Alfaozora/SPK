@@ -51,7 +51,17 @@
                 <div class="col-md-3 mb-3 input-group-sm">
                     <label for="nama">Password</label>
                     <span class="text-danger">*</span>
-                    <input type="password" value="{{ old('password') }}" name="password" id="email" class="form-control input-lg">
+                    <input type="password" value="{{ old('password') }}" name="password" id="email" class="form-control" required data-eye>
+                </div>
+                <div class="col-md-3 mb-3 input-group-sm">
+                    <label for="role">Role</label>
+                    <span class="text-danger">*</span>
+                    <select name="role" id="id_kriteria" class="form-control input-lg">
+                        <option value="">Pilih Role</option>
+                        @foreach ($roles as $r)
+                        <option value="{{ $r->id}}">{{ $r->id }}-{{ $r->role }} </option>
+                        @endforeach
+                    </select>
                 </div>
                 <br>
                 <br>
@@ -70,4 +80,6 @@
     <br>
     <p class="back-link">Desa Gedongboyountung 2023</p>
 </div>
+<script src="{{asset ('js/custom.js')}}"></script>
+<script src="{{asset ('js/my-login.js')}}"></script>
 @endsection

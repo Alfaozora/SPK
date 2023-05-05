@@ -23,7 +23,6 @@ return new class extends Migration
             $table->double('nilai');
             $table->timestamps();
         });
-
         Schema::table('crips', function ($table) {
             $table->foreign('id_kriteria')
                 ->references('id_kriteria')

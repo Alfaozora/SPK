@@ -7,6 +7,8 @@ use App\Http\Controllers\CripsController;
 use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SendEmailController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Route as GlobalRoute;
 
 /*
@@ -22,19 +24,31 @@ use Route as GlobalRoute;
 #Login
 Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login/action', [LoginController::class, 'postLogin'])->middleware('guest');
-Route::get('/login/logout', [LoginController::class, 'logout'])->middleware('auth');
+Route::get('/login/logout', [LoginController::class, 'logout'])->middleware(['auth']);
 
 #Dashboard
-Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
+Route::get('/', [HomeController::class, 'index'])->middleware(['auth'])->name('home');
 
 #Kriteria
-Route::resource('kriteria', KriteriaController::class)->middleware('auth');
+Route::resource('kriteria', KriteriaController::class)->middleware(['auth']);
 
 #Crips
-Route::resource('crips', CripsController::class)->middleware('auth');
+Route::resource('crips', CripsController::class)->middleware(['auth']);
 
 #Alternatif
-Route::resource('alternatif', AlternatifController::class)->middleware('auth');
+Route::resource('alternatif', AlternatifController::class)->middleware(['auth']);
 
 #Register
-Route::resource('register', RegisterController::class)->middleware('auth');
+Route::resource('register', RegisterController::class)->middleware(['auth', 'admin']);
+
+// #Email Verification
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->middleware('auth')->name('verification.notice');
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
+//     return redirect('/');
+// })->middleware(['auth', 'signed'])->name('verification.verify');
+
+#Send Email
+Route::get('send-email', [SendEmailController::class, 'index']);

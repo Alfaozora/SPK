@@ -33,7 +33,7 @@ class TesEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address('jeffrey@example.com', 'Jeffrey Way'),
+            from: new Address('alfa.ozora89@gmail.com', 'Tes Email'),
             subject: 'Tes Email',
         );
     }
@@ -46,7 +46,7 @@ class TesEmail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.testmail',
         );
     }
 
