@@ -18,10 +18,16 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
+        'role',
         'name',
         'email',
         'password',
     ];
+
+    public function role()
+    {
+        return $this->hasMany(role::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
