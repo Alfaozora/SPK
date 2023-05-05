@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Toaster;
 
 class LoginController extends Controller
 {
@@ -13,6 +14,13 @@ class LoginController extends Controller
     }
     public function postlogin(Request $request)
     {
+        $remember = $request->has('remember') ? true : false;
+        if (auth()->attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
+            $user = Auth::user();
+        } else {
+            alert()->error('Email atau Password Salah!', 'Gagal');
+            return back();
+        }
         $this->validate($request, [
             'email' => 'required',
             'password' => 'required|min:8'

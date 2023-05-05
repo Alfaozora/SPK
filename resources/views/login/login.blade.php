@@ -42,9 +42,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password
-                                        <a href="#" class="float-right">
+                                        <!-- <a href="#" class="float-right">
                                             Lupa Kata Sandi?
-                                        </a>
+                                        </a> -->
                                     </label>
                                     <input id="password" type="password" class="form-control" name="password" required data-eye>
                                     <div class="invalid-feedback">
