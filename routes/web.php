@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SendEmailController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\ProfilController;
 use Route as GlobalRoute;
 
 /*
@@ -52,3 +53,6 @@ Route::resource('register', RegisterController::class)->middleware(['auth', 'adm
 
 #Send Email
 Route::get('send-email', [SendEmailController::class, 'index']);
+
+#Profil
+Route::resource('profil', ProfilController::class);
