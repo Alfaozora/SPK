@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Penduduk extends Model
 {
     use HasFactory;
+    public $incrementing = false;
+    protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'id',
+        'nama',
+        'alamat',
+        'nik'
+    ];
 }
