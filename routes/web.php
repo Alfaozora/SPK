@@ -42,6 +42,7 @@ Route::resource('alternatif', AlternatifController::class)->middleware(['auth'])
 #Register
 Route::resource('register', RegisterController::class)->middleware(['auth', 'admin']);
 
+
 // #Email Verification
 // Route::get('/email/verify', function () {
 //     return view('auth.verify-email');
