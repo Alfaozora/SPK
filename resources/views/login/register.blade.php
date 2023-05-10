@@ -7,6 +7,7 @@
             <li><a href="{{ route('home') }}">
                     <em class="fa fa-home"></em>
                 </a></li>
+            <li class="breadcrumb-item"><a href="{{ route('register.index') }}">Menu User</a></li>
             <li class="breadcrumb-item active" aria-current="page">
                 Register
             </li>

@@ -15,29 +15,29 @@ class LoginController extends Controller
     public function postlogin(Request $request)
     {
         $remember = $request->has('remember') ? true : false;
-        if (auth()->attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
+        if (auth()->attempt(['name' => $request->name, 'password' => $request->password], $remember)) {
             $user = Auth::user();
         } else {
             alert()->error('Email atau Password Salah!', 'Gagal');
             return back();
         }
         $this->validate($request, [
-            'email' => 'required',
+            'name' => 'required',
             'password' => 'required|min:8'
         ], [
-            'email.required' => 'Email Harus Diisi!',
+            'name.required' => 'Username Harus Diisi!',
             'password.required' => 'Password Harus Diisi!',
             'password.min' => 'Password Minimal 8 Karakter!'
         ]);
         $infologin = [
-            'email' => $request->email,
+            'name' => $request->name,
             'password' => $request->password
         ];
 
         if (Auth::attempt($infologin)) {
             return redirect('/');
         } else {
-            return redirect('login')->withErrors(['Pesan' => 'Email atau Password Salah!']);
+            return redirect('login')->withErrors(['Pesan' => 'Username atau Password Salah!']);
         }
     }
     public function logout(Request $request)

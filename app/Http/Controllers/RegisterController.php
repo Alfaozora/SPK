@@ -10,6 +10,8 @@ use Alert;
 use Auth;
 use Illuminate\Auth\Events\Registered;
 use App\Models\role;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class RegisterController extends Controller
 {
@@ -20,8 +22,8 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        $roles = role::all();
-        return view('login.register', compact('roles'));
+        $users = User::all();
+        return view('login.datauser', compact('users'));
     }
 
     /**
@@ -31,7 +33,8 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        //
+        $roles = role::all();
+        return view('login.register', compact('roles'));
     }
 
     /**
@@ -66,10 +69,10 @@ class RegisterController extends Controller
         ]);
         if ($user) {
             Alert::success('Berhasil', 'Berhasil Mendaftar');
-            return redirect()->route('home');
+            return redirect()->route('register.index');
         } else {
             Alert::error('Gagal', 'Gagal Mendaftar');
-            return redirect()->route('register.index');
+            return redirect()->route('register.create');
         }
         // event(new Registered($user));
         // Auth::login($user);
@@ -95,7 +98,8 @@ class RegisterController extends Controller
      */
     public function edit($id)
     {
-        //
+        $users = User::find($id);
+        return view('login.edituser', compact('user'));
     }
 
     /**
@@ -107,7 +111,27 @@ class RegisterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+            'role' => 'required'
+        ]);
+
+        $users = User::find($id);
+        $users->update([
+            'role' => $request->role,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+        if ($users) {
+            Alert::success('Kriteria Berhasil Diubah', 'Selamat');
+            return redirect()->route('regiter.index');
+        } else {
+            Alert::error('Kriteria Gagal Diubah', 'Maaf');
+            return redirect()->route('register.edit');
+        }
     }
 
     /**
@@ -118,6 +142,8 @@ class RegisterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $users = User::find($id);
+        $users->delete();
+        return response()->json(['status' => 'Data Berhasil di hapus!']);
     }
 }

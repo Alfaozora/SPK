@@ -34,8 +34,8 @@
                             <form action="/login/action" method="POST" class="my-login-validation" novalidate="">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input id="email" type="email" class="form-control" name="email" value="" required autofocus>
+                                    <label for="name">Username</label>
+                                    <input id="name" type="text" class="form-control" name="name" placeholder="Masukan Username" required autofocus>
                                     <div class="invalid-feedback">
                                         Email is invalid
                                     </div>
@@ -46,11 +46,12 @@
                                             Lupa Kata Sandi?
                                         </a> -->
                                     </label>
-                                    <input id="password" type="password" class="form-control" name="password" required data-eye>
+                                    <input id="password" type="password" class="form-control" name="password" placeholder="Masukan Password" required data-eye>
                                     <div class="invalid-feedback">
                                         Password is required
                                     </div>
                                     <div class="form-group">
+                                        <br>
                                         <div class="custom-checkbox custom-control">
                                             <input type="checkbox" name="remember" id="remember" class="custom-control-input">
                                             <label for="remember" class="custom-control-label">Ingat Saya</label>
