@@ -43,7 +43,6 @@
                             <thead class="text-center" style="vertical-align:middle;">
                                 <tr>
                                     <th rowspan="2">No</th>
-                                    <th rowspan="2">Id Pengguna</th>
                                     <th rowspan="2">Nama</th>
                                     <th rowspan="2">Email</th>
                                     <th rowspan="2">Status</th>
@@ -59,10 +58,15 @@
                                 <tr>
                                     <input type="hidden" class="delete_id" value="{{ $u->id}}">
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $u->id }}</td>
                                     <td>{{ $u->name }}</td>
                                     <td>{{ $u->email }}</td>
-                                    <td>{{ $u->role }}</td>
+                                    <td>
+                                        @if ($u->role == 1)
+                                        Admin
+                                        @elseif ($u->role == 2)
+                                        User
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{ route('register.edit', $u->id) }}" class="btn btn-warning">
                                             <i class="fa fa-edit"></i> Edit

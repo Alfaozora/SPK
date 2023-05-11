@@ -53,7 +53,7 @@ Route::resource('register', RegisterController::class)->middleware(['auth', 'adm
 // })->middleware(['auth', 'signed'])->name('verification.verify');
 
 #Send Email
-Route::get('send-email', [SendEmailController::class, 'index']);
+// Route::get('send-email', [SendEmailController::class, 'index']);
 
 #Profil
 Route::resource('profil', ProfilController::class);

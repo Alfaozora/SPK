@@ -12,6 +12,7 @@ use Illuminate\Auth\Events\Registered;
 use App\Models\role;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
 class RegisterController extends Controller
 {
@@ -23,7 +24,8 @@ class RegisterController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('login.datauser', compact('users'));
+        $roles = role::all();
+        return view('login.datauser', compact('users', 'roles'));
     }
 
     /**
@@ -74,6 +76,38 @@ class RegisterController extends Controller
             Alert::error('Gagal', 'Gagal Mendaftar');
             return redirect()->route('register.create');
         }
+        if ($user) {
+            $email_pengirim = 'spkbansos.gmail.com';
+            $nama_pengirim = 'Admin';
+            $email_penerima = $_POST['email'];
+            $subjek = 'Registrasi Pengguna Baru';
+            $pesan = 'Selamat Akun Anda Berhasil Ditambahkan, Username Anda' . $_POST['name'] . 'Password Anda' . $_POST['password'];
+
+            $mail = new PHPMailer;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Username = $email_pengirim;
+            $mail->Password = 'bxzabhniwfycgfaa';
+            $mail->Port = 465;
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';
+            $mail->SMTPDebug = 2;
+
+            $mail->setFrom($email_pengirim, $nama_pengirim);
+            $mail->addAddress($email_penerima);
+            $mail->isHTML(true);
+            $mail->Subject = $subjek;
+            $mail->Body = $pesan;
+
+            $send = $mail->send();
+
+            if ($send) {
+                echo 'Pesan berhasil dikirim';
+            } else {
+                echo 'Pesan gagal dikirim';
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+            }
+        }
         // event(new Registered($user));
         // Auth::login($user);
         // return redirect('/email/verify');
@@ -99,7 +133,8 @@ class RegisterController extends Controller
     public function edit($id)
     {
         $users = User::find($id);
-        return view('login.edituser', compact('user'));
+        $roles = role::all();
+        return view('login.edituser', compact('users', 'roles'));
     }
 
     /**
@@ -111,25 +146,40 @@ class RegisterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
-            'role' => 'required'
-        ]);
+
 
         $users = User::find($id);
-        $users->update([
-            'role' => $request->role,
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
+        //validasi
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'role' => 'required',
+
         ]);
+
+
+        if ($request->new_password != null) {
+            $this->validate($request, [
+                'new_password' => 'required|min:8',
+                'repeatpassword' => 'required|same:new_password|different:old_password'
+            ]);
+            if (!Hash::check($request->old_password, $users->password)) {
+                Alert::error('Password lama tidak sesuai', 'Error');
+                return redirect()->back();
+            }
+            $users->password = Hash::make($request->new_password);
+        }
+
+        $users->name = $request->name;
+        $users->email = $request->email;
+        $users->role = $request->role;
+        $users->save();
+
         if ($users) {
-            Alert::success('Kriteria Berhasil Diubah', 'Selamat');
-            return redirect()->route('regiter.index');
+            Alert::success('Data User Berhasil Diubah', 'Selamat');
+            return redirect()->route('register.index');
         } else {
-            Alert::error('Kriteria Gagal Diubah', 'Maaf');
+            Alert::error('Data User Gagal Diubah', 'Maaf');
             return redirect()->route('register.edit');
         }
     }
