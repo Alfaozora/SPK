@@ -48,9 +48,18 @@
                     <input type="text" value="{{ old('nama') }}" name="nama" id="nama" class="form-control input-lg">
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="atribut">keterangan</label>
+                    <label for="alamat">Alamat</label>
                     <span class="text-danger">*</span>
-                    <input type="text" value="{{ old('keterangan') }}" name="keterangan" id="keterangan" class="form-control input-lg">
+                    <select name="alamat" id="alamat" class="form-control">
+                        <option value="{{null}}" selected disabled>Pilih Alamat</option>
+                        <option value="Klari">Klari</option>
+                        <option value="Gedong">Gedong</option>
+                        <option value="Dampet">Dampet</option>
+                        <option value="Mlanggeng">Mlanggeng</option>
+                        <option value="Nataan Jobo">Nataan Jobo</option>
+                        <option value="Nataan Jero">Nataan Jero</option>
+                        <option value="Boyosari">Boyosari</option>
+                    </select>
                 </div>
                 <br>
                 <br>

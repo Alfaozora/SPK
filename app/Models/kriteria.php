@@ -14,9 +14,8 @@ class kriteria extends Model
 
     protected $fillable = [
         'id_kriteria',
+        'kode_kriteria',
         'nama_kriteria',
-        'atribut',
-        'bobot'
     ];
 
     // public function Crips()

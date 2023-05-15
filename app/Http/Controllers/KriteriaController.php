@@ -39,17 +39,15 @@ class KriteriaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'id_kriteria' => 'required|numeric',
+            'kode_kriteria' => 'required',
             'nama_kriteria' => 'required',
-            'atribut' => 'required',
-            'bobot' =>  'required|numeric'
+
         ]);
 
         $kriteria = Kriteria::create([
-            'id_kriteria' => $request->id_kriteria,
+            'kode_kriteria' => $request->kode_kriteria,
             'nama_kriteria' => $request->nama_kriteria,
-            'atribut' => $request->atribut,
-            'bobot' => $request->bobot
+
         ]);
         if ($kriteria) {
             Alert::success('Kriteria Berhasil Ditambahkan', 'Selamat');
@@ -93,16 +91,14 @@ class KriteriaController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'kode_kriteria' => 'required',
             'nama_kriteria' => 'required',
-            'atribut' => 'required',
-            'bobot' =>  'required|numeric'
         ]);
 
         $kriteria = Kriteria::find($id);
         $kriteria->update([
+            'kode_kriteria' => $request->kode_kriteria,
             'nama_kriteria' => $request->nama_kriteria,
-            'atribut' => $request->atribut,
-            'bobot' => $request->bobot
         ]);
         if ($kriteria) {
             Alert::success('Kriteria Berhasil Diubah', 'Selamat');
