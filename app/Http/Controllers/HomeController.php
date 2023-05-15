@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Penduduk;
+use App\Models\alternatif;
 
 class HomeController extends Controller
 {
@@ -11,6 +12,7 @@ class HomeController extends Controller
     {
         //$penduduks = penduduk::where('status', '1')->count();
         $penduduks = Penduduk::all();
-        return view('home', compact('penduduks'));
+        $alternatifs = Alternatif::count();
+        return view('home', compact('penduduks', 'alternatifs'));
     }
 }

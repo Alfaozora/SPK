@@ -47,8 +47,19 @@
                     <input type="text" name="nama" class="form-control" placeholder="" value="{{ old('nama', $alternatifs->nama) }}">
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
-                    <label>keterangan</label>
-                    <input type="text" name="keterangan" class="form-control" placeholder="" value="{{ old('keterangan', $alternatifs->keterangan) }}">
+                    <label>Alamat</label>
+                    <select name="alamat" id="alamat" class="form-control">
+                        <option value="{{ old('alamat', $alternatifs->alamat) }}" selected>
+                            {{ old('alamat', $alternatifs->alamat) }}
+                        </option>
+                        <option value="Klari">Klari</option>
+                        <option value="Gedong">Gedong</option>
+                        <option value="Dampet">Dampet</option>
+                        <option value="Mlanggeng">Mlanggeng</option>
+                        <option value="Nataan Jobo">Nataan Jobo</option>
+                        <option value="Nataan Jero">Nataan Jero</option>
+                        <option value="Boyosari">Boyosari</option>
+                    </select>
                 </div>
             </div>
         </div>

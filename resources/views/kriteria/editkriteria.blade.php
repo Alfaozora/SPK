@@ -40,26 +40,11 @@
             <div class="form-row">
                 <div class="col-md-3 mb-3 input-group-sm">
                     <label>Kode</label>
-                    <input type="text" name="id_kriteria" class="form-control" placeholder="" value="{{ old('id_kriteria', $kriteria->id_kriteria) }}">
+                    <input type="text" name="kode_kriteria" class="form-control" placeholder="" value="{{ old('kode_kriteria', $kriteria->kode_kriteria) }}">
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
                     <label>Nama Kriteria</label>
                     <input type="text" name="nama_kriteria" class="form-control" placeholder="" value="{{ old('nama_kriteria', $kriteria->nama_kriteria) }}">
-                </div>
-                <div class="col-md-3 mb-3 input-group-sm">
-                    <label>Atribut</label>
-                    <select name="atribut" class="form-control">
-                        <option value="{{ old('atribut', $kriteria->atribut) }}" selected>
-                            {{ old('atribut', $kriteria->atribut) }}
-                        </option>
-                        <option>------------------------------------------------------</option>
-                        <option value="Benefit">Benefit</option>
-                        <option value="Cost">Cost</option>
-                    </select>
-                </div>
-                <div class="col-md-3 mb-3 input-group-sm">
-                    <label>Bobot</label>
-                    <input type="text" name="bobot" class="form-control" placeholder="" value="{{ old('bobot', $kriteria->bobot) }}">
                 </div>
             </div>
         </div>

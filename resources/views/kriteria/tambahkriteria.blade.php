@@ -38,28 +38,14 @@
             <h5 class="card-header">Kriteria</h5>
             <div class="form-row" style="text-align: center">
                 <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="id_kriteria">Id Kriteria</label>
+                    <label for="kode_kriteria">Kode Kriteria</label>
                     <span class="text-danger">*</span>
-                    <input type="text" name="id_kriteria" value="{{ old('id_kriteria') }}" id="id_kriteria" class="form-control input-lg">
+                    <input type="text" value="{{ old('kode_kriteria') }}" name="kode_kriteria" id="kode_kriteria" class="form-control input-lg">
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
                     <label for="nama_kriteria">Nama Kriteria</label>
                     <span class="text-danger">*</span>
                     <input type="text" value="{{ old('nama_kriteria') }}" name="nama_kriteria" id="nama_kriteria" class="form-control input-lg">
-                </div>
-                <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="atribut">Atribut</label>
-                    <span class="text-danger">*</span>
-                    <select name="atribut" value="{{ old('atribut') }}" id="atribut" class="form-control input-lg">
-                        <option disabled selected>--Pilih Atribut--</option>
-                        <option>Benefit</option>
-                        <option>Cost</option>
-                    </select>
-                </div>
-                <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="bobot">Bobot</label>
-                    <span class="text-danger">*</span>
-                    <input name="bobot" value="{{ old('bobot') }}" id="bobot" class="form-control input-lg">
                 </div>
                 <br>
                 <br>

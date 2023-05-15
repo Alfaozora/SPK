@@ -43,10 +43,8 @@
                             <thead class="text-center" style="vertical-align:middle;">
                                 <tr>
                                     <th rowspan="2">No</th>
-                                    <th rowspan="2">Id Kriteria</th>
+                                    <th rowspan="2">Kode Kriteria</th>
                                     <th rowspan="2">Nama Kriteria</th>
-                                    <th rowspan="2">Atribut</th>
-                                    <th rowspan="2">Bobot</th>
                                     <th colspan="2">Action</th>
                                 </tr>
                                 <tr>
@@ -59,10 +57,8 @@
                                 <tr>
                                     <input type="hidden" class="delete_id" value="{{ $k->id_kriteria}}">
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $k->id_kriteria }}</td>
+                                    <td>{{ $k->kode_kriteria }}</td>
                                     <td>{{ $k->nama_kriteria }}</td>
-                                    <td>{{ $k->atribut }}</td>
-                                    <td>{{ $k->bobot }}</td>
                                     <td>
                                         <a href="{{ route('kriteria.edit', $k->id_kriteria) }}" class="btn btn-warning">
                                             <i class="fa fa-edit"></i> Edit

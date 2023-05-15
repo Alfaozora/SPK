@@ -45,7 +45,7 @@
                                     <th rowspan="2">No</th>
                                     <th rowspan="2">Kode</th>
                                     <th rowspan="2">Nama Alternatif</th>
-                                    <th rowspan="2">keterangan</th>
+                                    <th rowspan="2">Alamat</th>
                                     <th colspan="2">Action</th>
                                 </tr>
                                 <tr>
@@ -57,10 +57,10 @@
                                 @foreach ($alternatifs as $a)
                                 <tr>
                                     <input type="hidden" class="delete_id" value="{{ $a->id }}">
-                                    <td>{{ $a->id }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $a->kode }}</td>
                                     <td>{{ $a->nama }}</td>
-                                    <td>{{ $a->keterangan }}</td>
+                                    <td>{{ $a->alamat }}</td>
                                     <td>
                                         <a href="{{ route('alternatif.edit', $a->id) }}" class="btn btn-warning">
                                             <i class="fa fa-edit"></i> Edit
