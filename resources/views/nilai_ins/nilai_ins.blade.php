@@ -8,18 +8,19 @@
                 <li><a href="{{ route('home') }}">
                         <em class="fa fa-home"></em>
                     </a></li>
-                <li class="active">Alternatif</li>
+                <li class="active">Nilai Intensitas</li>
             </ol>
         </div>
         <!--/.row-->
 
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Alternatif</h2>
+                <h2 class="page-header">Nilai Intensitas</h2>
             </div>
         </div>
     </div>
     <!--/.main-->
+
 </div>
 <div class="wow fadeIn">
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -31,10 +32,7 @@
                             <div class="form-group">
                             </div>
                             <div class="form-group">
-                                <a type="button" class="btn btn-danger" href="{{route('alternatif.create')}}"><i class="fa fa-plus"></i> Tambah</a>
-                            </div>
-                            <div class="form-group">
-                                <a type="button" class="btn btn-info" href=""><i class="fa fa-print"></i> Cetak</a>
+                                <a type="button" class="btn btn-danger" href="{{route('nilaiIntensitas.create')}}"><i class="fa fa-plus"></i> Tambah</a>
                             </div>
                         </form>
                     </div>
@@ -42,11 +40,8 @@
                         <table class="table table-bordered table-striped table-hover">
                             <thead class="text-center" style="vertical-align:middle;">
                                 <tr>
-                                    <th rowspan="2">No</th>
-                                    <th rowspan="2">Kode</th>
-                                    <th rowspan="2">NIK</th>
-                                    <th rowspan="2">Nama Penduduk</th>
-                                    <th rowspan="2">Alamat</th>
+                                    <th rowspan="2">Nilai</th>
+                                    <th rowspan="2">Keterangan</th>
                                     <th colspan="2">Action</th>
                                 </tr>
                                 <tr>
@@ -55,21 +50,18 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center" style="vertical-align:middle;">
-                                @foreach ($alternatifs as $a)
+                                @foreach ($nilaiintensitas as $n)
                                 <tr>
-                                    <input type="hidden" class="delete_id" value="{{ $a->id }}">
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $a->kode }}</td>
-                                    <td>{{ $a->nik }}</td>
-                                    <td>{{ $a->nama }}</td>
-                                    <td>{{ $a->alamat }}</td>
+                                    <input type="hidden" class="delete_id" value="{{ $n->id_nilai}}">
+                                    <td>{{ $n->jum_nilai }}</td>
+                                    <td class="text-left">{{ $n->keterangan}}</td>
                                     <td>
-                                        <a href="{{ route('alternatif.edit', $a->id) }}" class="btn btn-warning">
+                                        <a href="{{ route('nilaiIntensitas.edit', $n->id_nilai) }}" class="btn btn-warning">
                                             <i class="fa fa-edit"></i> Edit
                                         </a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('alternatif.destroy', $a->id) }}" method="POST">
+                                        <form action="{{ route('nilaiIntensitas.destroy', $n->id_nilai) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btndelete"><i class="fa fa-trash"></i> Hapus</button>
@@ -121,7 +113,7 @@
                         };
                         $.ajax({
                             type: "DELETE",
-                            url: 'alternatif/' + deleteid,
+                            url: 'nilaiIntensitas/' + deleteid,
                             data: data,
                             success: function(response) {
                                 swal(response.status, {

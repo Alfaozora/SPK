@@ -18,12 +18,7 @@ class CripsController extends Controller
     public function index(Request $request)
     {
         $kriterias = Kriteria::all();
-        $query = Crips::query();
-        if ($request->ajax()) {
-            $crips = $query->where(['id_kriteria' => $request->kriteria])->get();
-            return response()->json(['crips' => $crips]);
-        }
-        $crips = $query->get();
+        $crips = Crips::all();
         return view('crips.tampilcrips', compact('kriterias', 'crips'));
     }
 

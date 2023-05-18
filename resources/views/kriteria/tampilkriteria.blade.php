@@ -58,7 +58,7 @@
                                     <input type="hidden" class="delete_id" value="{{ $k->id_kriteria}}">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $k->kode_kriteria }}</td>
-                                    <td>{{ $k->nama_kriteria }}</td>
+                                    <td class="text-left">{{ $k->nama_kriteria }}</td>
                                     <td>
                                         <a href="{{ route('kriteria.edit', $k->id_kriteria) }}" class="btn btn-warning">
                                             <i class="fa fa-edit"></i> Edit

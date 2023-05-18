@@ -39,12 +39,14 @@ class AlternatifController extends Controller
     {
         $this->validate($request, [
             'kode' => 'required',
+            'nik' => 'required|unique:alternatifs,nik',
             'nama' => 'required',
             'alamat' => 'required',
         ]);
 
         $alternatifs = alternatif::create([
             'kode' => $request->kode,
+            'nik' => $request->nik,
             'nama' => $request->nama,
             'alamat' => $request->alamat
 
@@ -92,6 +94,7 @@ class AlternatifController extends Controller
     {
         $this->validate($request, [
             'kode' => 'required',
+            'nik' => 'required',
             'nama' => 'required',
             'alamat' => 'required',
         ]);
@@ -99,6 +102,7 @@ class AlternatifController extends Controller
         $alternatifs = Alternatif::find($id);
         $alternatifs->update([
             'kode' => $request->kode,
+            'nik' => $request->nik,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
         ]);

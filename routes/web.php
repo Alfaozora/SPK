@@ -10,6 +10,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SendEmailController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\IntensitasController;
 use Route as GlobalRoute;
 
 /*
@@ -42,6 +43,8 @@ Route::resource('alternatif', AlternatifController::class)->middleware(['auth'])
 #Register
 Route::resource('register', RegisterController::class)->middleware(['auth', 'admin']);
 
+#nilaiIntensitas
+Route::resource('nilaiIntensitas', IntensitasController::class)->middleware(['auth']);
 
 // #Email Verification
 // Route::get('/email/verify', function () {

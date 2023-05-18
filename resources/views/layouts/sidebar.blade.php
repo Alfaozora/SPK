@@ -27,6 +27,12 @@
             </a>
             <ul class="children collapse" id="sub-item-3">
                 <li>
+                    <a class="{{ request()->is('nilaiIntensitas*') ? 'active' : '' }}" href="{{ route('nilaiIntensitas.index') }}">
+                        <span class="fa fa-file-text-o">&nbsp;</span>
+                        Nilai Intensitas
+                    </a>
+                </li>
+                <li>
                     <a class="{{ request()->is('crips*') ? 'active' : '' }}" href="{{ route('crips.index') }}">
                         <span class="fa fa-user-o">&nbsp;</span>
                         Nilai Bobot Kriteria

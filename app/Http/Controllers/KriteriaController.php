@@ -51,7 +51,7 @@ class KriteriaController extends Controller
         ]);
         if ($kriteria) {
             Alert::success('Kriteria Berhasil Ditambahkan', 'Selamat');
-            return redirect()->route('kriteria.index');
+            return redirect()->route('kriteria.create');
         } else {
             Alert::error('Kriteria Gagal Ditambahkan', 'Maaf');
             return redirect()->route('kriteria.create');
