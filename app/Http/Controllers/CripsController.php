@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Crips;
 use App\Models\Kriteria;
+use App\Models\nilaiintensitas;
 use Alert;
 use DB;
 
@@ -17,9 +18,25 @@ class CripsController extends Controller
      */
     public function index(Request $request)
     {
-        $kriterias = Kriteria::all();
-        $crips = Crips::all();
-        return view('crips.tampilcrips', compact('kriterias', 'crips'));
+        $kriteriaObj = new Kriteria();
+        $nilaiObj = new nilaiintensitas();
+
+        $kriteraCount = $kriteriaObj->count();
+
+        $r = [];
+        $kriterias = $kriteriaObj->all();
+        foreach ($kriterias as $kriteria) {
+            $kriteriass = $kriteriaObj->find($kriteria->kode_kriteria);
+            foreach ($kriteriass as $roww) {
+                $pcs = explode("C", $roww->kode_kriteria);
+                $c = $kriteraCount - $pcs[1];
+            }
+            if ($c >= 1) {
+                $r[$kriteria->kode_kriteria] = $c;
+            }
+        }
+
+        return view('crips.tampilcrips', compact('r'));
     }
 
     /**

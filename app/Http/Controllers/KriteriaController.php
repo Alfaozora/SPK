@@ -75,9 +75,9 @@ class KriteriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($kriteria)
+    public function edit($id)
     {
-        $kriteria = Kriteria::find($kriteria);
+        $kriteria = Kriteria::find($id);
         return view('kriteria.editkriteria', compact('kriteria'));
     }
 

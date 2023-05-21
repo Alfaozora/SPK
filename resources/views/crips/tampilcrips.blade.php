@@ -45,8 +45,45 @@
                                     </div>
                                 </div>
                             </div>
-                            @foreach ($kriterias as $k)
-                            @for ($i=1; $i<=$k; $i++) @endfor @endforeach </form>
+                            @php $no=1; foreach($r as $key => $value): @endphp
+                            @php for ($i=1; $i <= $value; $i++): @endphp @php $rows=$kriteriaObj->bacaSatu($key);
+                                while ($row = $rows->fetch_assoc()): @endphp
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-3">
+                                        <div class="form-group">
+                                            @php $rows = $kriteriaObj->bacaSatu($key);
+                                            while($row = $rows->fetch_assoc()): @endphp
+                                            <input type="text" class="form-control" value="{{ $row['nama_kriteria'] }}" readonly />
+                                            <input type="hidden" name="{{ $key }}{{ $no }}" value="{{ $row['kode_kriteria'] }}" />
+                                            @php endwhile; @endphp
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group">
+                                            <select class="form-control" name="nl{{ $no }}">
+                                                <option value="">-- Pilih Nilai --</option>
+                                                @php $rows = $nilaiObj->readAll();
+                                                while($row = $rows->fetch_assoc()): @endphp
+                                                <option value="{{ $row['jum_nilai'] }}">{{ $row['jum_nilai'] }} - {{ $row['keterangan'] }}</option>
+                                                @php endwhile; @endphp
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3">
+                                        <div class="form-group">
+                                            @php $pcs = explode("C", $key); $nid = "C".($pcs[1] + $i); @endphp
+                                            @php $rows = $kriteriaObj->bacaSatu($nid);
+                                            while($row = $rows->fetch_assoc()): @endphp
+                                            <input type="text" class="form-control" value="{{ $row['nama_kriteria'] }}" readonly />
+                                            <input type="hidden" name="{{ $nid }}{{ $no }}" value="{{ $row['kode_kriteria'] }}" />
+                                            @php endwhile; @endphp
+                                        </div>
+                                    </div>
+                                </div>
+                                @php endwhile; $no++; @endphp
+                                @php endfor; @endphp
+                                @endforeach;
+                        </form>
                     </div>
                 </div>
             </div>

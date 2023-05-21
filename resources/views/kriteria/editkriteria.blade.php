@@ -32,7 +32,7 @@
         </ul>
     </div>
     @endif
-    <form method="POST" action="{{ route('kriteria.update', $kriteria->id_kriteria) }}">
+    <form method="POST" action="{{ route('kriteria.update', $kriteria->kode_kriteria) }}">
         @csrf
         @method('PUT')
         <div class="row">
