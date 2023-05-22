@@ -80,6 +80,9 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="col-md-6 my-12">
+                        {{ $alternatifs->links() }}
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">

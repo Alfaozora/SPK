@@ -15,7 +15,7 @@ class AlternatifController extends Controller
      */
     public function index()
     {
-        $alternatifs = alternatif::all();
+        $alternatifs = alternatif::paginate(20);
         return view('alternatif.tampilalternatif', compact('alternatifs'));
     }
 
