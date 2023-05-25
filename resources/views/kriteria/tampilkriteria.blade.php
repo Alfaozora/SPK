@@ -74,6 +74,44 @@
                         </table>
                     </div>
                 </div>
+                <!-- Sub Kriteria -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <h4>Nilai Preferensi Sub-Kriteria</h4>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="text-center" style="vertical-align:middle;">
+                                <tr>
+                                    <th rowspan="2">Bobot</th>
+                                    <th rowspan="2">Keterangan Bobot Nilai</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-left" style="vertical-align:middle;">
+                                <tr>
+                                    <td class="text-center">1</td>
+                                    <td>Sangat Penting</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">0,75</td>
+                                    <td>Penting</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">0,5</td>
+                                    <td>Cukup</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">0</td>
+                                    <td>Kurang Penting</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-12">
                 <p class="back-link">Desa Gedongboyountung 2023</a></p>

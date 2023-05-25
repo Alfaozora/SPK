@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kriteria;
+use App\Models\sub_kriteria;
 use Alert;
 
 class KriteriaController extends Controller
@@ -16,7 +17,7 @@ class KriteriaController extends Controller
     public function index()
     {
         return view('kriteria.tampilkriteria', [
-            'kriteria' => Kriteria::all()
+            'kriteria' => Kriteria::all(), 'sub_kriteria' => sub_kriteria::all()
         ]);
     }
 
