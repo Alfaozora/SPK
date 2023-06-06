@@ -39,6 +39,7 @@ Route::resource('crips', CripsController::class)->middleware(['auth']);
 
 #Alternatif
 Route::resource('alternatif', AlternatifController::class)->middleware(['auth']);
+Route::get('/alternatif-export', [AlternatifController::class, 'export'])->middleware(['auth']);
 
 #Register
 Route::resource('register', RegisterController::class)->middleware(['auth', 'admin']);

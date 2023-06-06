@@ -49,7 +49,68 @@
                     <!-- <a href="" class="small-box-footer">Report <i class="fa fa-arrow-circle-right"></i></a> -->
                 </div>
             </div>
-            <!-- ./col -->
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <h4>Daftar Warga Mendapatkan Bantuan</h4>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead class="text-center" style="vertical-align:middle;">
+                        <tr>
+                            <th rowspan="2">No</th>
+                            <th rowspan="2">Kode</th>
+                            <th rowspan="2">NIK</th>
+                            <th rowspan="2">Nama Penduduk</th>
+                            <th rowspan="2">Alamat</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center" style="vertical-align:middle;">
+                        <tr>
+                            <td>1</td>
+                            <td>A01</td>
+                            <td>123456789</td>
+                            <td>Wahyu</td>
+                            <td>Jl. Raya</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>A02</td>
+                            <td>123456789</td>
+                            <td>Wahyu</td>
+                            <td>Jl. Raya</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>A03</td>
+                            <td>123456789</td>
+                            <td>Wahyu</td>
+                            <td>Jl. Raya</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>A04</td>
+                            <td>123456789</td>
+                            <td>Wahyu</td>
+                            <td>Jl. Raya</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>A05</td>
+                            <td>123456789</td>
+                            <td>Wahyu</td>
+                            <td>Jl. Raya</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6 my-12">
+
+            </div>
         </div>
         <!--/.row-->
         <!--/.row-->

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Alternatif;
 use Alert;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AlternatifController extends Controller
 {
@@ -17,6 +18,11 @@ class AlternatifController extends Controller
     {
         $alternatifs = alternatif::paginate(20);
         return view('alternatif.tampilalternatif', compact('alternatifs'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 
     /**
