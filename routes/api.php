@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PendudukApi;
+use App\Http\Controllers\alternatifApi;
+use App\Http\Controllers\LoginMobile;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +16,10 @@ use App\Http\Controllers\PendudukApi;
 |
 */
 
-#Penduduk
-Route::resource('pendudukapi', PendudukApi::class);
+#Data Alternatif
+Route::resource('alternatifapi', alternatifApi::class);
+
+#Login
+Route::get('/loginApp', [LoginMobile::class, 'loginApp'])->middleware('guest');
+Route::post('/loginApp/action', [LoginMobile::class, 'postloginApp'])->middleware('guest');
+Route::get('/loginApp/logout', [LoginMobile::class, 'logoutApp'])->middleware(['auth']);

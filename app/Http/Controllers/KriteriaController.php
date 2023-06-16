@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kriteria;
+use App\Models\sub_kriteria;
 use Alert;
 
 class KriteriaController extends Controller
@@ -16,7 +17,7 @@ class KriteriaController extends Controller
     public function index()
     {
         return view('kriteria.tampilkriteria', [
-            'kriteria' => Kriteria::all()
+            'kriteria' => Kriteria::all(), 'sub_kriteria' => sub_kriteria::all()
         ]);
     }
 
@@ -51,7 +52,7 @@ class KriteriaController extends Controller
         ]);
         if ($kriteria) {
             Alert::success('Kriteria Berhasil Ditambahkan', 'Selamat');
-            return redirect()->route('kriteria.index');
+            return redirect()->route('kriteria.create');
         } else {
             Alert::error('Kriteria Gagal Ditambahkan', 'Maaf');
             return redirect()->route('kriteria.create');
@@ -75,9 +76,9 @@ class KriteriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($kriteria)
+    public function edit($id)
     {
-        $kriteria = Kriteria::find($kriteria);
+        $kriteria = Kriteria::find($id);
         return view('kriteria.editkriteria', compact('kriteria'));
     }
 

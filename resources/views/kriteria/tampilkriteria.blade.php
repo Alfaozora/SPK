@@ -33,9 +33,6 @@
                             <div class="form-group">
                                 <a type="button" class="btn btn-danger" href="{{route('kriteria.create')}}"><i class="fa fa-plus"></i> Tambah</a>
                             </div>
-                            <div class="form-group">
-                                <a type="button" class="btn btn-info" href=""><i class="fa fa-print"></i> Cetak</a>
-                            </div>
                         </form>
                     </div>
                     <div class="table-responsive">
@@ -55,17 +52,17 @@
                             <tbody class="text-center" style="vertical-align:middle;">
                                 @foreach ($kriteria as $k)
                                 <tr>
-                                    <input type="hidden" class="delete_id" value="{{ $k->id_kriteria}}">
+                                    <input type="hidden" class="delete_id" value="{{ $k->kode_kriteria}}">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $k->kode_kriteria }}</td>
-                                    <td>{{ $k->nama_kriteria }}</td>
+                                    <td class="text-left">{{ $k->nama_kriteria }}</td>
                                     <td>
-                                        <a href="{{ route('kriteria.edit', $k->id_kriteria) }}" class="btn btn-warning">
+                                        <a href="{{ route('kriteria.edit', $k->kode_kriteria) }}" class="btn btn-warning">
                                             <i class="fa fa-edit"></i> Edit
                                         </a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('kriteria.destroy', $k->id_kriteria) }}" method="POST">
+                                        <form action="{{ route('kriteria.destroy', $k->kode_kriteria) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btndelete"><i class="fa fa-trash"></i> Hapus</button>
@@ -73,6 +70,44 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Sub Kriteria -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <h4>Nilai Preferensi Sub-Kriteria</h4>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="text-center" style="vertical-align:middle;">
+                                <tr>
+                                    <th rowspan="2">Bobot</th>
+                                    <th rowspan="2">Keterangan Bobot Nilai</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-left" style="vertical-align:middle;">
+                                <tr>
+                                    <td class="text-center">1</td>
+                                    <td>Sangat Penting</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">0,75</td>
+                                    <td>Penting</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">0,5</td>
+                                    <td>Cukup</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">0</td>
+                                    <td>Kurang Penting</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

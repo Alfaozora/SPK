@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Alternatif;
 use Alert;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AlternatifController extends Controller
 {
@@ -15,8 +16,13 @@ class AlternatifController extends Controller
      */
     public function index()
     {
-        $alternatifs = alternatif::all();
+        $alternatifs = alternatif::paginate(20);
         return view('alternatif.tampilalternatif', compact('alternatifs'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 
     /**
@@ -39,12 +45,14 @@ class AlternatifController extends Controller
     {
         $this->validate($request, [
             'kode' => 'required',
+            'nik' => 'required|unique:alternatifs,nik',
             'nama' => 'required',
             'alamat' => 'required',
         ]);
 
         $alternatifs = alternatif::create([
             'kode' => $request->kode,
+            'nik' => $request->nik,
             'nama' => $request->nama,
             'alamat' => $request->alamat
 
@@ -92,6 +100,7 @@ class AlternatifController extends Controller
     {
         $this->validate($request, [
             'kode' => 'required',
+            'nik' => 'required',
             'nama' => 'required',
             'alamat' => 'required',
         ]);
@@ -99,6 +108,7 @@ class AlternatifController extends Controller
         $alternatifs = Alternatif::find($id);
         $alternatifs->update([
             'kode' => $request->kode,
+            'nik' => $request->nik,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
         ]);

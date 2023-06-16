@@ -27,6 +27,12 @@
             </a>
             <ul class="children collapse" id="sub-item-3">
                 <li>
+                    <a class="{{ request()->is('nilaiIntensitas*') ? 'active' : '' }}" href="{{ route('nilaiIntensitas.index') }}">
+                        <span class="fa fa-file-text-o">&nbsp;</span>
+                        Nilai Intensitas
+                    </a>
+                </li>
+                <li>
                     <a class="{{ request()->is('crips*') ? 'active' : '' }}" href="{{ route('crips.index') }}">
                         <span class="fa fa-user-o">&nbsp;</span>
                         Nilai Bobot Kriteria
@@ -40,7 +46,7 @@
                 </li>
             </ul>
         </li>
-        <li class=""><a href="index.html"><em class="fa fa-calculator">&nbsp;</em> Hasil</a></li>
+        <li class="{{ request()->is('perhitungan*') ? 'active' : '' }}"><a href="{{route ('perhitungan.index') }}"><em class="fa fa-calculator">&nbsp;</em> Perhitungan</a></li>
         @if (Auth::user()->role != 1)
         @else
         <li class="{{ request()->is('register*') ? 'active' : '' }}"><a href="{{route ('register.index')}}"><em class="fa fa-address-book" aria-hidden="true">&nbsp;</em> Menu User</a></li>

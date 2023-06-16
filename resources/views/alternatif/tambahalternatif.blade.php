@@ -43,7 +43,12 @@
                     <input type="text" name="kode" value="{{ old('kode') }}" id="kode" class="form-control input-lg">
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="nama_kriteria">Nama Alternatif</label>
+                    <label for="nik">NIK</label>
+                    <span class="text-danger">*</span>
+                    <input type="text" name="nik" value="{{ old('nik') }}" id="nik" class="form-control input-lg">
+                </div>
+                <div class="col-md-3 mb-3 input-group-sm">
+                    <label for="nama_kriteria">Nama Penduduk</label>
                     <span class="text-danger">*</span>
                     <input type="text" value="{{ old('nama') }}" name="nama" id="nama" class="form-control input-lg">
                 </div>

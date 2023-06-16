@@ -10,6 +10,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SendEmailController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\IntensitasController;
+use App\Http\Controllers\PerhitunganController;
 use Route as GlobalRoute;
 
 /*
@@ -38,10 +40,17 @@ Route::resource('crips', CripsController::class)->middleware(['auth']);
 
 #Alternatif
 Route::resource('alternatif', AlternatifController::class)->middleware(['auth']);
+Route::get('/alternatif-export', [AlternatifController::class, 'export'])->middleware(['auth']);
 
 #Register
 Route::resource('register', RegisterController::class)->middleware(['auth', 'admin']);
 
+#nilaiIntensitas
+Route::resource('nilaiIntensitas', IntensitasController::class)->middleware(['auth']);
+
+#perhitungan
+Route::resource('perhitungan', PerhitunganController::class)->middleware(['auth']);
+Route::get('/loadTable2', 'App\Http\Controllers\PerhitunganController@loadTable2')->name('perhitungan.loadTable2')->middleware(['auth']);
 
 // #Email Verification
 // Route::get('/email/verify', function () {

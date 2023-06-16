@@ -43,7 +43,11 @@
                     <input type="text" name="kode" class="form-control" placeholder="" value="{{ old('kode', $alternatifs->kode) }}">
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
-                    <label>Nama Alternatif</label>
+                    <label>NIK</label>
+                    <input type="text" name="nik" class="form-control" placeholder="" value="{{ old('nik', $alternatifs->nik) }}">
+                </div>
+                <div class="col-md-3 mb-3 input-group-sm">
+                    <label>Nama Penduduk</label>
                     <input type="text" name="nama" class="form-control" placeholder="" value="{{ old('nama', $alternatifs->nama) }}">
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">

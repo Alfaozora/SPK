@@ -10,12 +10,13 @@ class kriteria extends Model
 {
     //use HasFactory;
     public $incrementing = false;
-    protected $primaryKey = 'id_kriteria';
+    protected $primaryKey = 'kode_kriteria';
 
     protected $fillable = [
-        'id_kriteria',
         'kode_kriteria',
         'nama_kriteria',
+        'jumlah_kriteria',
+        'bobot_kriteria'
     ];
 
     // public function Crips()
