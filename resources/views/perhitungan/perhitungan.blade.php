@@ -25,59 +25,62 @@
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <form class="form-inline">
+                <form method="POST" action="{{ route('perhitungan.store') }}">
+                    @csrf
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
                             <div class="form-group">
                                 <p>Matriks Perbandingan Berpasangan</p>
                             </div>
-                        </form>
-                    </div>
-                    <div class="table-responsive" id="tableContainer">
-                        <table class="table table-bordered table-striped table-hover" id="table1">
-                            <thead class="text-center" style="vertical-align:middle;">
-                                <tr>
-                                    <th>
-                                        Kriteria
-                                    </th>
+                        </div>
+                        <div class="table-responsive" id="tableContainer">
+                            <table class="table table-bordered table-striped table-hover" id="table1">
+                                <thead class="text-center" style="vertical-align:middle;">
+                                    <tr>
+                                        <th>
+                                            Kriteria
+                                        </th>
+                                        @foreach($kriterias as $kriteria)
+                                        <th class="text-center" style="vertical-align:middle;">{{$kriteria->nama_kriteria}}</th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center" style="vertical-align:middle;">
+                                    @php
+                                    $no = 0;
+                                    @endphp
                                     @foreach($kriterias as $kriteria)
-                                    <th class="text-center" style="vertical-align:middle;">{{$kriteria->nama_kriteria}}</th>
+                                    <tr>
+                                        <td class="text-left" style="vertical-align:middle;">{{$kriteria->nama_kriteria}}</td>
+                                        @foreach($kriterias as $kriteria2)
+                                        <td class="text-center" style="vertical-align:middle;">
+                                            @if($kriteria->kode_kriteria == $kriteria2->kode_kriteria)
+                                            1
+                                            @else
+                                            @if($kriteria->kode_kriteria > $kriteria2->kode_kriteria)
+                                            0
+                                            <!-- <input class="form-control form-control-sm text-center" type="text" name="nilai[{{$kriteria->kode_kriteria}}][{{$kriteria2->kode_kriteria}}]" readonly=""> -->
+                                            @else
+                                            <select class="form-control form-control-sm" name="nilai[{{$kriteria->kode_kriteria}}][{{$kriteria2->kode_kriteria}}]">
+                                                @foreach ($nilaiintensitas as $n)
+                                                <option value="{{$n->jum_nilai}}">{{$n->jum_nilai}}-{{$n->keterangan}}</option>
+                                                @endforeach
+                                            </select>
+                                            @endif
+                                            @endif
+                                        </td>
+                                        @endforeach
+                                    </tr>
                                     @endforeach
-                                </tr>
-                            </thead>
-                            <tbody class="text-center" style="vertical-align:middle;">
-                                @php
-                                $no = 0;
-                                @endphp
-                                @foreach($kriterias as $kriteria)
-                                <tr>
-                                    <td class="text-left" style="vertical-align:middle;">{{$kriteria->nama_kriteria}}</td>
-                                    @foreach($kriterias as $kriteria2)
-                                    <td class="text-center" style="vertical-align:middle;">
-                                        @if($kriteria->kode_kriteria == $kriteria2->kode_kriteria)
-                                        1
-                                        @else
-                                        @if($kriteria->kode_kriteria > $kriteria2->kode_kriteria)
-                                        <input class="form-control form-control-sm text-center" type="text" name="nilai[{{$kriteria->kode_kriteria}}][{{$kriteria2->kode_kriteria}}]" value="0" readonly="">
-                                        @else
-                                        <select class="form-control form-control-sm" name="nilai[{{$kriteria->kode_kriteria}}][{{$kriteria2->kode_kriteria}}]">
-                                            @foreach ($nilaiintensitas as $n)
-                                            <option value="{{$n->jum_nilai}}">{{$n->keterangan}}</option>
-                                            @endforeach
-                                        </select>
-                                        @endif
-                                        @endif
-                                    </td>
-                                    @endforeach
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <button type="submit" class="btn btn-primary btn-sm" id="showTable2">
-                    Normalisasi
-                </button>
+                    <button type="submit" class="btn btn-primary btn-sm" id="showTable2">
+                        Normalisasi
+                    </button>
+                </form>
+
                 </br>
                 </br>
                 <div class="table-responsive">

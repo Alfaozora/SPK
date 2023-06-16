@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sub_kriterias', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('kriteria_id')->unsigned();
-            $table->string('nama_sub_kriteria');
+        Schema::create('perbandingan_kriterias', function (Blueprint $table) {
+            $table->id();
+            $table->string('kriteria1');
+            $table->string('kriteria2');
+            $table->float('nilai');
             $table->timestamps();
-            $table->softDeletes();
-            $table->foreign('kriteria_id')->references('id')->on('kriterias');
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::drop('sub_kriterias');
+        Schema::dropIfExists('perbandingan_kriterias');
     }
 };
