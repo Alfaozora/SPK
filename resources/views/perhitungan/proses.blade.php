@@ -52,13 +52,13 @@
                                 </tr>
                                 @endforeach
                                 <tr>
-                                    <td>
+                                    <th class="text-center">
                                         Jumlah
-                                    </td>
+                                    </th>
                                     @foreach($kriterias as $kriteria2 )
-                                    <td>
+                                    <th class="text-center">
                                         {{$jumlahKolom[$kriteria2]}}
-                                    </td>
+                                    </th>
                                     @endforeach
                                 </tr>
                             </tbody>
