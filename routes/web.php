@@ -50,7 +50,7 @@ Route::resource('nilaiIntensitas', IntensitasController::class)->middleware(['au
 
 #perhitungan
 Route::resource('perhitungan', PerhitunganController::class)->middleware(['auth']);
-Route::get('/loadTable2', 'App\Http\Controllers\PerhitunganController@loadTable2')->name('perhitungan.loadTable2')->middleware(['auth']);
+Route::get('/proses', 'App\Http\Controllers\PerhitunganController@proses')->name('perhitungan.proses')->middleware(['auth']);
 
 // #Email Verification
 // Route::get('/email/verify', function () {

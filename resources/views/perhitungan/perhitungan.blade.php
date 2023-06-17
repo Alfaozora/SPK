@@ -30,7 +30,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="form-group">
-                                <p>Matriks Perbandingan Berpasangan</p>
+                                <p>Inisialisasi Matriks Perbandingan Berpasangan</p>
                             </div>
                         </div>
                         <div class="table-responsive" id="tableContainer">
@@ -55,11 +55,12 @@
                                         @foreach($kriterias as $kriteria2)
                                         <td class="text-center" style="vertical-align:middle;">
                                             @if($kriteria->kode_kriteria == $kriteria2->kode_kriteria)
+                                            <input type="hidden" name="nilai[{{$kriteria->kode_kriteria}}][{{$kriteria2->kode_kriteria}}]" value="1">
                                             1
                                             @else
                                             @if($kriteria->kode_kriteria > $kriteria2->kode_kriteria)
+                                            <input type="hidden" name="nilai[{{$kriteria->kode_kriteria}}][{{$kriteria2->kode_kriteria}}]" value="0">
                                             0
-                                            <!-- <input class="form-control form-control-sm text-center" type="text" name="nilai[{{$kriteria->kode_kriteria}}][{{$kriteria2->kode_kriteria}}]" readonly=""> -->
                                             @else
                                             <select class="form-control form-control-sm" name="nilai[{{$kriteria->kode_kriteria}}][{{$kriteria2->kode_kriteria}}]">
                                                 @foreach ($nilaiintensitas as $n)
@@ -80,7 +81,6 @@
                         Normalisasi
                     </button>
                 </form>
-
                 </br>
                 </br>
                 <div class="table-responsive">
@@ -97,7 +97,7 @@
 </div>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
+<!-- <script>
     document.getElementById("showTable2").addEventListener("click", function() {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
@@ -111,5 +111,5 @@
         xhr.open("GET", "/loadTable2", true);
         xhr.send();
     });
-</script>
+</script> -->
 @endsection
