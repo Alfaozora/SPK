@@ -81,7 +81,7 @@ class PerhitunganController extends Controller
         }
 
 
-        //Menghitung jumlah bobot setiap kriteria
+        //Menghitung jumlah setiap kriteria
         $jumlahKolom = [];
         foreach ($kriterias as $kriteria2) {
             $jumlahKolom[$kriteria2] = 0;
@@ -90,6 +90,32 @@ class PerhitunganController extends Controller
             }
         }
 
+        //Menghitung Matriks Nilai Kriteria
+        $matriksNilaiKriteria = [];
+
+        foreach ($kriterias as $kriteria2) {
+            $jumlahKolom[$kriteria2];
+            foreach ($kriterias as $kriteria1) {
+                $matriksNilaiKriteria[$kriteria1][$kriteria2] = number_format($matriksNormalisasi[$kriteria1][$kriteria2] / $jumlahKolom[$kriteria2], 3);
+            }
+        }
+
+        //Menghitung Jumlah Baris Nilai Kriteria
+        $jumlahBaris = [];
+        foreach ($kriterias as $kriteria1) {
+            $jumlahBaris[$kriteria1] = 0;
+            foreach ($kriterias as $kriteria2) {
+                $jumlahBaris[$kriteria1] += $matriksNilaiKriteria[$kriteria1][$kriteria2];
+            }
+        }
+
+        //Menghitung Bobot Prioritas
+        $bobotPrioritas = [];
+        foreach ($kriterias as $kriteria1) {
+            $bobotPrioritas[$kriteria1] = number_format($jumlahBaris[$kriteria1] / count($kriterias), 3);
+        }
+
+        //menyimpan dan mengupdate nilai inisialiasi kriteria
         foreach ($nilaiintensitas as $key => $value) {
             foreach ($value as $key2 => $value2) {
                 $perbandingan_kriterias = new perbandingan_kriteria();
@@ -112,7 +138,10 @@ class PerhitunganController extends Controller
             'kriterias' => $kriterias,
             'matriksPerbandingan' => $matriksPerbandingan,
             'jumlahKolom' =>  $jumlahKolom,
+            'jumlahBaris' => $jumlahBaris,
             'matriksNormalisasi' => $matriksNormalisasi,
+            'matriksNilaiKriteria' => $matriksNilaiKriteria,
+            'bobotPrioritas' => $bobotPrioritas,
         ]);
     }
 

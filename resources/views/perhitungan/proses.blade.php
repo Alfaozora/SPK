@@ -65,6 +65,51 @@
                         </table>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="form-group">
+                            <p>Matriks Nilai Kriteria</p>
+                        </div>
+                    </div>
+                    <div class="table-responsive" id="tableContainer">
+                        <table class="table table-bordered table-striped table-hover" id="table2">
+                            <thead class="text-center" style="vertical-align:middle;">
+                                <tr>
+                                    <th>
+                                        Kriteria
+                                    </th>
+                                    @foreach($kriterias as $kriteria2)
+                                    <th class="text-center" style="vertical-align:middle;">{{$kriteria2}}</th>
+                                    @endforeach
+                                    <th>
+                                        Jumlah
+                                    </th>
+                                    <th>
+                                        Prioritas Vektor
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center" style="vertical-align:middle;">
+                                @foreach($kriterias as $kriteria1)
+                                <tr>
+                                    <td class="text-center" style="vertical-align:middle;">{{$kriteria1}}</td>
+                                    @foreach($kriterias as $kriteria2)
+                                    <td>
+                                        {{$matriksNilaiKriteria[$kriteria1][$kriteria2]}}
+                                    </td>
+                                    @endforeach
+                                    <td>
+                                        {{$jumlahBaris[$kriteria1]}}
+                                    </td>
+                                    <td>
+                                        {{$bobotPrioritas[$kriteria1]}}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-12">
                 <p class="back-link">Desa Gedongboyountung 2023</a></p>
