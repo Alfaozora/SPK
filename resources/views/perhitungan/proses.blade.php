@@ -53,7 +53,7 @@
                                 @endforeach
                                 <tr>
                                     <th class="text-center">
-                                        Jumlah
+                                        Total
                                     </th>
                                     @foreach($kriterias as $kriteria2 )
                                     <th class="text-center">
@@ -87,6 +87,9 @@
                                     <th>
                                         Prioritas Vektor
                                     </th>
+                                    <th>
+                                        Eigen Value
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody class="text-center" style="vertical-align:middle;">
@@ -104,11 +107,50 @@
                                     <td>
                                         {{$bobotPrioritas[$kriteria1]}}
                                     </td>
+                                    <td>
+                                        {{$eigenValue[$kriteria1]}}
+                                    </td>
                                 </tr>
                                 @endforeach
+                                <tr>
+                                    <th class="text-center">
+                                        Total
+                                    </th>
+                                    <th colspan="8"></th>
+                                    <th class="text-center">{{ $totalEigenValue[$kriteria1]}}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">
+                                        Consistancy Index
+                                    </th>
+                                    <th colspan="8"></th>
+                                    <th class="text-center">{{ $ci[$kriteria1]}}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">
+                                        Random Index
+                                    </th>
+                                    <th colspan="8"></th>
+                                    <th class="text-center">{{$nilaiRI}}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">
+                                        Consistancy Ratio
+                                    </th>
+                                    <th colspan="8"></th>
+                                    <th class="text-center">
+                                        {{$cr[$kriteria1]}}
+                                </tr>
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="alert alert-info" role="alert">
+                    @if($cr[$kriteria1] < 0.1) <p>Nilai Consistancy Ratio (CR) yang diperoleh adalah <strong>{{$cr[$kriteria1]}}</strong> . Nilai CR yang diperoleh <strong> ≤ 0,1 </strong> maka dapat disimpulkan bahwa matriks perbandingan berpasangan yang telah dibuat <strong> Sudah Dapat Diterima.</strong>
+                        </p>
+                        @else
+                        <p>Nilai Consistancy Ratio (CR) yang diperoleh adalah <strong>{{$cr[$kriteria1]}}</strong>. Nilai CR yang diperoleh <strong> > 0,1 </strong> maka dapat disimpulkan bahwa matriks perbandingan berpasangan yang telah dibuat <strong> Tidak Dapat Diterima.</strong></p>
+                        @endif
                 </div>
             </div>
             <div class="col-sm-12">

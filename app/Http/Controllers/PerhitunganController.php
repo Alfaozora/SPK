@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\kriteria;
 use App\Models\nilaiintensitas;
 use App\Models\perbandingan_kriteria;
+use Gopalindians\Matrix\Matrix;
 
 use Illuminate\Http\Request;
 use Redirect;
@@ -76,12 +77,12 @@ class PerhitunganController extends Controller
                 } else {
                     $nilaiNormalisasi = $matriksPerbandingan[$kriteria1][$kriteria2];
                 }
-                $matriksNormalisasi[$kriteria1][$kriteria2] = number_format($nilaiNormalisasi, 2);
+                $matriksNormalisasi[$kriteria1][$kriteria2] = round($nilaiNormalisasi, 2);
             }
         }
 
 
-        //Menghitung jumlah setiap kriteria
+        //Menghitung total jumlah setiap kriteria
         $jumlahKolom = [];
         foreach ($kriterias as $kriteria2) {
             $jumlahKolom[$kriteria2] = 0;
@@ -115,6 +116,41 @@ class PerhitunganController extends Controller
             $bobotPrioritas[$kriteria1] = number_format($jumlahBaris[$kriteria1] / count($kriterias), 3);
         }
 
+        //Menghitung Eigen Value
+        $eigenValue = [];
+        foreach ($kriterias as $kriteria1) {
+            $eigenValue[$kriteria1] = 0;
+            foreach ($kriterias as $kriteria2) {
+                $eigenValue[$kriteria1] = number_format($jumlahKolom[$kriteria1] * $bobotPrioritas[$kriteria1], 3);
+            }
+        }
+
+        //Total eigen value
+        $totalEigenValue = [];
+        foreach ($kriterias as $kriteria1) {
+            $totalEigenValue[$kriteria1] = 0;
+            foreach ($kriterias as $kriteria2) {
+                $totalEigenValue[$kriteria1] += $eigenValue[$kriteria2];
+            }
+        }
+
+        //Menghitung CI
+        $ci = [];
+        foreach ($kriterias as $kriteria1) {
+            $ci[$kriteria1] = number_format(($totalEigenValue[$kriteria1] - count($kriterias)) / (count($kriterias) - 1), 3);
+        }
+
+        //Menghitung RI
+        $n = count($kriterias);
+        $nilaiRI = [0, 0, 0.58, 0.90, 1.12, 1.24, 1.32, 1.41, 1.45];
+        $nilaiRI = $nilaiRI[$n - 1];
+
+        //Menghitung CR
+        $cr = [];
+        foreach ($kriterias as $kriteria1) {
+            $cr[$kriteria1] = number_format($ci[$kriteria1] / $nilaiRI, 3);
+        }
+
         //menyimpan dan mengupdate nilai inisialiasi kriteria
         foreach ($nilaiintensitas as $key => $value) {
             foreach ($value as $key2 => $value2) {
@@ -142,6 +178,12 @@ class PerhitunganController extends Controller
             'matriksNormalisasi' => $matriksNormalisasi,
             'matriksNilaiKriteria' => $matriksNilaiKriteria,
             'bobotPrioritas' => $bobotPrioritas,
+            'eigenValue' => $eigenValue,
+            'totalEigenValue' => $totalEigenValue,
+            'ci' => $ci,
+            'nilaiRI' => $nilaiRI,
+            'cr' => $cr,
+
         ]);
     }
 
