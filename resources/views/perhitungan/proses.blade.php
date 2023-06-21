@@ -22,6 +22,7 @@
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         <div class="row">
             <div class="col-md-12">
+                <!-- Matriks Normalisasi Perbandingan Berpasangan -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="form-group">
@@ -45,9 +46,15 @@
                                 <tr>
                                     <td class="text-center" style="vertical-align:middle;">{{$kriteria1}}</td>
                                     @foreach($kriterias as $kriteria2)
+                                    @if($kriteria1 == $kriteria2)
+                                    <td class="bg-info">
+                                        {{$matriksNormalisasi[$kriteria1][$kriteria2]}}
+                                    </td>
+                                    @else
                                     <td>
                                         {{$matriksNormalisasi[$kriteria1][$kriteria2]}}
                                     </td>
+                                    @endif
                                     @endforeach
                                 </tr>
                                 @endforeach
@@ -151,6 +158,59 @@
                         @else
                         <p>Nilai Consistancy Ratio (CR) yang diperoleh adalah <strong>{{$cr[$kriteria1]}}</strong>. Nilai CR yang diperoleh <strong> > 0,1 </strong> maka dapat disimpulkan bahwa matriks perbandingan berpasangan yang telah dibuat <strong> Tidak Dapat Diterima.</strong></p>
                         @endif
+                </div>
+                <!-- Nilai  TFN -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="form-group">
+                            <p>Konversi Nilai Perbandingan Antar Kriteria Ke Matriks Berpasangan Fuzzy</p>
+                        </div>
+                    </div>
+                    <div class="table-responsive" id="tableContainer">
+                        <table class="table table-bordered table-striped table-hover" id="table2">
+                            <thead class="text-center" style="vertical-align:middle;">
+                                <tr>
+                                    <th rowspan="2">
+                                        Kriteria
+                                    </th>
+                                    @foreach($kriterias as $kriteria2)
+                                    <th class="text-center" style="vertical-align:middle;" colspan="3">{{$kriteria2}}</th>
+                                    @endforeach
+                                </tr>
+                                <tr>
+                                    @foreach($kriterias as $kriteria2)
+                                    <th>l</th>
+                                    <th>m</th>
+                                    <th>u</th>
+                                    @endforeach
+                                </tr>
+                            </thead>
+                            <tbody class="text-center" style="vertical-align:middle;">
+                                @foreach($kriterias as $kriteria1)
+                                <tr>
+                                    <td class="text-center" style="vertical-align:middle;">{{$kriteria1}}</td>
+                                    @foreach($kriterias as $kriteria2)
+                                    <td>
+                                        @if(isset($matriksTFN[$kriteria1][$kriteria2]))
+                                        {{ $matriksTFNInvers[$kriteria1][$kriteria2]['l'] ?? '' }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if(isset($matriksTFN[$kriteria1][$kriteria2]))
+                                        {{ $matriksTFNInvers[$kriteria1][$kriteria2]['m'] ?? '' }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if(isset($matriksTFN[$kriteria1][$kriteria2]))
+                                        {{ $matriksTFNInvers[$kriteria1][$kriteria2]['u'] ?? '' }}
+                                        @endif
+                                    </td>
+                                    @endforeach
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">

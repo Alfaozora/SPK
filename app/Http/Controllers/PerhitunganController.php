@@ -74,8 +74,10 @@ class PerhitunganController extends Controller
             foreach ($kriterias as $kriteria2) {
                 if ($matriksPerbandingan[$kriteria2][$kriteria1] != 0) {
                     $nilaiNormalisasi = 1 / $matriksPerbandingan[$kriteria2][$kriteria1];
+                    // dd($matriksPerbandingan);
                 } else {
                     $nilaiNormalisasi = $matriksPerbandingan[$kriteria1][$kriteria2];
+                    // dd($matriksPerbandingan);
                 }
                 $matriksNormalisasi[$kriteria1][$kriteria2] = round($nilaiNormalisasi, 2);
             }
@@ -88,6 +90,7 @@ class PerhitunganController extends Controller
             $jumlahKolom[$kriteria2] = 0;
             foreach ($kriterias as $kriteria1) {
                 $jumlahKolom[$kriteria2] += $matriksNormalisasi[$kriteria1][$kriteria2];
+                // dd($matriksNormalisasi);
             }
         }
 
@@ -151,6 +154,77 @@ class PerhitunganController extends Controller
             $cr[$kriteria1] = number_format($ci[$kriteria1] / $nilaiRI, 3);
         }
 
+        //Menghitung Konversi Nilai Perbandingan Antar Kriteria Ke Matriks Berpasangan Fuzzy
+        $matriksTFN = [];
+
+        foreach ($kriterias as $kriteria1) {
+            $matriksTFN[$kriteria1] = [];
+            foreach ($kriterias as $kriteria2) {
+                $nilaiNormalisasi = $matriksNormalisasi[$kriteria1][$kriteria2];
+                $tfn = [];
+                if ($nilaiNormalisasi == 1) {
+                    $tfn['l'] = 1;
+                    $tfn['m'] = 1;
+                    $tfn['u'] = 1;
+                } elseif ($nilaiNormalisasi == 2) {
+                    $tfn['l'] = 0.5;
+                    $tfn['m'] = 1;
+                    $tfn['u'] = 0.5;
+                } elseif ($nilaiNormalisasi == 3) {
+                    $tfn['l'] = 1;
+                    $tfn['m'] = 1.5;
+                    $tfn['u'] = 2;
+                } elseif ($nilaiNormalisasi == 4) {
+                    $tfn['l'] = 1.5;
+                    $tfn['m'] = 2;
+                    $tfn['u'] = 2.5;
+                } elseif ($nilaiNormalisasi == 5) {
+                    $tfn['l'] = 2;
+                    $tfn['m'] = 2.5;
+                    $tfn['u'] = 3;
+                } elseif ($nilaiNormalisasi == 6) {
+                    $tfn['l'] = 2.5;
+                    $tfn['m'] = 3;
+                    $tfn['u'] = 3.5;
+                } elseif ($nilaiNormalisasi == 7) {
+                    $tfn['l'] = 3;
+                    $tfn['m'] = 3.5;
+                    $tfn['u'] = 4;
+                } elseif ($nilaiNormalisasi == 8) {
+                    $tfn['l'] = 3.5;
+                    $tfn['m'] = 4;
+                    $tfn['u'] = 4.5;
+                } elseif ($nilaiNormalisasi == 9) {
+                    $tfn['l'] = 4;
+                    $tfn['m'] = 4.5;
+                    $tfn['u'] = 4.5;
+                }
+                $matriksTFN[$kriteria1][$kriteria2] = $tfn;
+            }
+        }
+
+        //nilai kebalikan TFN
+        $matriksTFNInverse = [];
+        foreach ($kriterias as $kriteria1) {
+            $matriksTFNInverse[$kriteria1] = [];
+            foreach ($kriterias as $kriteria2) {
+                $matriksTFN[$kriteria1][$kriteria2] = $tfn;
+                $tfnInverse = [];
+                if ($tfn == 1) {
+                    $tfnInverse['l'] = 1;
+                    $tfnInverse['m'] = 1;
+                    $tfnInverse['u'] = 1;
+                } elseif ($tfn == 2) {
+                    $tfnInverse['l'] = 0.7;
+                    $tfnInverse['m'] = 1;
+                    $tfnInverse['u'] = 2;
+                }
+                $matriksTFNInverse[$kriteria2][$kriteria1] = $tfnInverse;
+            }
+        }
+
+
+
         //menyimpan dan mengupdate nilai inisialiasi kriteria
         foreach ($nilaiintensitas as $key => $value) {
             foreach ($value as $key2 => $value2) {
@@ -183,7 +257,8 @@ class PerhitunganController extends Controller
             'ci' => $ci,
             'nilaiRI' => $nilaiRI,
             'cr' => $cr,
-
+            'matriksTFN' => $matriksTFN,
+            'matriksTFNInverse' => $matriksTFNInverse,
         ]);
     }
 
