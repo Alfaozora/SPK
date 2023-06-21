@@ -21,6 +21,13 @@
 </head>
 
 <body class="my-login-page">
+    <style>
+        body {
+            background-image: url("gambar/BG.PNG");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
     <section class="h-100">
         <div class="container h-100">
             <div class="row justify-content-md-center h-100">
