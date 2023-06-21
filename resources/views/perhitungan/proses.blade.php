@@ -72,6 +72,7 @@
                         </table>
                     </div>
                 </div>
+                <!-- Matriks Nilai Kriteria -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="form-group">
@@ -152,6 +153,7 @@
                         </table>
                     </div>
                 </div>
+                <!-- Kotak Biru Infone Masse -->
                 <div class="alert alert-info" role="alert">
                     @if($cr[$kriteria1] < 0.1) <p>Nilai Consistancy Ratio (CR) yang diperoleh adalah <strong>{{$cr[$kriteria1]}}</strong> . Nilai CR yang diperoleh <strong> ≤ 0,1 </strong> maka dapat disimpulkan bahwa matriks perbandingan berpasangan yang telah dibuat <strong> Sudah Dapat Diterima.</strong>
                         </p>
@@ -179,9 +181,9 @@
                                 </tr>
                                 <tr>
                                     @foreach($kriterias as $kriteria2)
-                                    <th>l</th>
-                                    <th>m</th>
-                                    <th>u</th>
+                                    <th class="bg-primary"><i>l</i></th>
+                                    <th class="bg-primary"><i>m</i></th>
+                                    <th class="bg-primary"><i>u</i></th>
                                     @endforeach
                                 </tr>
                             </thead>
@@ -190,21 +192,42 @@
                                 <tr>
                                     <td class="text-center" style="vertical-align:middle;">{{$kriteria1}}</td>
                                     @foreach($kriterias as $kriteria2)
+                                    @if($kriteria1 == $kriteria2)
+                                    <td class="bg-info">
+                                        @if(isset($matriksTFN[$kriteria1][$kriteria2]))
+                                        {{ $matriksTFN[$kriteria1][$kriteria2]['l'] ?? '' }}
+                                        @endif
+                                    </td>
+                                    <td class="bg-info">
+                                        @if(isset($matriksTFN[$kriteria1][$kriteria2]))
+                                        {{ $matriksTFN[$kriteria1][$kriteria2]['m'] ?? '' }}
+                                        @endif
+                                    </td>
+                                    <td class="bg-info">
+                                        @if(isset($matriksTFN[$kriteria1][$kriteria2]))
+                                        {{ $matriksTFN[$kriteria1][$kriteria2]['u'] ?? '' }}
+                                        @endif
+                                    </td>
+                                    @else
                                     <td>
                                         @if(isset($matriksTFN[$kriteria1][$kriteria2]))
-                                        {{ $matriksTFNInvers[$kriteria1][$kriteria2]['l'] ?? '' }}
+                                        {{ $matriksTFN[$kriteria1][$kriteria2]['l'] ?? '' }}
+                                        {{ $matriksTFNInverse[$kriteria2][$kriteria1]['l'] ?? '' }}
                                         @endif
                                     </td>
                                     <td>
                                         @if(isset($matriksTFN[$kriteria1][$kriteria2]))
-                                        {{ $matriksTFNInvers[$kriteria1][$kriteria2]['m'] ?? '' }}
+                                        {{ $matriksTFN[$kriteria1][$kriteria2]['m'] ?? '' }}
+                                        {{ $matriksTFNInverse[$kriteria2][$kriteria1]['m'] ?? '' }}
                                         @endif
                                     </td>
                                     <td>
                                         @if(isset($matriksTFN[$kriteria1][$kriteria2]))
-                                        {{ $matriksTFNInvers[$kriteria1][$kriteria2]['u'] ?? '' }}
+                                        {{ $matriksTFN[$kriteria1][$kriteria2]['u'] ?? '' }}
+                                        {{ $matriksTFNInverse[$kriteria2][$kriteria1]['u'] ?? '' }}
                                         @endif
                                     </td>
+                                    @endif
                                     @endforeach
                                 </tr>
                                 @endforeach
