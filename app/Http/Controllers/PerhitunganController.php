@@ -154,6 +154,7 @@ class PerhitunganController extends Controller
             $cr[$kriteria1] = number_format($ci[$kriteria1] / $nilaiRI, 3);
         }
 
+
         //Menghitung Konversi Nilai Perbandingan Antar Kriteria Ke Matriks Berpasangan Fuzzy
         $matriksTFN = [];
         $matriksTFNInverse = [];
@@ -244,8 +245,41 @@ class PerhitunganController extends Controller
             }
         }
 
-        //nilai kebalikan TFN
 
+        //menggabungkan matriks tfn kosong dengan matriks tfn yang sudah diisi
+        foreach ($matriksTFN as $matriks1 => $value) {
+            foreach ($matriksTFNInverse as $matriks2 => $value2) {
+                if ($matriksTFN[$matriks1][$matriks2] == null) {
+                    $matriksTFN[$matriks1][$matriks2] = $matriksTFNInverse[$matriks2][$matriks1];
+                }
+            }
+        }
+
+
+
+        //Jumlah TFN
+        $jumlahLMU = [];
+
+        foreach ($kriterias as $kriteria1) {
+            $jumlahLMU[$kriteria1] = [
+                'l' => 0,
+                'm' => 0,
+                'u' => 0,
+            ];
+            foreach ($kriterias as $kriteria2) {
+                if ($matriksTFN[$kriteria1][$kriteria2]['l']) {
+                    $jumlahLMU[$kriteria1]['l'] += $matriksTFN[$kriteria1][$kriteria2]['l'];
+                }
+                if ($matriksTFN[$kriteria1][$kriteria2]['m']) {
+                    $jumlahLMU[$kriteria1]['m'] += $matriksTFN[$kriteria1][$kriteria2]['m'];
+                }
+                if ($matriksTFN[$kriteria1][$kriteria2]['u']) {
+                    $jumlahLMU[$kriteria1]['u'] += $matriksTFN[$kriteria1][$kriteria2]['u'];
+                }
+            }
+        }
+
+        // dd($jumlahLMU);
 
 
 
@@ -283,6 +317,8 @@ class PerhitunganController extends Controller
             'cr' => $cr,
             'matriksTFN' => $matriksTFN,
             'matriksTFNInverse' => $matriksTFNInverse,
+            'jumlahLMU' => $jumlahLMU,
+            // 'totalLMU' => $totalLMU,
 
         ]);
     }

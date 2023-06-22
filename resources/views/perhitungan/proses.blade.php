@@ -193,17 +193,17 @@
                                     <td class="text-center" style="vertical-align:middle;">{{$kriteria1}}</td>
                                     @foreach($kriterias as $kriteria2)
                                     @if($kriteria1 == $kriteria2)
-                                    <td class="bg-info">
+                                    <td class="bg-warning">
                                         @if(isset($matriksTFN[$kriteria1][$kriteria2]))
                                         {{ $matriksTFN[$kriteria1][$kriteria2]['l'] ?? '' }}
                                         @endif
                                     </td>
-                                    <td class="bg-info">
+                                    <td class="bg-warning">
                                         @if(isset($matriksTFN[$kriteria1][$kriteria2]))
                                         {{ $matriksTFN[$kriteria1][$kriteria2]['m'] ?? '' }}
                                         @endif
                                     </td>
-                                    <td class="bg-info">
+                                    <td class="bg-warning">
                                         @if(isset($matriksTFN[$kriteria1][$kriteria2]))
                                         {{ $matriksTFN[$kriteria1][$kriteria2]['u'] ?? '' }}
                                         @endif
@@ -212,23 +212,54 @@
                                     <td>
                                         @if(isset($matriksTFN[$kriteria1][$kriteria2]))
                                         {{ $matriksTFN[$kriteria1][$kriteria2]['l'] ?? '' }}
-                                        {{ $matriksTFNInverse[$kriteria2][$kriteria1]['l'] ?? '' }}
                                         @endif
                                     </td>
                                     <td>
                                         @if(isset($matriksTFN[$kriteria1][$kriteria2]))
                                         {{ $matriksTFN[$kriteria1][$kriteria2]['m'] ?? '' }}
-                                        {{ $matriksTFNInverse[$kriteria2][$kriteria1]['m'] ?? '' }}
                                         @endif
                                     </td>
                                     <td>
                                         @if(isset($matriksTFN[$kriteria1][$kriteria2]))
                                         {{ $matriksTFN[$kriteria1][$kriteria2]['u'] ?? '' }}
-                                        {{ $matriksTFNInverse[$kriteria2][$kriteria1]['u'] ?? '' }}
                                         @endif
                                     </td>
                                     @endif
                                     @endforeach
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Fuzzy Tringular Number -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="form-group">
+                            <p>Fuzzy Tringular Number</p>
+                        </div>
+                    </div>
+                    <div class="table-responsive" id="tableContainer">
+                        <table class="table table-bordered table-striped table-hover" id="table2">
+                            <thead class="text-center" style="vertical-align:middle;">
+                                <tr>
+                                    <th rowspan="2">
+                                        Kriteria
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="bg-primary"><i>l</i></th>
+                                    <th class="bg-primary"><i>m</i></th>
+                                    <th class="bg-primary"><i>u</i></th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center" style="vertical-align:middle;">
+                                @foreach($jumlahLMU as $kriteria1 => $jumlah)
+                                <tr>
+                                    <td class="text-center" style="vertical-align:middle;">{{$kriteria1}}</td>
+                                    <td>{{$jumlah['l']}}</td>
+                                    <td>{{$jumlah['m']}}</td>
+                                    <td>{{$jumlah['u']}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
