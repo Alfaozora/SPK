@@ -262,6 +262,11 @@
                                     <td>{{$jumlah['u']}}</td>
                                 </tr>
                                 @endforeach
+                                <tr>
+                                    <th class="text-center" style="vertical-align:middle;">Total</th>
+                                    <th class="text-center">{{$totalLMU['l']}}</th>
+                                    <th class="text-center">{{$totalLMU['m']}}</th>
+                                    <th class="text-center">{{$totalLMU['u']}}</th>
                             </tbody>
                         </table>
                     </div>

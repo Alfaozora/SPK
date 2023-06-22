@@ -279,7 +279,49 @@ class PerhitunganController extends Controller
             }
         }
 
-        // dd($jumlahLMU);
+        //total jumlah nilai l,m,u dari setiap kriteria
+        $totalLMU = [
+            'l' => 0,
+            'm' => 0,
+            'u' => 0,
+        ];
+        foreach ($kriterias as $kriteria1) {
+            $totalLMU['l'] += $jumlahLMU[$kriteria1]['l'];
+            $totalLMU['m'] += $jumlahLMU[$kriteria1]['m'];
+            $totalLMU['u'] += $jumlahLMU[$kriteria1]['u'];
+        }
+
+        //Menghitung nlai sintesis fuzzy untuk kriteria
+        $nilaiSintesisFuzzy = [];
+        foreach ($kriterias as $kriteria1) {
+            $nilaiSintesisFuzzy[$kriteria1] = [
+                'l' => round($jumlahLMU[$kriteria1]['l'] / $totalLMU['u'], 2),
+                'm' => round($jumlahLMU[$kriteria1]['m'] / $totalLMU['m'], 2),
+                'u' => round($jumlahLMU[$kriteria1]['u'] / $totalLMU['l'], 2),
+            ];
+        }
+
+        //Menghitung hasil nilai prioritas vektor jika m2 >= m1 maka hasil 1 dan jika l1 < u2 maka hasil 1
+        $nilaiPrioritasVektor = [];
+        foreach ($kriterias as $kriteria1) {
+            $nilaiPrioritasVektor[$kriteria1] = [
+                'l' => 0,
+                'm' => 0,
+                'u' => 0,
+            ];
+            foreach ($kriterias as $kriteria2) {
+                if ($nilaiSintesisFuzzy[$kriteria1]['l'] >= $nilaiSintesisFuzzy[$kriteria2]['l']) {
+                    $nilaiPrioritasVektor[$kriteria1]['l'] += 1;
+                }
+                if ($nilaiSintesisFuzzy[$kriteria1]['m'] >= $nilaiSintesisFuzzy[$kriteria2]['m']) {
+                    $nilaiPrioritasVektor[$kriteria1]['m'] += 1;
+                }
+                if ($nilaiSintesisFuzzy[$kriteria1]['u'] >= $nilaiSintesisFuzzy[$kriteria2]['u']) {
+                    $nilaiPrioritasVektor[$kriteria1]['u'] += 1;
+                }
+            }
+        }
+        dd($nilaiPrioritasVektor);
 
 
 
@@ -318,7 +360,7 @@ class PerhitunganController extends Controller
             'matriksTFN' => $matriksTFN,
             'matriksTFNInverse' => $matriksTFNInverse,
             'jumlahLMU' => $jumlahLMU,
-            // 'totalLMU' => $totalLMU,
+            'totalLMU' => $totalLMU,
 
         ]);
     }
