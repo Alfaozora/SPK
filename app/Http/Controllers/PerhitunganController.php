@@ -321,7 +321,7 @@ class PerhitunganController extends Controller
                 }
             }
         }
-        dd($nilaiPrioritasVektor);
+        // dd($nilaiPrioritasVektor);
 
 
 

@@ -243,6 +243,14 @@
                         <table class="table table-bordered table-striped table-hover" id="table2">
                             <thead class="text-center" style="vertical-align:middle;">
                                 <tr>
+                                    <th colspan="5">
+                                        Fuzzy Tringular Number
+                                    </th>
+                                    <th colspan="">
+                                        Sitesis Fuzzy
+                                    </th>
+                                </tr>
+                                <tr>
                                     <th rowspan="2">
                                         Kriteria
                                     </th>
@@ -252,6 +260,7 @@
                                     <th class="bg-primary"><i>m</i></th>
                                     <th class="bg-primary"><i>u</i></th>
                                 </tr>
+
                             </thead>
                             <tbody class="text-center" style="vertical-align:middle;">
                                 @foreach($jumlahLMU as $kriteria1 => $jumlah)
