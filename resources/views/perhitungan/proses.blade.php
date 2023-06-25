@@ -243,10 +243,10 @@
                         <table class="table table-bordered table-striped table-hover" id="table2">
                             <thead class="text-center" style="vertical-align:middle;">
                                 <tr>
-                                    <th colspan="5">
+                                    <th colspan="4">
                                         Fuzzy Tringular Number
                                     </th>
-                                    <th colspan="">
+                                    <th colspan="4">
                                         Sitesis Fuzzy
                                     </th>
                                 </tr>
@@ -259,8 +259,10 @@
                                     <th class="bg-primary"><i>l</i></th>
                                     <th class="bg-primary"><i>m</i></th>
                                     <th class="bg-primary"><i>u</i></th>
+                                    <th class="bg-primary"><i>l</i></th>
+                                    <th class="bg-primary"><i>m</i></th>
+                                    <th class="bg-primary"><i>u</i></th>
                                 </tr>
-
                             </thead>
                             <tbody class="text-center" style="vertical-align:middle;">
                                 @foreach($jumlahLMU as $kriteria1 => $jumlah)
@@ -269,6 +271,9 @@
                                     <td>{{$jumlah['l']}}</td>
                                     <td>{{$jumlah['m']}}</td>
                                     <td>{{$jumlah['u']}}</td>
+                                    <td>{{ $nilaiSintesisFuzzy[$kriteria1]['l'] }}</td>
+                                    <td>{{ $nilaiSintesisFuzzy[$kriteria1]['m'] }}</td>
+                                    <td>{{ $nilaiSintesisFuzzy[$kriteria1]['u'] }}</td>
                                 </tr>
                                 @endforeach
                                 <tr>
@@ -276,13 +281,48 @@
                                     <th class="text-center">{{$totalLMU['l']}}</th>
                                     <th class="text-center">{{$totalLMU['m']}}</th>
                                     <th class="text-center">{{$totalLMU['u']}}</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="form-group">
+                            <p> Hasil Nilai Prioritas Vektor</p>
+                        </div>
+                    </div>
+                    <div class="table-responsive" id="tableContainer">
+                        <table class="table table-bordered table-striped table-hover" id="table2">
+                            <thead class="text-center" style="vertical-align:middle;">
+                                <tr>
+                                    <th rowspan="2">
+                                        Kriteria
+                                    </th>
+                                    @foreach($kriterias as $kriteria2)
+                                    <th class="text-center" style="vertical-align: middle;">{{$kriteria2}}</th>
+                                    @endforeach
+                                    <th>
+                                        Nilai Ordinat
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center" style="vertical-align:middle;">
+                                @foreach($kriterias as $kriteria1)
+                                <tr>
+                                    <td class="text-center" style="vertical-align:middle;">{{$kriteria1}}</td>
+                                    @foreach($kriterias as $kriteria2)
+                                    <td>{{ $derajatKeanggotaan[$kriteria1][$kriteria2]}}</td>
+                                    @endforeach
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <p class="back-link">Desa Gedongboyountung 2023</a></p>
+                <p class="back-link">SPK - Desa Gedongboyountung 2023</a></p>
             </div>
         </div>
     </div>

@@ -300,29 +300,31 @@ class PerhitunganController extends Controller
                 'u' => round($jumlahLMU[$kriteria1]['u'] / $totalLMU['l'], 2),
             ];
         }
+        // dd($nilaiSintesisFuzzy);
 
-        //Menghitung hasil nilai prioritas vektor jika m2 >= m1 maka hasil 1 dan jika l1 < u2 maka hasil 1
-        $nilaiPrioritasVektor = [];
+
+        //Menghitung derajat keanggotan dari perbandingan nilai sintesis fuzzy
+        $derajatKeanggotaan = [];
         foreach ($kriterias as $kriteria1) {
-            $nilaiPrioritasVektor[$kriteria1] = [
-                'l' => 0,
-                'm' => 0,
-                'u' => 0,
-            ];
+            $l1 = $nilaiSintesisFuzzy[$kriteria1]['l'];
+            $m1 = $nilaiSintesisFuzzy[$kriteria1]['m'];
+
+            $derajatKeanggotaan[$kriteria1] = [];
+
             foreach ($kriterias as $kriteria2) {
-                if ($nilaiSintesisFuzzy[$kriteria1]['l'] >= $nilaiSintesisFuzzy[$kriteria2]['l']) {
-                    $nilaiPrioritasVektor[$kriteria1]['l'] += 1;
-                }
-                if ($nilaiSintesisFuzzy[$kriteria1]['m'] >= $nilaiSintesisFuzzy[$kriteria2]['m']) {
-                    $nilaiPrioritasVektor[$kriteria1]['m'] += 1;
-                }
-                if ($nilaiSintesisFuzzy[$kriteria1]['u'] >= $nilaiSintesisFuzzy[$kriteria2]['u']) {
-                    $nilaiPrioritasVektor[$kriteria1]['u'] += 1;
+                $m2 = $nilaiSintesisFuzzy[$kriteria2]['m'];
+                $u2 = $nilaiSintesisFuzzy[$kriteria2]['u'];
+
+                if ($m2 >= $m1) {
+                    $derajatKeanggotaan[$kriteria1][$kriteria2] = 1;
+                } elseif ($l1 >= $u2) {
+                    $derajatKeanggotaan[$kriteria1][$kriteria2] = 0;
+                } else {
+                    $derajatKeanggotaan[$kriteria1][$kriteria2] = round(($l1 - $u2) / (($m2 - $u2) - ($m1 - $l1)), 2);
                 }
             }
         }
-        // dd($nilaiPrioritasVektor);
-
+        // dd($derajatKeanggotaan);
 
 
         //menyimpan dan mengupdate nilai inisialiasi kriteria
@@ -361,7 +363,8 @@ class PerhitunganController extends Controller
             'matriksTFNInverse' => $matriksTFNInverse,
             'jumlahLMU' => $jumlahLMU,
             'totalLMU' => $totalLMU,
-
+            'nilaiSintesisFuzzy' => $nilaiSintesisFuzzy,
+            'derajatKeanggotaan' => $derajatKeanggotaan,
         ]);
     }
 
