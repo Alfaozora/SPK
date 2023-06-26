@@ -303,7 +303,10 @@
                                     <th class="text-center" style="vertical-align: middle;">{{$kriteria2}}</th>
                                     @endforeach
                                     <th>
-                                        Nilai Ordinat
+                                        Nilai Minimum
+                                    </th>
+                                    <th>
+                                        Normalisasi
                                     </th>
                                 </tr>
                             </thead>
@@ -314,8 +317,15 @@
                                     @foreach($kriterias as $kriteria2)
                                     <td>{{ $derajatKeanggotaan[$kriteria1][$kriteria2]}}</td>
                                     @endforeach
+                                    <td>{{$nilaiMinimum[$kriteria1]}}</td>
+                                    <td>{{$normalisasiVektor[$kriteria1]}}</td>
                                 </tr>
                                 @endforeach
+                                <tr>
+                                    <th class="text-center">Total</th>
+                                    <th colspan="6"></th>
+                                    <th class="text-center" colspan="">{{$totalMinimum}}</th>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

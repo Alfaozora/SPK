@@ -305,6 +305,7 @@ class PerhitunganController extends Controller
 
         //Menghitung derajat keanggotan dari perbandingan nilai sintesis fuzzy
         $derajatKeanggotaan = [];
+        $totalMinimum = 0;
         foreach ($kriterias as $kriteria1) {
             $l1 = $nilaiSintesisFuzzy[$kriteria1]['l'];
             $m1 = $nilaiSintesisFuzzy[$kriteria1]['m'];
@@ -322,9 +323,17 @@ class PerhitunganController extends Controller
                 } else {
                     $derajatKeanggotaan[$kriteria1][$kriteria2] = round(($l1 - $u2) / (($m2 - $u2) - ($m1 - $l1)), 2);
                 }
+                // dd($m2);
             }
+            $nilaiMinimum[$kriteria1] = min($derajatKeanggotaan[$kriteria1]);
+            $totalMinimum += $nilaiMinimum[$kriteria1];
         }
-        // dd($derajatKeanggotaan);
+
+        //menghitung normalisasi vektor
+        $normalisasiVektor = [];
+        foreach ($kriterias as $kriteria1) {
+            $normalisasiVektor[$kriteria1] = round($nilaiMinimum[$kriteria1] / $totalMinimum, 2);
+        }
 
 
         //menyimpan dan mengupdate nilai inisialiasi kriteria
@@ -365,6 +374,9 @@ class PerhitunganController extends Controller
             'totalLMU' => $totalLMU,
             'nilaiSintesisFuzzy' => $nilaiSintesisFuzzy,
             'derajatKeanggotaan' => $derajatKeanggotaan,
+            'nilaiMinimum' => $nilaiMinimum,
+            'totalMinimum' => $totalMinimum,
+            'normalisasiVektor' => $normalisasiVektor,
         ]);
     }
 
