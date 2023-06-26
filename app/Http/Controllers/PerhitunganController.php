@@ -154,6 +154,7 @@ class PerhitunganController extends Controller
             $cr[$kriteria1] = number_format($ci[$kriteria1] / $nilaiRI, 3);
         }
 
+
         //Menghitung Konversi Nilai Perbandingan Antar Kriteria Ke Matriks Berpasangan Fuzzy
         $matriksTFN = [];
         $matriksTFNInverse = [];
@@ -244,9 +245,95 @@ class PerhitunganController extends Controller
             }
         }
 
-        //nilai kebalikan TFN
+
+        //menggabungkan matriks tfn kosong dengan matriks tfn yang sudah diisi
+        foreach ($matriksTFN as $matriks1 => $value) {
+            foreach ($matriksTFNInverse as $matriks2 => $value2) {
+                if ($matriksTFN[$matriks1][$matriks2] == null) {
+                    $matriksTFN[$matriks1][$matriks2] = $matriksTFNInverse[$matriks2][$matriks1];
+                }
+            }
+        }
 
 
+
+        //Jumlah TFN
+        $jumlahLMU = [];
+
+        foreach ($kriterias as $kriteria1) {
+            $jumlahLMU[$kriteria1] = [
+                'l' => 0,
+                'm' => 0,
+                'u' => 0,
+            ];
+            foreach ($kriterias as $kriteria2) {
+                if ($matriksTFN[$kriteria1][$kriteria2]['l']) {
+                    $jumlahLMU[$kriteria1]['l'] += $matriksTFN[$kriteria1][$kriteria2]['l'];
+                }
+                if ($matriksTFN[$kriteria1][$kriteria2]['m']) {
+                    $jumlahLMU[$kriteria1]['m'] += $matriksTFN[$kriteria1][$kriteria2]['m'];
+                }
+                if ($matriksTFN[$kriteria1][$kriteria2]['u']) {
+                    $jumlahLMU[$kriteria1]['u'] += $matriksTFN[$kriteria1][$kriteria2]['u'];
+                }
+            }
+        }
+
+        //total jumlah nilai l,m,u dari setiap kriteria
+        $totalLMU = [
+            'l' => 0,
+            'm' => 0,
+            'u' => 0,
+        ];
+        foreach ($kriterias as $kriteria1) {
+            $totalLMU['l'] += $jumlahLMU[$kriteria1]['l'];
+            $totalLMU['m'] += $jumlahLMU[$kriteria1]['m'];
+            $totalLMU['u'] += $jumlahLMU[$kriteria1]['u'];
+        }
+
+        //Menghitung nlai sintesis fuzzy untuk kriteria
+        $nilaiSintesisFuzzy = [];
+        foreach ($kriterias as $kriteria1) {
+            $nilaiSintesisFuzzy[$kriteria1] = [
+                'l' => round($jumlahLMU[$kriteria1]['l'] / $totalLMU['u'], 2),
+                'm' => round($jumlahLMU[$kriteria1]['m'] / $totalLMU['m'], 2),
+                'u' => round($jumlahLMU[$kriteria1]['u'] / $totalLMU['l'], 2),
+            ];
+        }
+        // dd($nilaiSintesisFuzzy);
+
+
+        //Menghitung derajat keanggotan dari perbandingan nilai sintesis fuzzy
+        $derajatKeanggotaan = [];
+        $totalMinimum = 0;
+        foreach ($kriterias as $kriteria1) {
+            $l1 = $nilaiSintesisFuzzy[$kriteria1]['l'];
+            $m1 = $nilaiSintesisFuzzy[$kriteria1]['m'];
+
+            $derajatKeanggotaan[$kriteria1] = [];
+
+            foreach ($kriterias as $kriteria2) {
+                $m2 = $nilaiSintesisFuzzy[$kriteria2]['m'];
+                $u2 = $nilaiSintesisFuzzy[$kriteria2]['u'];
+
+                if ($m2 >= $m1) {
+                    $derajatKeanggotaan[$kriteria1][$kriteria2] = 1;
+                } elseif ($l1 >= $u2) {
+                    $derajatKeanggotaan[$kriteria1][$kriteria2] = 0;
+                } else {
+                    $derajatKeanggotaan[$kriteria1][$kriteria2] = round(($l1 - $u2) / (($m2 - $u2) - ($m1 - $l1)), 2);
+                }
+                // dd($m2);
+            }
+            $nilaiMinimum[$kriteria1] = min($derajatKeanggotaan[$kriteria1]);
+            $totalMinimum += $nilaiMinimum[$kriteria1];
+        }
+
+        //menghitung normalisasi vektor
+        $normalisasiVektor = [];
+        foreach ($kriterias as $kriteria1) {
+            $normalisasiVektor[$kriteria1] = round($nilaiMinimum[$kriteria1] / $totalMinimum, 2);
+        }
 
 
         //menyimpan dan mengupdate nilai inisialiasi kriteria
@@ -283,7 +370,13 @@ class PerhitunganController extends Controller
             'cr' => $cr,
             'matriksTFN' => $matriksTFN,
             'matriksTFNInverse' => $matriksTFNInverse,
-
+            'jumlahLMU' => $jumlahLMU,
+            'totalLMU' => $totalLMU,
+            'nilaiSintesisFuzzy' => $nilaiSintesisFuzzy,
+            'derajatKeanggotaan' => $derajatKeanggotaan,
+            'nilaiMinimum' => $nilaiMinimum,
+            'totalMinimum' => $totalMinimum,
+            'normalisasiVektor' => $normalisasiVektor,
         ]);
     }
 
