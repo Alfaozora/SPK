@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Crips;
 use App\Models\Kriteria;
-use App\Models\nilaiintensitas;
+use App\Models\sub_kriteria;
 use Alert;
 use DB;
 
@@ -18,25 +18,9 @@ class CripsController extends Controller
      */
     public function index(Request $request)
     {
-        $kriteriaObj = new Kriteria();
-        $nilaiObj = new nilaiintensitas();
-
-        $kriteraCount = $kriteriaObj->count();
-
-        $r = [];
-        $kriterias = $kriteriaObj->all();
-        foreach ($kriterias as $kriteria) {
-            $kriteriass = $kriteriaObj->find($kriteria->kode_kriteria);
-            foreach ($kriteriass as $roww) {
-                $pcs = explode("C", $roww->kode_kriteria);
-                $c = $kriteraCount - $pcs[1];
-            }
-            if ($c >= 1) {
-                $r[$kriteria->kode_kriteria] = $c;
-            }
-        }
-
-        return view('crips.tampilcrips', compact('r'));
+        $kriterias = kriteria::all();
+        $sub_kriterias = sub_kriteria::all();
+        return view('crips.tampilcrips', compact('kriterias', 'sub_kriterias'));
     }
 
     /**
@@ -47,7 +31,8 @@ class CripsController extends Controller
     public function create()
     {
         $kriterias = Kriteria::all();
-        return view('crips.tambahcrips', compact('kriterias'));
+        $sub_kriterias = sub_kriteria::all();
+        return view('crips.tambahcrips', compact('kriterias', 'sub_kriterias'));
     }
 
     /**
@@ -59,26 +44,23 @@ class CripsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'id_crips' => 'required|numeric',
-            'id_kriteria' => 'required|numeric',
-            'nama' => 'required',
-            'keterangan' => 'required',
-            'nilai' =>  'required|numeric'
+            'kode_kriteria' => 'required',
+            'nama_sub' => 'required',
+            'bobot' => 'required'
         ]);
 
-        $crips = Crips::create([
-            'id_crips' => $request->id_crips,
-            'id_kriteria' => $request->id_kriteria,
-            'nama' => $request->nama,
-            'keterangan' => $request->keterangan,
-            'nilai' => $request->nilai
+        $sub_kriterias = sub_kriteria::create([
+            'kode_kriteria' => $request->kode_kriteria,
+            'nama_sub' => $request->nama_sub,
+            'bobot' => $request->bobot
+
         ]);
-        if ($crips) {
-            Alert::success('Data Crips Berhasil Ditambahkan', 'Selamat');
-            return redirect()->route('crips.index');
+        if ($sub_kriterias) {
+            Alert::success('Kriteria Berhasil Ditambahkan', 'Selamat');
+            return redirect()->back();
         } else {
-            Alert::error('Data Crips Gagal Ditambahkan', 'Maaf');
-            return redirect()->route('crips.create');
+            Alert::error('Kriteria Gagal Ditambahkan', 'Maaf');
+            return redirect()->route('kriteria.create');
         }
     }
 
@@ -101,9 +83,6 @@ class CripsController extends Controller
      */
     public function edit($id)
     {
-        $crips = crips::find($id);
-        $kriteria = Kriteria::all();
-        return view('crips.editcrips', compact('crips', 'kriteria'));
     }
 
     /**
@@ -115,27 +94,6 @@ class CripsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'id_crips' => 'required' | 'numeric',
-            'nama' => 'required',
-            'keterangan' => 'required',
-            'nilai' => 'required|numeric'
-        ]);
-
-        $crips = Crips::find($id);
-        $crips->update([
-            'id_crips' => $request->id_crips,
-            'nama' => $request->nama,
-            'keterangan' => $request->keterangan,
-            'nilai' => $request->nilai,
-        ]);
-        if ($crips) {
-            Alert::success('Nilai Kriteria Berhasil Diubah', 'Selamat');
-            return redirect()->route('crips.index');
-        } else {
-            Alert::error('Nilai Kriteria Gagal Diubah', 'Maaf');
-            return redirect()->route('crips.edit');
-        }
     }
 
     /**
@@ -146,8 +104,5 @@ class CripsController extends Controller
      */
     public function destroy($id)
     {
-        $crips = Crips::find($id);
-        $crips->delete();
-        return response()->json(['status' => 'Kriteria Berhasil di hapus!']);
     }
 }

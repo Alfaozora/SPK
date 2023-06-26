@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\kriteria;
 use App\Models\nilaiintensitas;
 use App\Models\perbandingan_kriteria;
-use Gopalindians\Matrix\Matrix;
+use App\Models\alternatif;
+use App\Models\sub_kriteria;
+use App\Models\perbandingan_alternatif;
 
 use Illuminate\Http\Request;
 use Redirect;
@@ -22,7 +24,9 @@ class PerhitunganController extends Controller
         $kriterias = kriteria::all();
         $nilaiintensitas = nilaiintensitas::all();
         $perbandingan_kriterias = perbandingan_kriteria::all();
-        return view('perhitungan.perhitungan', compact('kriterias', 'nilaiintensitas', 'perbandingan_kriterias'));
+        $alternatifs = alternatif::all();
+        $sub_kriterias = sub_kriteria::all();
+        return view('perhitungan.perhitungan', compact('kriterias', 'nilaiintensitas', 'perbandingan_kriterias', 'alternatifs', 'sub_kriterias'));
     }
 
     /**
@@ -50,6 +54,9 @@ class PerhitunganController extends Controller
         $perbandingan_kriterias = perbandingan_kriteria::all();
         $perbandingan_kriterias = $request->input('nilai');
 
+        $sub_kriterias = sub_kriteria::all();
+        $perbandingan_alternatifs = perbandingan_alternatif::all();
+        $alternatifs = alternatif::all();
 
         //Mendapatkan daftar semua kriteria yang tersedia
         $kriterias = kriteria::pluck('kode_kriteria')->toArray();
@@ -355,6 +362,30 @@ class PerhitunganController extends Controller
                 );
             }
         }
+        // dd($perbandingan_kriterias);
+
+        //menyimpan dan mengupdate nilai inisialisasi Bobot Nilai Kriteria Untuk Masing Masing Alternatif
+        $nilaiBobot = $request->input('bobot');
+        foreach ($nilaiBobot as $key => $value) {
+            foreach ($value as $key2 => $value2) {
+                $perbandingan_alternatifs = new perbandingan_alternatif();
+                $perbandingan_alternatifs->alternatif_id = $key;
+                $perbandingan_alternatifs->kode_kriteria = $key2;
+                $perbandingan_alternatifs->bobot = $value2;
+                //menyimpan dan memperbarui data
+                perbandingan_alternatif::updateOrCreate(
+                    [
+                        'alternatif_id' => $key,
+                        'kode_kriteria' => $key2,
+                    ],
+                    [
+                        'bobot' => $value2,
+                    ]
+                );
+            }
+        }
+
+
         return view('perhitungan.proses', [
             'kriterias' => $kriterias,
             'matriksPerbandingan' => $matriksPerbandingan,

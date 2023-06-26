@@ -8,14 +8,14 @@
                 <li><a href="{{ route('home') }}">
                         <em class="fa fa-home"></em>
                     </a></li>
-                <li class="active">Nilai Kriteria</li>
+                <li class="active">Nilai Sub Kriteria</li>
             </ol>
         </div>
         <!--/.row-->
 
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Nilai Kriteria</h2>
+                <h2 class="page-header">Nilai Sub Kriteria</h2>
             </div>
         </div>
     </div>
@@ -26,64 +26,36 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-body">
-                        <form class="needs-validation" method="post" action="{{ route('crips.store') }} " validate>
-                            <div class="row">
-                                <div class="col-xs-12 col-md-4">
-                                    <div class="form-group">
-                                        <label>Kriteria Pertama</label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-md-4">
-                                    <div class="form-group">
-                                        <label>Pernilaian</label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-md-4">
-                                    <div class="form-group">
-                                        <label>Kriteria Kedua</label>
-                                    </div>
-                                </div>
+                    <div class="panel-heading">
+                        <form class="form-inline">
+                            <div class="form-group">
                             </div>
-                            @php $no=1; foreach($r as $key => $value): @endphp
-                            @php for ($i=1; $i <= $value; $i++): @endphp @php $rows=$kriteriaObj->bacaSatu($key);
-                                while ($row = $rows->fetch_assoc()): @endphp
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-3">
-                                        <div class="form-group">
-                                            @php $rows = $kriteriaObj->bacaSatu($key);
-                                            while($row = $rows->fetch_assoc()): @endphp
-                                            <input type="text" class="form-control" value="{{ $row['nama_kriteria'] }}" readonly />
-                                            <input type="hidden" name="{{ $key }}{{ $no }}" value="{{ $row['kode_kriteria'] }}" />
-                                            @php endwhile; @endphp
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-md-6">
-                                        <div class="form-group">
-                                            <select class="form-control" name="nl{{ $no }}">
-                                                <option value="">-- Pilih Nilai --</option>
-                                                @php $rows = $nilaiObj->readAll();
-                                                while($row = $rows->fetch_assoc()): @endphp
-                                                <option value="{{ $row['jum_nilai'] }}">{{ $row['jum_nilai'] }} - {{ $row['keterangan'] }}</option>
-                                                @php endwhile; @endphp
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-md-3">
-                                        <div class="form-group">
-                                            @php $pcs = explode("C", $key); $nid = "C".($pcs[1] + $i); @endphp
-                                            @php $rows = $kriteriaObj->bacaSatu($nid);
-                                            while($row = $rows->fetch_assoc()): @endphp
-                                            <input type="text" class="form-control" value="{{ $row['nama_kriteria'] }}" readonly />
-                                            <input type="hidden" name="{{ $nid }}{{ $no }}" value="{{ $row['kode_kriteria'] }}" />
-                                            @php endwhile; @endphp
-                                        </div>
-                                    </div>
-                                </div>
-                                @php endwhile; $no++; @endphp
-                                @php endfor; @endphp
-                                @endforeach;
+                            <div class="form-group">
+                                <a type="button" class="btn btn-danger" href="{{route('crips.create')}}"><i class="fa fa-plus"></i> Tambah</a>
+                            </div>
                         </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="text-center" style="vertical-align:middle;">
+                                <tr>
+                                    <th rowspan="2">No</th>
+                                    <th rowspan="2">Kode Kriteria</th>
+                                    <th rowspan="2">Sub Kriteria</th>
+                                    <th rowspan="2">Bobot</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center" style="vertical-align:middle;">
+                                @foreach ($sub_kriterias as $sub)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $sub->kode_kriteria }}</td>
+                                    <td class="text-left">{{ $sub->nama_sub }}</td>
+                                    <td>{{$sub->bobot}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
