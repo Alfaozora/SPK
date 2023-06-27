@@ -365,23 +365,27 @@ class PerhitunganController extends Controller
         // dd($perbandingan_kriterias);
 
         //menyimpan dan mengupdate nilai inisialisasi Bobot Nilai Kriteria Untuk Masing Masing Alternatif
-        $nilaiBobot = $request->input('bobot');
-        foreach ($nilaiBobot as $key => $value) {
-            foreach ($value as $key2 => $value2) {
-                $perbandingan_alternatifs = new perbandingan_alternatif();
-                $perbandingan_alternatifs->alternatif_id = $key;
-                $perbandingan_alternatifs->kode_kriteria = $key2;
-                $perbandingan_alternatifs->bobot = $value2;
-                //menyimpan dan memperbarui data
-                perbandingan_alternatif::updateOrCreate(
-                    [
-                        'alternatif_id' => $key,
-                        'kode_kriteria' => $key2,
-                    ],
-                    [
-                        'bobot' => $value2,
-                    ]
-                );
+        $bobotValues = $request->input('bobot');
+
+        foreach ($bobotValues as $alternatifId => $kriteriaBobots) {
+            foreach ($kriteriaBobots as $kriteriaId => $bobot) {
+                // Cari entitas yang sesuai dengan alternatif_id dan kriteria_id
+                $perbandingan = perbandingan_alternatif::where('alternatif_id', $alternatifId)
+                    ->where('kriteria_id', $kriteriaId)
+                    ->first();
+
+                if ($perbandingan) {
+                    // Jika entitas sudah ada, update bobot
+                    $perbandingan->bobot = $bobot;
+                    $perbandingan->save();
+                } else {
+                    // Jika entitas belum ada, buat data baru
+                    perbandingan_alternatif::create([
+                        'alternatif_id' => $alternatifId,
+                        'kriteria_id' => $kriteriaId,
+                        'bobot' => $bobot,
+                    ]);
+                }
             }
         }
 

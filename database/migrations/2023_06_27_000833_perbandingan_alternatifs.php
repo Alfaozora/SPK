@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('perbandingan_alternatifs', function (Blueprint $table) {
             $table->id();
             $table->string('alternatif_id');
-            $table->string('kode_alternatif');
+            $table->string('kode_kriteria');
             $table->integer('bobot');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perbandingan_alternatifs');
+        //
     }
 };
