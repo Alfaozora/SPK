@@ -110,7 +110,7 @@
                                             <select class="form-control form-control-sm" name="bobot[{{$alternatif->kode}}][{{$kriteria->kode_kriteria}}]">
                                                 @foreach ($sub_kriterias as $sub)
                                                 @if($sub->kode_kriteria == $kriteria->kode_kriteria)
-                                                <option value="{{$sub->bobot}}">{{$sub->nama_sub}}</option>
+                                                <option value="{{$sub->bobot}}">{{$sub->bobot}}-{{$sub->nama_sub}}</option>
                                                 @endif
                                                 @endforeach
                                             </select>

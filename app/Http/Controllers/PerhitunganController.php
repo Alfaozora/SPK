@@ -342,6 +342,44 @@ class PerhitunganController extends Controller
             $normalisasiVektor[$kriteria1] = round($nilaiMinimum[$kriteria1] / $totalMinimum, 2);
         }
 
+        //Menampilkan Konversi Bobot Kirteria Dari Masing-Masing Alternatif ke tabel
+        $bobotValues = $request->input('bobot');
+        $matriksBobot = [];
+        foreach ($bobotValues as $alternatifId => $kriteriaBobots) {
+            foreach ($kriteriaBobots as $kriteriaId => $bobot) {
+                $matriksBobot[$alternatifId][$kriteriaId] = $bobot;
+            }
+        }
+
+        //menghitung bobot kriteria dengan alternatif dikali dengan normalisasi vektor
+        $matriksBobotVektor = [];
+        foreach ($bobotValues as $alternatifId => $kriteriaBobots) {
+            foreach ($kriteriaBobots as $kriteriaId => $bobot) {
+                $matriksBobotVektor[$alternatifId][$kriteriaId] = $bobot * $normalisasiVektor[$kriteriaId];
+            }
+        }
+        // dd($matriksBobotVektor);
+
+        //menjumlahkan baris dari matriks bobot vektor
+        $totalBobotVektor = [];
+        foreach ($bobotValues as $alternatifId => $kriteriaBobots) {
+            $totalBobot = 0;
+            foreach ($kriteriaBobots as $kriteriaId => $bobot) {
+                $totalBobot += $matriksBobotVektor[$alternatifId][$kriteriaId];
+            }
+            $totalBobotVektor[$alternatifId] = $totalBobot;
+        }
+        // dd($totalBobotVektor);
+
+        //melakukan perangkingan alternatif berdasarkan nilai total bobot vektor
+        arsort($totalBobotVektor);
+        $peringkat = 1;
+        foreach ($totalBobotVektor as $kode => $totalBobot) {
+            $alternatifs = Alternatif::where('kode', $kode)->first();
+            $namaAlternatif = $alternatifs ? $alternatifs->nama : 'N/A';
+            $peringkat++;
+        }
+        // dd($namaAlternatif);
 
         //menyimpan dan mengupdate nilai inisialiasi kriteria
         foreach ($nilaiintensitas as $key => $value) {
@@ -412,6 +450,13 @@ class PerhitunganController extends Controller
             'nilaiMinimum' => $nilaiMinimum,
             'totalMinimum' => $totalMinimum,
             'normalisasiVektor' => $normalisasiVektor,
+            'alternatifs' => $alternatifs,
+            'sub_kriterias' => $sub_kriterias,
+            'perbandigan_alternatifs' => $perbandingan_alternatifs,
+            'matriksBobot' => $matriksBobot,
+            'matriksBobotVektor' => $matriksBobotVektor,
+            'totalBobotVektor' => $totalBobotVektor,
+            'namaAlternatif' => $namaAlternatif,
         ]);
     }
 

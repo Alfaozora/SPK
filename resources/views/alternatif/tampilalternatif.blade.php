@@ -44,6 +44,7 @@
                                 <tr>
                                     <th rowspan="2">No</th>
                                     <th rowspan="2">Kode</th>
+                                    <th rowspan="2">NKK</th>
                                     <th rowspan="2">NIK</th>
                                     <th rowspan="2">Nama Penduduk</th>
                                     <th rowspan="2">Alamat</th>
@@ -60,6 +61,7 @@
                                     <input type="hidden" class="delete_id" value="{{ $a->id }}">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $a->kode }}</td>
+                                    <td>{{$a->nkk}}</td>
                                     <td>{{ $a->nik }}</td>
                                     <td>{{ $a->nama }}</td>
                                     <td>{{ $a->alamat }}</td>

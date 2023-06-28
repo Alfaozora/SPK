@@ -11,4 +11,9 @@ class perbandingan_alternatif extends Model
     protected $table = 'perbandingan_alternatifs';
     protected $primaryKey = 'id';
     protected $fillable = ['id', 'alternatif_id', 'kriteria_id', 'bobot'];
+
+    public function alternatif()
+    {
+        return $this->belongsTo(alternatif::class, 'alternatif_id', 'kode');
+    }
 }
