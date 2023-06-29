@@ -419,12 +419,18 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $kode }}</td>
-                                    <td>{{ $namaAlternatif }}</td>
+                                    <td class="text-left">{{ $namaAlternatif }}</td>
                                     <td>{{ $data }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        <br>
+                        <form class="">
+                            <div class="form-group">
+                                <a type="button" class="btn btn-primary" href=""><i class="fa fa-print"></i> Cetak</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

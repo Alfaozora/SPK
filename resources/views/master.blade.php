@@ -50,6 +50,7 @@
                 </div>
             </div>
         </div>
+        </br>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <form class="form-inline">
@@ -64,47 +65,24 @@
                         <tr>
                             <th rowspan="2">No</th>
                             <th rowspan="2">Kode</th>
-                            <th rowspan="2">NIK</th>
-                            <th rowspan="2">Nama Penduduk</th>
-                            <th rowspan="2">Alamat</th>
+                            <th rowspan="2">NKK</th>
+                            <th rowspan="2">Nama</th>
+
                         </tr>
                     </thead>
                     <tbody class="text-center" style="vertical-align:middle;">
+                        @foreach($pemeringkatans as $pemeringkatan)
+                        @php
+                        $alternatifs = App\Models\Alternatif::where('kode', $pemeringkatan->kode)->first();
+                        $nkk = $alternatifs ? $alternatifs->nkk : 'N/A';
+                        @endphp
                         <tr>
-                            <td>1</td>
-                            <td>A01</td>
-                            <td>123456789</td>
-                            <td>Wahyu</td>
-                            <td>Jl. Raya</td>
+                            <td>{{ $loop->iteration}}</td>
+                            <td>{{ $pemeringkatan->alternatif_id }}</td>
+                            <td>{{$nkk}}</td>
+                            <td>{{ $pemeringkatan->nama }}</td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>A02</td>
-                            <td>123456789</td>
-                            <td>Wahyu</td>
-                            <td>Jl. Raya</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>A03</td>
-                            <td>123456789</td>
-                            <td>Wahyu</td>
-                            <td>Jl. Raya</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>A04</td>
-                            <td>123456789</td>
-                            <td>Wahyu</td>
-                            <td>Jl. Raya</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>A05</td>
-                            <td>123456789</td>
-                            <td>Wahyu</td>
-                            <td>Jl. Raya</td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -8,6 +8,7 @@ use App\Models\perbandingan_kriteria;
 use App\Models\alternatif;
 use App\Models\sub_kriteria;
 use App\Models\perbandingan_alternatif;
+use App\Models\pemeringkatan;
 
 use Illuminate\Http\Request;
 use Redirect;
@@ -377,6 +378,19 @@ class PerhitunganController extends Controller
         foreach ($totalBobotVektor as $kode => $totalBobot) {
             $alternatifs = Alternatif::where('kode', $kode)->first();
             $namaAlternatif = $alternatifs ? $alternatifs->nama : 'N/A';
+
+            //Menyimpan hasil pemeringkatan ke dalam database
+            pemeringkatan::updateOrCreate(
+                [
+                    'alternatif_id' => $kode,
+                ],
+                [
+                    'nama' => $namaAlternatif,
+                    'bobot' => $totalBobot,
+                    'peringkat' => $peringkat,
+                ]
+            );
+
             $peringkat++;
         }
         // dd($namaAlternatif);
