@@ -24,7 +24,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <div class="large"><strong><!--{{$penduduks}}-->2</strong></div>
+                        <div class="large"><strong>2</strong></div>
                         <div class="text"><strong> Penduduk Mendapatkan Bantuan</strong></div>
                     </div>
                     <div class="icon">
@@ -39,7 +39,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <div class="large"><strong>{{number_format($alternatifs)}}</strong></div>
+                        <div class="large"><strong></strong></div>
                         <div class="text"><strong>Jumlah Penduduk Yang Terdaftar</strong></div>
                     </div>
                     <div class="icon">
@@ -53,9 +53,15 @@
         </br>
         <div class="panel panel-default">
             <div class="panel-heading">
+                <span class="pull-right clickable panel-toggle panel-button-tab-left">
+                    <em class="fa fa-toggle-up">
+
+                    </em>
+                </span>
                 <form class="form-inline">
-                    <div class="form-group">
-                        <h4>Daftar Warga Mendapatkan Bantuan</h4>
+                    <div class="col-auto">
+                        <input type="number" name="jumlah_orang" id="jumlah_orang" class="form-control mb-2" placeholder="Jumlah Orang">
+                        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-filter"></i> Filter</button>
                     </div>
                 </form>
             </div>
@@ -63,24 +69,26 @@
                 <table class="table table-bordered table-striped table-hover">
                     <thead class="text-center" style="vertical-align:middle;">
                         <tr>
+                            <th colspan="6">Daftar Warga Yang Mendapatkan Bantuan</th>
+                        </tr>
+                        <tr>
                             <th rowspan="2">No</th>
                             <th rowspan="2">Kode</th>
                             <th rowspan="2">NKK</th>
+                            <th rowspan="2">NIK</th>
                             <th rowspan="2">Nama</th>
-
+                            <th rowspan="2">Alamat</th>
                         </tr>
                     </thead>
                     <tbody class="text-center" style="vertical-align:middle;">
-                        @foreach($pemeringkatans as $pemeringkatan)
-                        @php
-                        $alternatifs = App\Models\Alternatif::where('kode', $pemeringkatan->kode)->first();
-                        $nkk = $alternatifs ? $alternatifs->nkk : 'N/A';
-                        @endphp
+                        @foreach($pemeringkatans as $pemeringkatan => $data)
                         <tr>
                             <td>{{ $loop->iteration}}</td>
-                            <td>{{ $pemeringkatan->alternatif_id }}</td>
-                            <td>{{$nkk}}</td>
-                            <td>{{ $pemeringkatan->nama }}</td>
+                            <td>{{ $data->alternatif_id }}</td>
+                            <td>{{ $data->nkk }}</td>
+                            <td>{{ $data->nik }}</td>
+                            <td>{{ $data->nama }}</td>
+                            <td class="text-left">{{ $data->alamat }}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -90,8 +98,6 @@
 
             </div>
         </div>
-        <!--/.row-->
-        <!--/.row-->
     </div>
     <!--/.main-->
     @endsection

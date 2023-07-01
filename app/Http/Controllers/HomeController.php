@@ -12,22 +12,17 @@ class HomeController extends Controller
     public function index()
     {
         //$penduduks = penduduk::where('status', '1')->count();
-        $penduduks = Penduduk::all();
-        $alternatifs = Alternatif::all();
         $pemeringkatans = Pemeringkatan::all();
 
-        //menampilkan data NKK dari database alternatif kemudian ditampilkan dengan tabel pemeringkatan
-        foreach ($pemeringkatans as $kode) {
-            $alternatifs = Alternatif::where('kode', $kode)->first();
-            $nkk = $alternatifs ? $alternatifs->nkk : null;
-        }
+        //mengambil data NKK dari database alternatif kemudian ditampilkan dengan tabel pemeringkatan
+        $pemeringkatans = Pemeringkatan::join('alternatifs', 'pemeringkatans.alternatif_id', '=', 'alternatifs.kode')
+            ->select('alternatifs.nkk', 'alternatifs.nik', 'alternatifs.alamat', 'pemeringkatans.*')
+            ->orderBy('id', 'ASC')
+            ->get();
         // dd($pemeringkatans);
 
         return view('home', [
-            'penduduks' => $penduduks,
-            'alternatifs' => $alternatifs,
             'pemeringkatans' => $pemeringkatans,
-            'nkk' => $nkk,
         ]);
     }
 }
