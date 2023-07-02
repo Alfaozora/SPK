@@ -29,8 +29,6 @@
                     <div class="panel-heading">
                         <form class="form-inline">
                             <div class="form-group">
-                            </div>
-                            <div class="form-group">
                                 <a type="button" class="btn btn-danger" href="{{route('alternatif.create')}}"><i class="fa fa-plus"></i> Tambah</a>
                             </div>
                             <div class="form-group">

@@ -58,15 +58,17 @@
 
                     </em>
                 </span>
-                <form class="form-inline">
-                    <div class="col-auto">
-                        <input type="number" name="jumlah_orang" id="jumlah_orang" class="form-control mb-2" placeholder="Jumlah Orang">
+                <form class="form-inline" id="filterForm">
+                    <div class="form-group">
+                        <input type="text" name="jumlahOrang" id="jumlahOrang" class="form-control mb-2" placeholder="Jumlah Orang">
+                    </div>
+                    <div class="form-group">
                         <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-filter"></i> Filter</button>
                     </div>
                 </form>
             </div>
             <div class="table-responsive">
-                <table class="table table-bordered table-striped table-hover">
+                <table class="table table-bordered table-striped table-hover" id="tabelPemeringkatan">
                     <thead class="text-center" style="vertical-align:middle;">
                         <tr>
                             <th colspan="6">Daftar Warga Yang Mendapatkan Bantuan</th>
@@ -95,9 +97,32 @@
                 </table>
             </div>
             <div class="col-md-6 my-12">
-
             </div>
         </div>
     </div>
-    <!--/.main-->
-    @endsection
+</div>
+@endsection
+<script>
+    $(document).ready(function() {
+        //Tangkap subit form
+        $('#filterForm').on('submit', function(e) {
+            e.preventDefault(); //Mencegah form submit secara default
+            //Ambil nilai jumlah orang dari input 
+            var jumlahOrang = $('#jumlahOrang').val();
+            //Lakukan request ajax
+            $.ajax({
+                type: "GET",
+                url: "{{ route('home') }}",
+                data: {
+                    jumlahOrang: jumlahOrang
+                },
+                success: function(response) {
+                    $('#tabelPemeringkatan').html(response);
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
