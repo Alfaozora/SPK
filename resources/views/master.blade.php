@@ -24,7 +24,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <div class="large"><strong><!--{{$penduduks}}-->2</strong></div>
+                        <div class="large"><strong>2</strong></div>
                         <div class="text"><strong> Penduduk Mendapatkan Bantuan</strong></div>
                     </div>
                     <div class="icon">
@@ -39,7 +39,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <div class="large"><strong>{{number_format($alternatifs)}}</strong></div>
+                        <div class="large"><strong></strong></div>
                         <div class="text"><strong>Jumlah Penduduk Yang Terdaftar</strong></div>
                     </div>
                     <div class="icon">
@@ -50,70 +50,79 @@
                 </div>
             </div>
         </div>
+        </br>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <form class="form-inline">
+                <span class="pull-right clickable panel-toggle panel-button-tab-left">
+                    <em class="fa fa-toggle-up">
+
+                    </em>
+                </span>
+                <form class="form-inline" id="filterForm">
                     <div class="form-group">
-                        <h4>Daftar Warga Mendapatkan Bantuan</h4>
+                        <input type="text" name="jumlahOrang" id="jumlahOrang" class="form-control mb-2" placeholder="Jumlah Orang">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-filter"></i> Filter</button>
                     </div>
                 </form>
             </div>
             <div class="table-responsive">
-                <table class="table table-bordered table-striped table-hover">
+                <table class="table table-bordered table-striped table-hover" id="tabelPemeringkatan">
                     <thead class="text-center" style="vertical-align:middle;">
+                        <tr>
+                            <th colspan="6">Daftar Warga Yang Mendapatkan Bantuan</th>
+                        </tr>
                         <tr>
                             <th rowspan="2">No</th>
                             <th rowspan="2">Kode</th>
+                            <th rowspan="2">NKK</th>
                             <th rowspan="2">NIK</th>
-                            <th rowspan="2">Nama Penduduk</th>
+                            <th rowspan="2">Nama</th>
                             <th rowspan="2">Alamat</th>
                         </tr>
                     </thead>
                     <tbody class="text-center" style="vertical-align:middle;">
+                        @foreach($pemeringkatans as $pemeringkatan => $data)
                         <tr>
-                            <td>1</td>
-                            <td>A01</td>
-                            <td>123456789</td>
-                            <td>Wahyu</td>
-                            <td>Jl. Raya</td>
+                            <td>{{ $loop->iteration}}</td>
+                            <td>{{ $data->alternatif_id }}</td>
+                            <td>{{ $data->nkk }}</td>
+                            <td>{{ $data->nik }}</td>
+                            <td>{{ $data->nama }}</td>
+                            <td class="text-left">{{ $data->alamat }}</td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>A02</td>
-                            <td>123456789</td>
-                            <td>Wahyu</td>
-                            <td>Jl. Raya</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>A03</td>
-                            <td>123456789</td>
-                            <td>Wahyu</td>
-                            <td>Jl. Raya</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>A04</td>
-                            <td>123456789</td>
-                            <td>Wahyu</td>
-                            <td>Jl. Raya</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>A05</td>
-                            <td>123456789</td>
-                            <td>Wahyu</td>
-                            <td>Jl. Raya</td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
             <div class="col-md-6 my-12">
-
             </div>
         </div>
-        <!--/.row-->
-        <!--/.row-->
     </div>
-    <!--/.main-->
-    @endsection
+</div>
+@endsection
+<script>
+    $(document).ready(function() {
+        //Tangkap subit form
+        $('#filterForm').on('submit', function(e) {
+            e.preventDefault(); //Mencegah form submit secara default
+            //Ambil nilai jumlah orang dari input 
+            var jumlahOrang = $('#jumlahOrang').val();
+            //Lakukan request ajax
+            $.ajax({
+                type: "GET",
+                url: "{{ route('home') }}",
+                data: {
+                    jumlahOrang: jumlahOrang
+                },
+                success: function(response) {
+                    $('#tabelPemeringkatan').html(response);
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>

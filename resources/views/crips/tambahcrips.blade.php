@@ -7,15 +7,15 @@
             <li><a href="{{ route('home') }}">
                     <em class="fa fa-home"></em>
                 </a></li>
-            <li class="breadcrumb-item"><a href="{{ route('crips.index') }}">Nilai Kriteria</a></li>
-            <li class="breadcrumb-item active" aria-current="page"> Tambah Nilai Kriteria</li>
+            <li class="breadcrumb-item"><a href="{{ route('crips.index') }}">Nilai Sub Kriteria</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> Tambah Nilai Sub Kriteria</li>
         </ol>
     </div>
     <!--/.row-->
 
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header">Tambah Nilai Kriteria</h2>
+            <h2 class="page-header">Tambah Nilai Sub Kriteria</h2>
         </div>
     </div>
 </div>
@@ -38,39 +38,30 @@
             <h5 class="card-header">Nilai Kriteria</h5>
             <div class="form-row" style="text-align: center">
                 <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="id_crips">ID Crips</label>
-                    <span class="text-danger">*</span>
-                    <input type="text" value="{{ old('id_crips') }}" name="id_crips" id="id_crips" class="form-control input-lg">
-                </div>
-                <div class="col-md-3 mb-3 input-group-sm">
                     <label for="id_kriteria">ID kriteria</label>
                     <span class="text-danger">*</span>
-                    <select name="id_kriteria" id="id_kriteria" class="form-control input-lg">
+                    <select name="kode_kriteria" id="kode_kriteria" class="form-control input-lg">
                         <option value="">Pilih Id</option>
                         @foreach ($kriterias as $k)
-                        <option value="{{ $k->id_kriteria}}">{{ $k->id_kriteria }}-{{ $k->nama_kriteria }} </option>
+                        <option value="{{ $k->kode_kriteria}}">{{ $k->kode_kriteria }}-{{ $k->nama_kriteria }} </option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="nama">Nama Kriteria</label>
+                    <label for="nama">Sub Kriteria</label>
                     <span class="text-danger">*</span>
-                    <select name="nama" id="nama" class="form-control input-lg">
-                        <option value="">Pilih Kriteria</option>
-                        @foreach ($kriterias as $k)
-                        <option value="{{ $k->nama_kriteria}}">{{ $k->nama_kriteria }}</option>
-                        @endforeach
+                    <input type="text" class="form-control" id="nama_sub" name="nama_sub" placeholder="Isi Sub Kriteria" required>
+                </div>
+                <div class="col-md-3 mb-3 input-group-sm">
+                    <label for="nilai">Bobot</label>
+                    <span class="text-danger">*</span>
+                    <select name="bobot" id="bobot" class="form-control input-lg">
+                        <option value="">Bobot</option>
+                        <option value="1">1-Kurang Penting</option>
+                        <option value="2">2-Cukup Penting</option>
+                        <option value="3">3-Penting</option>
+                        <option value="4">4-Sangat Penting</option>
                     </select>
-                </div>
-                <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="keterangan">Keterangan</label>
-                    <span class="text-danger">*</span>
-                    <input type="text" value="{{ old('keterangan') }}" name="keterangan" id="keterangan" class="form-control input-lg dynamic" data-dependent="keterangan" data-dynamic="keterangan">
-                </div>
-                <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="nilai">Nilai</label>
-                    <span class="text-danger">*</span>
-                    <input type="text" value="{{ old('nilai') }}" name="nilai" id="nilai" class="form-control input-lg dynamic" data-dependent="nilai" data-dynamic="nilai">
                 </div>
                 <br>
                 <br>

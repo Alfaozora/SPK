@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\kriteria;
 use App\Models\nilaiintensitas;
 use App\Models\perbandingan_kriteria;
-use Gopalindians\Matrix\Matrix;
+use App\Models\alternatif;
+use App\Models\sub_kriteria;
+use App\Models\perbandingan_alternatif;
+use App\Models\pemeringkatan;
 
 use Illuminate\Http\Request;
 use Redirect;
@@ -22,7 +25,9 @@ class PerhitunganController extends Controller
         $kriterias = kriteria::all();
         $nilaiintensitas = nilaiintensitas::all();
         $perbandingan_kriterias = perbandingan_kriteria::all();
-        return view('perhitungan.perhitungan', compact('kriterias', 'nilaiintensitas', 'perbandingan_kriterias'));
+        $alternatifs = alternatif::all();
+        $sub_kriterias = sub_kriteria::all();
+        return view('perhitungan.perhitungan', compact('kriterias', 'nilaiintensitas', 'perbandingan_kriterias', 'alternatifs', 'sub_kriterias'));
     }
 
     /**
@@ -50,6 +55,9 @@ class PerhitunganController extends Controller
         $perbandingan_kriterias = perbandingan_kriteria::all();
         $perbandingan_kriterias = $request->input('nilai');
 
+        $sub_kriterias = sub_kriteria::all();
+        $perbandingan_alternatifs = perbandingan_alternatif::all();
+        $alternatifs = alternatif::all();
 
         //Mendapatkan daftar semua kriteria yang tersedia
         $kriterias = kriteria::pluck('kode_kriteria')->toArray();
@@ -335,6 +343,57 @@ class PerhitunganController extends Controller
             $normalisasiVektor[$kriteria1] = round($nilaiMinimum[$kriteria1] / $totalMinimum, 2);
         }
 
+        //Menampilkan Konversi Bobot Kirteria Dari Masing-Masing Alternatif ke tabel
+        $bobotValues = $request->input('bobot');
+        $matriksBobot = [];
+        foreach ($bobotValues as $alternatifId => $kriteriaBobots) {
+            foreach ($kriteriaBobots as $kriteriaId => $bobot) {
+                $matriksBobot[$alternatifId][$kriteriaId] = $bobot;
+            }
+        }
+
+        //menghitung bobot kriteria dengan alternatif dikali dengan normalisasi vektor
+        $matriksBobotVektor = [];
+        foreach ($bobotValues as $alternatifId => $kriteriaBobots) {
+            foreach ($kriteriaBobots as $kriteriaId => $bobot) {
+                $matriksBobotVektor[$alternatifId][$kriteriaId] = $bobot * $normalisasiVektor[$kriteriaId];
+            }
+        }
+        // dd($matriksBobotVektor);
+
+        //menjumlahkan baris dari matriks bobot vektor
+        $totalBobotVektor = [];
+        foreach ($bobotValues as $alternatifId => $kriteriaBobots) {
+            $totalBobot = 0;
+            foreach ($kriteriaBobots as $kriteriaId => $bobot) {
+                $totalBobot += $matriksBobotVektor[$alternatifId][$kriteriaId];
+            }
+            $totalBobotVektor[$alternatifId] = $totalBobot;
+        }
+        // dd($totalBobotVektor);
+
+        //melakukan perangkingan alternatif berdasarkan nilai total bobot vektor
+        arsort($totalBobotVektor);
+        $peringkat = 1;
+        foreach ($totalBobotVektor as $kode => $totalBobot) {
+            $alternatifs = Alternatif::where('kode', $kode)->first();
+            $namaAlternatif = $alternatifs ? $alternatifs->nama : 'N/A';
+
+            //Menyimpan hasil pemeringkatan ke dalam database
+            pemeringkatan::updateOrCreate(
+                [
+                    'alternatif_id' => $kode,
+                ],
+                [
+                    'nama' => $namaAlternatif,
+                    'bobot' => $totalBobot,
+                    'peringkat' => $peringkat,
+                ]
+            );
+
+            $peringkat++;
+        }
+        // dd($namaAlternatif);
 
         //menyimpan dan mengupdate nilai inisialiasi kriteria
         foreach ($nilaiintensitas as $key => $value) {
@@ -355,6 +414,34 @@ class PerhitunganController extends Controller
                 );
             }
         }
+        // dd($perbandingan_kriterias);
+
+        //menyimpan dan mengupdate nilai inisialisasi Bobot Nilai Kriteria Untuk Masing Masing Alternatif
+        $bobotValues = $request->input('bobot');
+
+        foreach ($bobotValues as $alternatifId => $kriteriaBobots) {
+            foreach ($kriteriaBobots as $kriteriaId => $bobot) {
+                // Cari entitas yang sesuai dengan alternatif_id dan kriteria_id
+                $perbandingan = perbandingan_alternatif::where('alternatif_id', $alternatifId)
+                    ->where('kriteria_id', $kriteriaId)
+                    ->first();
+
+                if ($perbandingan) {
+                    // Jika entitas sudah ada, update bobot
+                    $perbandingan->bobot = $bobot;
+                    $perbandingan->save();
+                } else {
+                    // Jika entitas belum ada, buat data baru
+                    perbandingan_alternatif::create([
+                        'alternatif_id' => $alternatifId,
+                        'kriteria_id' => $kriteriaId,
+                        'bobot' => $bobot,
+                    ]);
+                }
+            }
+        }
+
+
         return view('perhitungan.proses', [
             'kriterias' => $kriterias,
             'matriksPerbandingan' => $matriksPerbandingan,
@@ -377,6 +464,13 @@ class PerhitunganController extends Controller
             'nilaiMinimum' => $nilaiMinimum,
             'totalMinimum' => $totalMinimum,
             'normalisasiVektor' => $normalisasiVektor,
+            'alternatifs' => $alternatifs,
+            'sub_kriterias' => $sub_kriterias,
+            'perbandigan_alternatifs' => $perbandingan_alternatifs,
+            'matriksBobot' => $matriksBobot,
+            'matriksBobotVektor' => $matriksBobotVektor,
+            'totalBobotVektor' => $totalBobotVektor,
+            'namaAlternatif' => $namaAlternatif,
         ]);
     }
 

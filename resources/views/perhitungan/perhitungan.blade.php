@@ -77,6 +77,52 @@
                             </table>
                         </div>
                     </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="form-group">
+                                <p>Input Bobot Nilai Kriteria Untuk Masing Masing Alternatif</p>
+                            </div>
+                        </div>
+                        <div class="table-responsive" id="tableContainer">
+                            <table class="table table-bordered table-striped table-hover" id="table1">
+                                <thead class="text-center" style="vertical-align:middle;">
+                                    <tr>
+                                        <th>
+                                            Alternatif
+                                        </th>
+                                        @foreach($kriterias as $kriteria)
+                                        <th class="text-center" style="vertical-align:middle;">{{$kriteria->nama_kriteria}}</th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center" style="vertical-align:middle;">
+                                    @php
+                                    $no = 0;
+                                    $nilaiSebelumnya = null;
+                                    @endphp
+                                    @foreach($alternatifs as $alternatif)
+                                    <tr>
+                                        <td class="text-left" style="vertical-align:middle;">
+                                            <input type="hidden" name="alternatif[{{$alternatif->nama}}]" value="{{$alternatif->kode}}">
+                                            {{$alternatif->nama}}
+                                        </td>
+                                        @foreach($kriterias as $kriteria)
+                                        <td class="text-center" style="vertical-align:middle;">
+                                            <select class="form-control form-control-sm" name="bobot[{{$alternatif->kode}}][{{$kriteria->kode_kriteria}}]">
+                                                @foreach ($sub_kriterias as $sub)
+                                                @if($sub->kode_kriteria == $kriteria->kode_kriteria)
+                                                <option value="{{$sub->bobot}}" {{$sub->bobot == $nilaiSebelumnya ? 'selected' : ''}}>{{$sub->bobot}}-{{$sub->nama_sub}}</option>
+                                                @endif
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        @endforeach
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-sm" id="showTable2">
                         Normalisasi
                     </button>
@@ -97,6 +143,7 @@
 </div>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <!-- <script>
     document.getElementById("showTable2").addEventListener("click", function() {
         var xhr = new XMLHttpRequest();

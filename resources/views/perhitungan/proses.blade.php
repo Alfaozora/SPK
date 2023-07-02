@@ -330,6 +330,109 @@
                         </table>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="form-group">
+                            <p> Konversi Bobot Kirteria Dari Masing-Masing Alternatif</p>
+                        </div>
+                    </div>
+                    <div class="table-responsive" id="tableContainer">
+                        <table class="table table-bordered table-striped table-hover" id="table2">
+                            <thead class="text-center" style="vertical-align:middle;">
+                                <tr>
+                                    <th rowspan="2">
+
+                                    </th>
+                                    @foreach($kriterias as $kriteria1)
+                                    <th class="text-center" style="vertical-align: middle;">{{$kriteria1}}</th>
+                                    @endforeach
+                                </tr>
+                            </thead>
+                            <tbody class="text-center" style="vertical-align:middle;">
+                                @foreach($matriksBobot as $alternatifId => $kriteriaBobots)
+                                <tr>
+                                    <td>{{ $alternatifId }}</td>
+                                    @foreach($kriteriaBobots as $kriteriaId => $bobot)
+                                    <td>{{ $bobot }}</td>
+                                    @endforeach
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="form-group">
+                            <p> Bobot Kirteria Dengan Alternatif</p>
+                        </div>
+                    </div>
+                    <div class="table-responsive" id="tableContainer">
+                        <table class="table table-bordered table-striped table-hover" id="table2">
+                            <thead class="text-center" style="vertical-align:middle;">
+                                <tr>
+                                    <th rowspan="2">
+
+                                    </th>
+                                    @foreach($kriterias as $kriteria1)
+                                    <th class="text-center" style="vertical-align: middle;">{{$kriteria1}}</th>
+                                    @endforeach
+                                    <th>Nilai</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center" style="vertical-align:middle;">
+                                @foreach($matriksBobotVektor as $alternatifId => $kriteriaBobots)
+                                <tr>
+                                    <td>{{ $alternatifId }}</td>
+                                    @foreach($kriteriaBobots as $kriteriaId => $bobot)
+                                    <td>{{ $bobot }}</td>
+                                    @endforeach
+                                    <td>{{$totalBobotVektor[$alternatifId]}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="form-group">
+                            <p>Pemeringkatan</p>
+                        </div>
+                    </div>
+                    <div class="table-responsive" id="tableContainer">
+                        <table class="table table-bordered table-striped table-hover" id="table2">
+                            <thead class="text-center" style="vertical-align:middle;">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Kode</th>
+                                    <th>Nama</th>
+                                    <th>Nilai</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center" style="vertical-align:middle;">
+                                @foreach ($totalBobotVektor as $kode => $data)
+                                @php
+                                $alternatifs = App\Models\Alternatif::where('kode', $kode)->first();
+                                $namaAlternatif = $alternatifs ? $alternatifs->nama : 'N/A';
+                                @endphp
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $kode }}</td>
+                                    <td class="text-left">{{ $namaAlternatif }}</td>
+                                    <td>{{ $data }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <br>
+                        <form class="">
+                            <div class="form-group">
+                                <a type="button" class="btn btn-primary" href=""><i class="fa fa-print"></i> Cetak</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-12">
                 <p class="back-link">SPK - Desa Gedongboyountung 2023</a></p>
