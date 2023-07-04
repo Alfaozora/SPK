@@ -18,7 +18,7 @@ class HomeController extends Controller
         //mengambil data NKK dari database alternatif kemudian ditampilkan dengan tabel pemeringkatan
         $pemeringkatans = Pemeringkatan::join('alternatifs', 'pemeringkatans.alternatif_id', '=', 'alternatifs.kode')
             ->select('alternatifs.nkk', 'alternatifs.nik', 'alternatifs.alamat', 'pemeringkatans.*')
-            ->orderBy('id', 'ASC')
+            ->orderBy('peringkat', 'ASC')
             ->take($jumlahOrang)
             ->get();
         // dd($pemeringkatans);
@@ -27,13 +27,4 @@ class HomeController extends Controller
             'pemeringkatans' => $pemeringkatans,
         ]);
     }
-
-    // public function filter(Request $request)
-    // {
-    //     $jumlahOrang = $request->input('jumlah_orang');
-    //     $pemeringkatan = Pemeringkatan::orderBy('peringkat')->take($jumlahOrang)->get();
-
-    //     return view('home', compact('pemeringkatan'));
-    //     dd($pemeringkatan);
-    // }
 }

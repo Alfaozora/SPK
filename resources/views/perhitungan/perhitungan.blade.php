@@ -64,7 +64,7 @@
                                             @else
                                             <select class="form-control form-control-sm" name="nilai[{{$kriteria->kode_kriteria}}][{{$kriteria2->kode_kriteria}}]">
                                                 @foreach ($nilaiintensitas as $n)
-                                                <option value="{{$n->jum_nilai}}">{{$n->jum_nilai}}-{{$n->keterangan}}</option>
+                                                <option value="{{old('jum_nilai', $n->jum_nilai)}}">{{$n->jum_nilai}}-{{$n->keterangan}}</option>
                                                 @endforeach
                                             </select>
                                             @endif

@@ -380,7 +380,7 @@ class PerhitunganController extends Controller
             $namaAlternatif = $alternatifs ? $alternatifs->nama : 'N/A';
 
             //Menyimpan hasil pemeringkatan ke dalam database
-            pemeringkatan::updateOrCreate(
+            Pemeringkatan::updateOrCreate(
                 [
                     'alternatif_id' => $kode,
                 ],
@@ -390,7 +390,6 @@ class PerhitunganController extends Controller
                     'peringkat' => $peringkat,
                 ]
             );
-
             $peringkat++;
         }
         // dd($namaAlternatif);
