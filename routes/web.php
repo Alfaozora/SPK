@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\CripsController;
 use App\Http\Controllers\AlternatifController;
+use App\Http\Controllers\HasilController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SendEmailController;
@@ -52,6 +53,12 @@ Route::resource('nilaiIntensitas', IntensitasController::class)->middleware(['au
 Route::resource('perhitungan', PerhitunganController::class)->middleware(['auth']);
 Route::get('/proses', 'App\Http\Controllers\PerhitunganController@proses')->name('perhitungan.proses')->middleware(['auth']);
 
+#Hasil
+Route::get('/hasil', [HasilController::class, 'index'])->middleware(['auth'])->name('hasil');
+Route::get('/hasil/cetak', [HasilController::class, 'cetak'])->middleware(['auth'])->name('hasil.cetak');
+Route::get('/hasil/cetak/dwonload', [HasilController::class, 'pdfDwonload'])->middleware(['auth'])->name('hasil.pdfDwonload');
+Route::get('/hasil/excel', [HasilController::class, 'excel'])->middleware(['auth'])->name('hasil.excel');
+
 // #Email Verification
 // Route::get('/email/verify', function () {
 //     return view('auth.verify-email');
@@ -65,4 +72,4 @@ Route::get('/proses', 'App\Http\Controllers\PerhitunganController@proses')->name
 // Route::get('send-email', [SendEmailController::class, 'index']);
 
 #Profil
-Route::resource('profil', ProfilController::class);
+Route::resource('profil', ProfilController::class)->middleware(['auth']);

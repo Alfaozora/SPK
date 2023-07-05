@@ -217,7 +217,7 @@ input:hover {
 
 .has-success .form-control,
 .has-success .form-control:focus {
-    border: 1px solid #8ad919;
+    border: 1px solid #1c753e;
 }
 
 .has-warning .form-control,
@@ -457,8 +457,8 @@ fieldset[disabled] .btn-success:active,
 .btn-success.disabled.active,
 .btn-success[disabled].active,
 fieldset[disabled] .btn-success.active {
-    background-color: #8ad919;
-    border-color: #8ad919;
+    background-color: #31a357;
+    border-color: #31a357;
 }
 
 .btn-warning,

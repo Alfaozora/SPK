@@ -38,15 +38,10 @@
                         Nilai Bobot Kriteria
                     </a>
                 </li>
-                <li>
-                    <a class="" href="">
-                        <span class="fa fa-book">&nbsp;</span>
-                        Nilai Bobot Alternatif
-                    </a>
-                </li>
             </ul>
         </li>
         <li class="{{ request()->is('perhitungan*') ? 'active' : '' }}"><a href="{{route ('perhitungan.index') }}"><em class="fa fa-calculator">&nbsp;</em> Perhitungan</a></li>
+        <li class="{{ request()->is('hasil*') ? 'active' : '' }}"><a href="{{route ('hasil') }}"><em class="fa fa-file-text-o">&nbsp;</em> Hasil</a></li>
         @if (Auth::user()->role != 1)
         @else
         <li class="{{ request()->is('register*') ? 'active' : '' }}"><a href="{{route ('register.index')}}"><em class="fa fa-address-book" aria-hidden="true">&nbsp;</em> Menu User</a></li>
