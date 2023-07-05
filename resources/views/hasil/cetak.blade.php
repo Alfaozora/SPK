@@ -40,7 +40,7 @@
 </head>
 
 <body>
-    <div class="rangkasurat" id="konten">
+    <div class="rangkasurat">
         <table width="100%">
             <tr>
                 <td style="padding-left: 10px; padding: 5px;"> <img src="{{asset ('gambar/logo.jpg')}}" width="120px"> </td>
@@ -52,7 +52,6 @@
                 </td>
             </tr>
         </table>
-        <br>
         <table class="table table-bordered" id="tableContainer">
             <thead class="text-center" style="vertical-align:middle;">
                 <tr>
@@ -67,9 +66,9 @@
                 </tr>
             </thead>
             <tbody class="text-center" style="vertical-align:middle;">
+                <br>
                 @foreach($pemeringkatans as $pemeringkatan => $data)
                 <tr>
-                    </br>
                     <td>{{ $loop->iteration}}</td>
                     <td>{{ $data->nkk }}</td>
                     <td>{{ $data->nik }}</td>
@@ -81,45 +80,15 @@
         </table>
         <div id="editor"></div>
         <div>
-            <a class="btn btn-danger mb-2" id="btnCetak">Download</a>
+            <button class="btn btn-danger mb-2" id="btnCetak">Download</button>
         </div>
     </div>
     <script src="{{asset ('js/bootstrap.min.js')}}"></script>
 </body>
 
 </html>
-<!-- <script>
+<script>
     document.getElementById('btnCetak').addEventListener('click', function() {
         window.print();
-    });
-</script> -->
-<!-- menyetak pdf dengan ajax -->
-<script>
-    $(document).ready(function() {
-        $('#btnCetak').click(function() {
-            var pdf = new jsPDF('p', 'pt', 'letter');
-            source = $('#konten')[0];
-            specialElementHandlers = {
-                '#bypassme': function(element, renderer) {
-                    return true
-                }
-            }
-            margins = {
-                top: 50,
-                left: 60,
-                width: 545
-            };
-            pdf.fromHTML(
-                source,
-                margins.left,
-                margins.top, {
-                    'width': margins.width,
-                    'elementHandlers': specialElementHandlers
-                },
-                function(dispose) {
-                    pdf.save('Laporan-Hasil.pdf');
-                }, margins
-            );
-        });
     });
 </script>
