@@ -56,6 +56,8 @@ Route::get('/proses', 'App\Http\Controllers\PerhitunganController@proses')->name
 #Hasil
 Route::get('/hasil', [HasilController::class, 'index'])->middleware(['auth'])->name('hasil');
 Route::get('/hasil/cetak', [HasilController::class, 'cetak'])->middleware(['auth'])->name('hasil.cetak');
+Route::get('/hasil/cetak/dwonload', [HasilController::class, 'pdfDwonload'])->middleware(['auth'])->name('hasil.pdfDwonload');
+Route::get('/hasil/excel', [HasilController::class, 'excel'])->middleware(['auth'])->name('hasil.excel');
 
 // #Email Verification
 // Route::get('/email/verify', function () {
@@ -70,4 +72,4 @@ Route::get('/hasil/cetak', [HasilController::class, 'cetak'])->middleware(['auth
 // Route::get('send-email', [SendEmailController::class, 'index']);
 
 #Profil
-Route::resource('profil', ProfilController::class);
+Route::resource('profil', ProfilController::class)->middleware(['auth']);

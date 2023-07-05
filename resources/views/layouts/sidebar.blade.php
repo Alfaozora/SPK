@@ -38,12 +38,6 @@
                         Nilai Bobot Kriteria
                     </a>
                 </li>
-                <li>
-                    <a class="" href="">
-                        <span class="fa fa-book">&nbsp;</span>
-                        Nilai Bobot Alternatif
-                    </a>
-                </li>
             </ul>
         </li>
         <li class="{{ request()->is('perhitungan*') ? 'active' : '' }}"><a href="{{route ('perhitungan.index') }}"><em class="fa fa-calculator">&nbsp;</em> Perhitungan</a></li>

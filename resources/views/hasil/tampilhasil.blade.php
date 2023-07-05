@@ -13,19 +13,23 @@
     <div class="jumbotorn jumbotorn-fluid wow fadeInUp">
         <div class="container">
             <h2 class="display-4">Hasil Dari Proses Perhitungan</h2>
+            <p>Masukan Jumlah Warga Yang Diprioritaskan</p>
         </div>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
             <form class="form-inline" id="filterForm">
                 <div class="form-group">
-                    <input type="number" name="jumlahOrang" id="jumlahOrang" class="form-control mb-2" placeholder="Jumlah Orang">
+                    <input type="number" name="jumlahOrang" id="jumlahOrang" class="form-control mb-2" placeholder="Jumlah Warga">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary mb-2" id="filterButton"><i class="fa fa-filter"></i> Filter</button>
                 </div>
                 <div class="form-group">
-                    <a type="button" class="btn btn-warning mb-2" href="{{route('hasil.cetak')}}" id="btnCetak"><i class="fa fa-print"></i> Cetak</a>
+                    <a class="btn btn-danger mb-2" id="btnCetak" href="{{route('hasil.cetak')}}"><i class="fa fa-file-pdf-o"></i> Cetak PDF</a>
+                </div>
+                <div class="form-group">
+                    <a class="btn btn-success mb-2" id="btnCetak" href="{{route('hasil.excel')}}"><i class="fa fa-file-excel-o"></i> Cetak Excel</a>
                 </div>
             </form>
         </div>
@@ -67,7 +71,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">
     $(document).ready(function() {
         // Tangkap submit form
-        $('#filterForm').on('submit', function(e) {
+        $('#filterButton').on('submit', function(e) {
             e.preventDefault(); // Mencegah form submit secara default
 
             // Ambil nilai jumlah orang dari input

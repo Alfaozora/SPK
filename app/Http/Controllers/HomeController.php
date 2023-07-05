@@ -9,22 +9,13 @@ use App\Models\pemeringkatan;
 
 class HomeController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        //$penduduks = penduduk::where('status', '1')->count();
+        $alternatifs = alternatif::all()->count();
         $pemeringkatans = Pemeringkatan::all();
-        $jumlahOrang = $request->input('jumlahOrang');
-
-        //mengambil data NKK dari database alternatif kemudian ditampilkan dengan tabel pemeringkatan
-        $pemeringkatans = Pemeringkatan::join('alternatifs', 'pemeringkatans.alternatif_id', '=', 'alternatifs.kode')
-            ->select('alternatifs.nkk', 'alternatifs.nik', 'alternatifs.alamat', 'pemeringkatans.*')
-            ->orderBy('peringkat', 'ASC')
-            ->take($jumlahOrang)
-            ->get();
-        // dd($pemeringkatans);
-
         return view('home', [
             'pemeringkatans' => $pemeringkatans,
+            'alternatifs' => $alternatifs,
         ]);
     }
 }

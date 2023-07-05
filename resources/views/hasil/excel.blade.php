@@ -35,24 +35,13 @@
     </style>
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 
 <body>
+    <br>
+
     <div class="rangkasurat" id="konten">
-        <table width="100%">
-            <tr>
-                <td style="padding-left: 10px; padding: 5px;"> <img src="{{asset ('gambar/logo.jpg')}}" width="120px"> </td>
-                <td class="tengah">
-                    <p style="font-family: 'Arial'; font-weight:bold; font-size: 24px; padding: 5px; color: black;">PEMERINTAH KABUPATEN LAMONGAN</p>
-                    <p style="font-family: 'Arial'; font-weight:bold; font-size: 24px; padding: 5px; color: black;">KECAMATAN TURI</p>
-                    <p style="font-family: 'Arial'; font-weight:bold; font-size: 30px; padding: 5px; color: black;">DESA GEDONGBOYOUNTUNG</p>
-                    <p style="font-family: 'Arial'; padding: 5px; color: black;">Alamat: Jl. Poros Desa, Mlanggeng, Gedongboyountung, Kec. Turi, Kode Pos. 62252</p>
-                </td>
-            </tr>
-        </table>
-        <br>
         <table class="table table-bordered" id="tableContainer">
             <thead class="text-center" style="vertical-align:middle;">
                 <tr>
@@ -69,7 +58,6 @@
             <tbody class="text-center" style="vertical-align:middle;">
                 @foreach($pemeringkatans as $pemeringkatan => $data)
                 <tr>
-                    </br>
                     <td>{{ $loop->iteration}}</td>
                     <td>{{ $data->nkk }}</td>
                     <td>{{ $data->nik }}</td>
@@ -81,45 +69,10 @@
         </table>
         <div id="editor"></div>
         <div>
-            <a class="btn btn-danger mb-2" id="btnCetak">Download</a>
+            <a class="btn btn-success mb-2" id="btnCetak" href="{{route('hasil.excelDwonload')}}">Download</a>
         </div>
     </div>
     <script src="{{asset ('js/bootstrap.min.js')}}"></script>
 </body>
 
 </html>
-<!-- <script>
-    document.getElementById('btnCetak').addEventListener('click', function() {
-        window.print();
-    });
-</script> -->
-<!-- menyetak pdf dengan ajax -->
-<script>
-    $(document).ready(function() {
-        $('#btnCetak').click(function() {
-            var pdf = new jsPDF('p', 'pt', 'letter');
-            source = $('#konten')[0];
-            specialElementHandlers = {
-                '#bypassme': function(element, renderer) {
-                    return true
-                }
-            }
-            margins = {
-                top: 50,
-                left: 60,
-                width: 545
-            };
-            pdf.fromHTML(
-                source,
-                margins.left,
-                margins.top, {
-                    'width': margins.width,
-                    'elementHandlers': specialElementHandlers
-                },
-                function(dispose) {
-                    pdf.save('Laporan-Hasil.pdf');
-                }, margins
-            );
-        });
-    });
-</script>

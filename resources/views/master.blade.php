@@ -13,7 +13,7 @@
     <div class="jumbotorn jumbotorn-fluid wow fadeInUp">
         <div class="container">
             <h1 class="display-4">Selamat Datang</h1>
-            <p class="lead">Sistem Pendukung Keputusan Penerimaan Bantuan Sosial</p>
+            <p class="lead">Sistem Pendukung Keputusan Penerimaan Bantuan Langsung Tunai Dana Desa</p>
         </div>
     </div>
     <!--/.row-->
@@ -39,7 +39,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <div class="large"><strong></strong></div>
+                        <div class="large"><strong>{{$alternatifs}}</strong></div>
                         <div class="text"><strong>Jumlah Penduduk Yang Terdaftar</strong></div>
                     </div>
                     <div class="icon">
