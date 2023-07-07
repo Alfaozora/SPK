@@ -31,9 +31,9 @@
                             <div class="form-group">
                                 <a type="button" class="btn btn-danger" href="{{route('alternatif.create')}}"><i class="fa fa-plus"></i> Tambah</a>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <a type="button" class="btn btn-info" href="/alternatif-export"><i class="fa fa-print"></i> Cetak</a>
-                            </div>
+                            </div> -->
                         </form>
                     </div>
                     <div class="table-responsive">

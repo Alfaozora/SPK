@@ -32,23 +32,34 @@
         </ul>
     </div>
     @endif
-    <form method="POST" action="{{ route('crips.update', $crips->id) }}">
+    <form method="POST" action="{{ route('crips.update', $sub_kriterias->id) }}">
         @csrf
         @method('PUT')
         <div class="row">
-            <h5 class="card-header">Nilai Kriteria</h5>
+            <h5 class="card-header">Edit Sub Kriteria</h5>
             <div class="form-row">
                 <div class="col-md-3 mb-3 input-group-sm">
-                    <label for="nama">Nama Kriteria</label>
-                    <input type="text" name="nama" class="form-control" value="{{ old('nama', $crips->nama) }}" readonly>
+                    <label for="nama">ID Kriteria</label>
+                    <select name="kode_kriteria" id="kode_kriteria" class="form-control input-lg">
+                        <option value="" readonly="">Pilih Kriteria</option>
+                        @foreach ($kriterias as $k)
+                        <option value="{{ old ('kode_kriteria', $k->kode_kriteria)}}">{{ $k->kode_kriteria }}-{{ $k->nama_kriteria }} </option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
-                    <label>Keterangan</label>
-                    <input type="text" name="keterangan" class="form-control" value="{{ old('keterangan', $crips->keterangan) }}">
+                    <label>Sub Kriteria</label>
+                    <input type="text" name="nama_sub" class="form-control" value="{{ old('nama_sub', $sub_kriterias->nama_sub) }}">
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
-                    <label>Nilai</label>
-                    <input type="text" name="nilai" class="form-control" value="{{ old('nilai', $crips->nilai) }}">
+                    <label>bobot</label>
+                    <select name="bobot" id="bobot" class="form-control input-lg" value="{{old('bobot', $sub_kriterias->bobot)}}">
+                        <option value="">Bobot</option>
+                        <option value="1">1-Kurang Penting</option>
+                        <option value="2">2-Cukup Penting</option>
+                        <option value="3">3-Penting</option>
+                        <option value="4">4-Sangat Penting</option>
+                    </select>
                 </div>
             </div>
         </div>

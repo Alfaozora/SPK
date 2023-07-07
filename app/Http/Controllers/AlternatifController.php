@@ -20,10 +20,10 @@ class AlternatifController extends Controller
         return view('alternatif.tampilalternatif', compact('alternatifs'));
     }
 
-    public function export()
-    {
-        return Excel::download(new UsersExport, 'users.xlsx');
-    }
+    // public function export()
+    // {
+    //     return Excel::download(new UsersExport, 'users.xlsx');
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -45,13 +45,15 @@ class AlternatifController extends Controller
     {
         $this->validate($request, [
             'kode' => 'required',
-            'nik' => 'required|unique:alternatifs,nik',
+            'nkk' => 'required|unique:alternatifs,nkk,number',
+            'nik' => 'required|unique:alternatifs,nik,number',
             'nama' => 'required',
             'alamat' => 'required',
         ]);
 
         $alternatifs = alternatif::create([
             'kode' => $request->kode,
+            'nkk' => $request->nkk,
             'nik' => $request->nik,
             'nama' => $request->nama,
             'alamat' => $request->alamat
@@ -100,7 +102,8 @@ class AlternatifController extends Controller
     {
         $this->validate($request, [
             'kode' => 'required',
-            'nik' => 'required',
+            'nkk' => 'required|unique:alternatifs,nkk,number',
+            'nik' => 'required|unique:alternatifs,nik,number',
             'nama' => 'required',
             'alamat' => 'required',
         ]);
@@ -108,6 +111,7 @@ class AlternatifController extends Controller
         $alternatifs = Alternatif::find($id);
         $alternatifs->update([
             'kode' => $request->kode,
+            'nkk' => $request->nkk,
             'nik' => $request->nik,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
