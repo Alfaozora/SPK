@@ -20,8 +20,8 @@
     <br>
     <div class="container-fluid chat wow fadeInUp">
         <div class="row">
-            <div class="col-lg-6 col-12">
-                <!-- small box -->
+            <!-- <div class="col-lg-6 col-12">
+                
                 <div class="small-box bg-info">
                     <div class="inner">
                         <div class="large"><strong>2</strong></div>
@@ -32,24 +32,24 @@
                     </div>
                     <a href="" class="small-box-footer">More Info <i class="fa fa-arrow-circle-right"></i></a>
                     <!-- <a href="" class="small-box-footer">Report <i class="fa fa-arrow-circle-right"></i></a> -->
-                </div>
+        </div>
+    </div> -->
+    <!-- ./col -->
+    <div class="col-lg-6 col-12">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <div class="large"><strong>{{$alternatifs}}</strong></div>
+                <div class="text"><strong>Jumlah Penduduk Yang Terdaftar</strong></div>
             </div>
-            <!-- ./col -->
-            <div class="col-lg-6 col-12">
-                <!-- small box -->
-                <div class="small-box bg-success">
-                    <div class="inner">
-                        <div class="large"><strong>{{$alternatifs}}</strong></div>
-                        <div class="text"><strong>Jumlah Penduduk Yang Terdaftar</strong></div>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-address-book" aria-hidden="true"></i>
-                    </div>
-                    <a href="{{route('alternatif.index')}}" class="small-box-footer">More Info <i class="fa fa-arrow-circle-right"></i></a>
-                    <!-- <a href="" class="small-box-footer">Report <i class="fa fa-arrow-circle-right"></i></a> -->
-                </div>
+            <div class="icon">
+                <i class="fa fa-address-book" aria-hidden="true"></i>
             </div>
+            <a href="{{route('alternatif.index')}}" class="small-box-footer">More Info <i class="fa fa-arrow-circle-right"></i></a>
+            <!-- <a href="" class="small-box-footer">Report <i class="fa fa-arrow-circle-right"></i></a> -->
         </div>
     </div>
+</div>
+</div>
 </div>
 @endsection

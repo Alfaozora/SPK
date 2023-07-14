@@ -59,10 +59,10 @@
                                     </div>
                                     <div class="form-group">
                                         <br>
-                                        <div class="custom-checkbox custom-control">
+                                        <!-- <div class="custom-checkbox custom-control">
                                             <input type="checkbox" name="remember" id="remember" class="custom-control-input">
                                             <label for="remember" class="custom-control-label">Ingat Saya</label>
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                     <div class="form-group m-0">

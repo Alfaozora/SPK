@@ -63,6 +63,12 @@
                     <span class="text-danger">*</span>
                     <input type="text" value="{{ old('alamat') }}" name="alamat" id="alamat" class="form-control input-lg">
                 </div>
+                <div class="col-md-3 mb-3 input-group-sm">
+                    <br>
+                    <label for="nomor">Nomor Hp</label>
+                    <span class="text-danger">*</span>
+                    <input type="text" value="{{ old('nomor') }}" name="nomor" id="nomor" class="form-control input-lg" placeholder="Gunakan awalan +62">
+                </div>
                 <br>
                 <br>
                 <br>

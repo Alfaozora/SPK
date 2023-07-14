@@ -49,6 +49,7 @@ class AlternatifController extends Controller
             'nik' => 'required|unique:alternatifs,nik,number',
             'nama' => 'required',
             'alamat' => 'required',
+            'nomor' => 'required|unique:alternatifs,nomor,number',
         ]);
 
         $alternatifs = alternatif::create([
@@ -56,8 +57,8 @@ class AlternatifController extends Controller
             'nkk' => $request->nkk,
             'nik' => $request->nik,
             'nama' => $request->nama,
-            'alamat' => $request->alamat
-
+            'alamat' => $request->alamat,
+            'nomor' => $request->nomor
         ]);
         if ($alternatifs) {
             Alert::success('Alternatif Berhasil Ditambahkan', 'Selamat');
@@ -102,10 +103,11 @@ class AlternatifController extends Controller
     {
         $this->validate($request, [
             'kode' => 'required',
-            'nkk' => 'required|unique:alternatifs,nkk,number',
-            'nik' => 'required|unique:alternatifs,nik,number',
+            'nkk' => 'required',
+            'nik' => 'required',
             'nama' => 'required',
             'alamat' => 'required',
+            'nomor' => 'required|unique:alternatifs,nomor,number',
         ]);
 
         $alternatifs = Alternatif::find($id);
@@ -115,6 +117,7 @@ class AlternatifController extends Controller
             'nik' => $request->nik,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
+            'nomor' => $request->nomor
         ]);
 
         if ($alternatifs) {

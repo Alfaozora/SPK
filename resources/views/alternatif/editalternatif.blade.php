@@ -59,6 +59,11 @@
                     <label>Alamat</label>
                     <input type="text" name="alamat" class="form-control" placeholder="" value="{{ old('alamat', $alternatifs->alamat) }}">
                 </div>
+                <div class="col-md-3 mb-3 input-group-sm">
+                    <br>
+                    <label>Nomor Hp</label>
+                    <input type="text" name="nomor" class="form-control" placeholder="" value="{{ old('nomor', $alternatifs->nomor) }}">
+                </div>
             </div>
         </div>
         <div class="form-row">

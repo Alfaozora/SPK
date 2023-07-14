@@ -20,8 +20,8 @@ class HasilController extends Controller
 
         //mengambil data NKK dari database alternatif kemudian ditampilkan dengan tabel pemeringkatan
         $pemeringkatans = Pemeringkatan::join('alternatifs', 'pemeringkatans.alternatif_id', '=', 'alternatifs.kode')
-            ->select('alternatifs.nkk', 'alternatifs.nik', 'alternatifs.alamat', 'pemeringkatans.*')
-            ->orderBy('peringkat', 'ASC')
+            ->select('alternatifs.nkk', 'alternatifs.nik', 'alternatifs.alamat', 'alternatifs.nomor', 'pemeringkatans.*')
+            ->orderBy('bobot', 'DESC')
             ->take($jumlahOrang)
             ->get();
         // dd($pemeringkatans);
