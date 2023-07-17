@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>SPK BANSOS</title>
+    <title>SPK BLT-DD</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="{{asset ('css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset ('css/login.css')}}" rel="stylesheet">
@@ -59,10 +59,10 @@
                                     </div>
                                     <div class="form-group">
                                         <br>
-                                        <div class="custom-checkbox custom-control">
+                                        <!-- <div class="custom-checkbox custom-control">
                                             <input type="checkbox" name="remember" id="remember" class="custom-control-input">
                                             <label for="remember" class="custom-control-label">Ingat Saya</label>
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                     <div class="form-group m-0">

@@ -83,6 +83,9 @@ class CripsController extends Controller
      */
     public function edit($id)
     {
+        $kriterias = Kriteria::all();
+        $sub_kriterias = sub_kriteria::find($id);
+        return view('crips.editcrips', compact('kriterias', 'sub_kriterias'));
     }
 
     /**
@@ -94,6 +97,24 @@ class CripsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'kode_kriteria' => 'required',
+            'nama_sub' => 'required',
+            'bobot' => 'required'
+        ]);
+        $sub_kriterias = sub_kriteria::find($id);
+        $sub_kriterias->update([
+            'kode_kriteria' => $request->kode_kriteria,
+            'nama_sub' => $request->nama_sub,
+            'bobot' => $request->bobot
+        ]);
+        if ($sub_kriterias) {
+            Alert::success('Sub Kriteria Berhasil Ditambahkan', 'Selamat');
+            return redirect()->route('crips.index');
+        } else {
+            Alert::error('Sub Kriteria Gagal Ditambahkan', 'Maaf');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -104,5 +125,8 @@ class CripsController extends Controller
      */
     public function destroy($id)
     {
+        $sub_kriterias = sub_kriteria::find($id);
+        $sub_kriterias->delete();
+        return response()->json(['status' => 'Kriteria Berhasil di hapus!']);
     }
 }

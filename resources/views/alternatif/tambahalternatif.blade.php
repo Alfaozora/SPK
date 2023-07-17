@@ -43,6 +43,11 @@
                     <input type="text" name="kode" value="{{ old('kode') }}" id="kode" class="form-control input-lg">
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
+                    <label for="nik">NKK</label>
+                    <span class="text-danger">*</span>
+                    <input type="text" name="nkk" value="{{ old('nkk') }}" id="nkk" class="form-control input-lg">
+                </div>
+                <div class="col-md-3 mb-3 input-group-sm">
                     <label for="nik">NIK</label>
                     <span class="text-danger">*</span>
                     <input type="text" name="nik" value="{{ old('nik') }}" id="nik" class="form-control input-lg">
@@ -53,18 +58,16 @@
                     <input type="text" value="{{ old('nama') }}" name="nama" id="nama" class="form-control input-lg">
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
+                    <br>
                     <label for="alamat">Alamat</label>
                     <span class="text-danger">*</span>
-                    <select name="alamat" id="alamat" class="form-control">
-                        <option value="{{null}}" selected disabled>Pilih Alamat</option>
-                        <option value="Klari">Klari</option>
-                        <option value="Gedong">Gedong</option>
-                        <option value="Dampet">Dampet</option>
-                        <option value="Mlanggeng">Mlanggeng</option>
-                        <option value="Nataan Jobo">Nataan Jobo</option>
-                        <option value="Nataan Jero">Nataan Jero</option>
-                        <option value="Boyosari">Boyosari</option>
-                    </select>
+                    <input type="text" value="{{ old('alamat') }}" name="alamat" id="alamat" class="form-control input-lg">
+                </div>
+                <div class="col-md-3 mb-3 input-group-sm">
+                    <br>
+                    <label for="nomor">Nomor Hp</label>
+                    <span class="text-danger">*</span>
+                    <input type="text" value="{{ old('nomor') }}" name="nomor" id="nomor" class="form-control input-lg" placeholder="Gunakan awalan +62">
                 </div>
                 <br>
                 <br>

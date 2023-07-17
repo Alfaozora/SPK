@@ -37,10 +37,14 @@
         @method('PUT')
         <div class="row">
             <h5 class="card-header">Alternatif</h5>
-            <div class="form-row">
+            <div class="form-row text-center">
                 <div class="col-md-3 mb-3 input-group-sm">
                     <label>Kode</label>
                     <input type="text" name="kode" class="form-control" placeholder="" value="{{ old('kode', $alternatifs->kode) }}">
+                </div>
+                <div class="col-md-3 mb-3 input-group-sm">
+                    <label>NKK</label>
+                    <input type="text" name="nkk" class="form-control" placeholder="" value="{{ old('nkk', $alternatifs->nkk) }}">
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
                     <label>NIK</label>
@@ -51,19 +55,14 @@
                     <input type="text" name="nama" class="form-control" placeholder="" value="{{ old('nama', $alternatifs->nama) }}">
                 </div>
                 <div class="col-md-3 mb-3 input-group-sm">
+                    <br>
                     <label>Alamat</label>
-                    <select name="alamat" id="alamat" class="form-control">
-                        <option value="{{ old('alamat', $alternatifs->alamat) }}" selected>
-                            {{ old('alamat', $alternatifs->alamat) }}
-                        </option>
-                        <option value="Klari">Klari</option>
-                        <option value="Gedong">Gedong</option>
-                        <option value="Dampet">Dampet</option>
-                        <option value="Mlanggeng">Mlanggeng</option>
-                        <option value="Nataan Jobo">Nataan Jobo</option>
-                        <option value="Nataan Jero">Nataan Jero</option>
-                        <option value="Boyosari">Boyosari</option>
-                    </select>
+                    <input type="text" name="alamat" class="form-control" placeholder="" value="{{ old('alamat', $alternatifs->alamat) }}">
+                </div>
+                <div class="col-md-3 mb-3 input-group-sm">
+                    <br>
+                    <label>Nomor Hp</label>
+                    <input type="text" name="nomor" class="form-control" placeholder="" value="{{ old('nomor', $alternatifs->nomor) }}">
                 </div>
             </div>
         </div>

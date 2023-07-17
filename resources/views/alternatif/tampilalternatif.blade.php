@@ -31,9 +31,9 @@
                             <div class="form-group">
                                 <a type="button" class="btn btn-danger" href="{{route('alternatif.create')}}"><i class="fa fa-plus"></i> Tambah</a>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <a type="button" class="btn btn-info" href="/alternatif-export"><i class="fa fa-print"></i> Cetak</a>
-                            </div>
+                            </div> -->
                         </form>
                     </div>
                     <div class="table-responsive">
@@ -46,6 +46,7 @@
                                     <th rowspan="2">NIK</th>
                                     <th rowspan="2">Nama Penduduk</th>
                                     <th rowspan="2">Alamat</th>
+                                    <th rowspan="2">Nomor Hp</th>
                                     <th colspan="2">Action</th>
                                 </tr>
                                 <tr>
@@ -63,6 +64,7 @@
                                     <td>{{ $a->nik }}</td>
                                     <td>{{ $a->nama }}</td>
                                     <td>{{ $a->alamat }}</td>
+                                    <td>{{ $a->nomor }}</td>
                                     <td>
                                         <a href="{{ route('alternatif.edit', $a->id) }}" class="btn btn-warning">
                                             <i class="fa fa-edit"></i> Edit

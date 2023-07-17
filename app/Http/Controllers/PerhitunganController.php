@@ -331,11 +331,11 @@ class PerhitunganController extends Controller
                 } else {
                     $derajatKeanggotaan[$kriteria1][$kriteria2] = round(($l1 - $u2) / (($m2 - $u2) - ($m1 - $l1)), 2);
                 }
-                // dd($m2);
             }
             $nilaiMinimum[$kriteria1] = min($derajatKeanggotaan[$kriteria1]);
             $totalMinimum += $nilaiMinimum[$kriteria1];
         }
+
 
         //menghitung normalisasi vektor
         $normalisasiVektor = [];

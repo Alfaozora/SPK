@@ -43,6 +43,11 @@
                                     <th rowspan="2">Kode Kriteria</th>
                                     <th rowspan="2">Sub Kriteria</th>
                                     <th rowspan="2">Bobot</th>
+                                    <th colspan="2">Action</th>
+                                </tr>
+                                <tr>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center" style="vertical-align:middle;">
@@ -52,6 +57,18 @@
                                     <td>{{ $sub->kode_kriteria }}</td>
                                     <td class="text-left">{{ $sub->nama_sub }}</td>
                                     <td>{{$sub->bobot}}</td>
+                                    <td>
+                                        <a href="{{ route('crips.edit', $sub->id) }}" class="btn btn-warning">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('crips.destroy', $sub->id) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger btndelete"><i class="fa fa-trash"></i> Hapus</button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -68,6 +85,51 @@
 </div>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-<!--/ .Sweet Alert Hapus -->
 @endsection
+<script>
+    $(document).ready(function() {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('.btndelete').click(function(e) {
+            e.preventDefault();
+
+            var deleteid = $(this).closest("tr").find('.delete_id').val();
+
+            swal({
+                    title: "Apakah anda yakin?",
+                    text: "Setelah dihapus, Anda tidak dapat memulihkan Data ini lagi!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+
+                        var data = {
+                            "_token": $('input[name=_token]').val(),
+                            'id': deleteid,
+                        };
+                        $.ajax({
+                            type: "DELETE",
+                            url: 'crips/' + deleteid,
+                            data: data,
+                            success: function(response) {
+                                swal(response.status, {
+                                        icon: "success",
+                                    })
+                                    .then((result) => {
+                                        location.reload();
+                                    });
+                            }
+                        });
+                    }
+                });
+        });
+
+    });
+</script>
