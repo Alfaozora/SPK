@@ -23,9 +23,11 @@
 <body class="my-login-page">
     <style>
         body {
-            background-image: url("gambar/BG.PNG");
+            background-image: url("gambar/BG.png");
             background-repeat: no-repeat;
             background-size: cover;
+            /* background-position: center; */
+            background-position-x: center;
         }
     </style>
     <section class="h-100">
