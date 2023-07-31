@@ -53,16 +53,16 @@
             </tr>
         </table>
         <table class="table table-bordered" id="tableContainer">
-            <thead class="text-center" style="vertical-align:middle;">
+            <thead>
                 <tr>
                     <th colspan="5" class="text-center">Daftar Warga Yang Mendapatkan Bantuan</th>
                 </tr>
                 <tr>
-                    <th rowspan="2">No</th>
-                    <th rowspan="2">NKK</th>
-                    <th rowspan="2">NIK</th>
-                    <th rowspan="2">Nama</th>
-                    <th rowspan="2">Alamat</th>
+                    <th rowspan="2" class="text-center">No</th>
+                    <th rowspan="2" class="text-center">NKK</th>
+                    <th rowspan="2" class="text-center">NIK</th>
+                    <th rowspan="2" class="text-center">Nama</th>
+                    <th rowspan="2" class="text-center">Alamat</th>
                 </tr>
             </thead>
             <tbody class="text-center" style="vertical-align:middle;">

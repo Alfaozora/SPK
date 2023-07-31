@@ -33,9 +33,6 @@
                             <div class="form-group">
                                 <a type="button" class="btn btn-danger" href="{{route('register.create')}}"><i class="fa fa-plus"></i> Tambah User</a>
                             </div>
-                            <div class="form-group">
-                                <a type="button" class="btn btn-info" href=""><i class="fa fa-print"></i> Cetak</a>
-                            </div>
                         </form>
                     </div>
                     <div class="table-responsive">

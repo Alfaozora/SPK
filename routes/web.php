@@ -58,6 +58,8 @@ Route::get('/hasil', [HasilController::class, 'index'])->middleware(['auth'])->n
 Route::get('/hasil/cetak', [HasilController::class, 'cetak'])->middleware(['auth'])->name('hasil.cetak');
 Route::get('/hasil/cetak/dwonload', [HasilController::class, 'pdfDwonload'])->middleware(['auth'])->name('hasil.pdfDwonload');
 Route::get('/hasil/excel', [HasilController::class, 'excel'])->middleware(['auth'])->name('hasil.excel');
+Route::get('/hasil/excel/dwonload', [HasilController::class, 'excelDwonload'])->middleware(['auth'])->name('hasil.excelDwonload');
+
 
 // #Email Verification
 // Route::get('/email/verify', function () {
