@@ -40,7 +40,7 @@ use Carbon\Carbon;
             <table class="table table-bordered table-striped table-hover">
                 <thead class="text-center" style="vertical-align:middle;">
                     <tr>
-                        <th colspan="6">Daftar Warga Yang Mendapatkan Bantuan</th>
+                        <th colspan="8">Daftar Warga Yang Mendapatkan Bantuan</th>
                     </tr>
                     <tr>
                         <th rowspan="2">No</th>

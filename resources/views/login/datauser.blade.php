@@ -64,6 +64,9 @@
                                         User
                                         @endif
                                     </td>
+                                    @if($u->role == 1)
+                                    <td></td>
+                                    @else
                                     <td>
                                         <a href="{{ route('register.edit', $u->id) }}" class="btn btn-warning">
                                             <i class="fa fa-edit"></i> Edit
@@ -76,6 +79,7 @@
                                             <button class="btn btn-danger btndelete"><i class="fa fa-trash"></i> Hapus</button>
                                         </form>
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
