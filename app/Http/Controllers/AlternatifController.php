@@ -14,9 +14,13 @@ class AlternatifController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $alternatifs = alternatif::paginate(20);
+        $cari = $request->cari;
+        $alternatifs = alternatif::where('nama', 'LIKE', "%" . $cari . "%")
+            ->orWhere('nik', 'LIKE', "%" . $cari . "%")
+            ->orWhere('nkk', 'LIKE', "%" . $cari . "%")
+            ->orderBy('id', 'asc')->paginate(20);
         return view('alternatif.tampilalternatif', compact('alternatifs'));
     }
 
@@ -77,7 +81,6 @@ class AlternatifController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**

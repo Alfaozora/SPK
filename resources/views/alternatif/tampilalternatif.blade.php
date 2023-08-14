@@ -31,6 +31,10 @@
                             <div class="form-group">
                                 <a type="button" class="btn btn-danger" href="{{route('alternatif.create')}}"><i class="fa fa-plus"></i> Tambah</a>
                             </div>
+                            <div class="form-group">
+                                <input id="floatingInputGroup1" name="cari" type="text" class="form-control" placeholder="Cari Nama, NIK, NKK">
+                                <button class="input-group-text btn btn-primary">Cari</button>
+                            </div>
                             <!-- <div class="form-group">
                                 <a type="button" class="btn btn-info" href="/alternatif-export"><i class="fa fa-print"></i> Cetak</a>
                             </div> -->

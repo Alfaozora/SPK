@@ -33,9 +33,6 @@
                             <div class="form-group">
                                 <a type="button" class="btn btn-danger" href="{{route('register.create')}}"><i class="fa fa-plus"></i> Tambah User</a>
                             </div>
-                            <div class="form-group">
-                                <a type="button" class="btn btn-info" href=""><i class="fa fa-print"></i> Cetak</a>
-                            </div>
                         </form>
                     </div>
                     <div class="table-responsive">
@@ -67,6 +64,9 @@
                                         User
                                         @endif
                                     </td>
+                                    @if($u->role == 1)
+                                    <td></td>
+                                    @else
                                     <td>
                                         <a href="{{ route('register.edit', $u->id) }}" class="btn btn-warning">
                                             <i class="fa fa-edit"></i> Edit
@@ -79,6 +79,7 @@
                                             <button class="btn btn-danger btndelete"><i class="fa fa-trash"></i> Hapus</button>
                                         </form>
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
