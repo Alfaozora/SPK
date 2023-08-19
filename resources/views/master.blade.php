@@ -19,7 +19,18 @@
     <!--/.row-->
     <br>
     <!-- ./col -->
-    <div class="col-lg-6 col-12">
+    <div class="col-lg-6">
+        <div class="alert alert-info" role="alert">
+            <strong>
+                <font size="4" face="Poppins">SPK BLT-DD</font>
+            </strong>
+            <font face="Poppins">
+                <p style="text-align: justify;">SPK BLT-DD adalah layanan khusus untuk menyimpan, mendukung keputusan, mengelola data calon penerima bantuan langsung tunai dana desa dari pemerintah.
+                    Layanan ini memudahkan Anda dalam pengambilan keputusan siapa saja yang layak menerima bantuan. Selain itu, Anda juga dimudahkan untuk dapat mengatur sendiri nilai bobot intensitas yang dipakai</p>
+            </font>
+        </div>
+    </div>
+    <div class="col-lg-6 col-6">
         <!-- small box -->
         <div class="small-box bg-success">
             <div class="inner">
@@ -31,17 +42,6 @@
             </div>
             <a href="{{route('alternatif.index')}}" class="small-box-footer">More Info <i class="fa fa-arrow-circle-right"></i></a>
             <!-- <a href="" class="small-box-footer">Report <i class="fa fa-arrow-circle-right"></i></a> -->
-        </div>
-    </div>
-    <div class="col-lg-12">
-        <div class="alert alert-info" role="alert">
-            <strong>
-                <font size="4" face="Poppins">SPK BLT-DD</font>
-            </strong>
-            <font face="Poppins">
-                <p>SPK BLT-DD adalah layanan khusus untuk menyimpan, mendukung keputusan, mengelola data calon penerima bantuan langsung tunai dana desa dari pemerintah.
-                    Layanan ini memudahkan Anda dalam pengambilan keputusan siapa saja yang layak menerima bantuan. Selain itu, Anda juga dimudahkan untuk dapat mengatur sendiri nilai bobot intensitas yang dipakai</p>
-            </font>
         </div>
     </div>
 </div>
