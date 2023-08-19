@@ -46,6 +46,7 @@
         @else
         <li class="{{ request()->is('register*') ? 'active' : '' }}"><a href="{{route ('register.index')}}"><em class="fa fa-address-book" aria-hidden="true">&nbsp;</em> Menu User</a></li>
         @endif
+        <li class="{{ request()->is('about*') ? 'active' : '' }}"><a href="{{route ('about.index') }}"><em class="fa fa-file-info">&nbsp;</em> About Us</a></li>
         <li><a href="/login/logout"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
     </ul>
 </div><!--/.sidebar-->

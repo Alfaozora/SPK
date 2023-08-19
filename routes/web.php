@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\IntensitasController;
 use App\Http\Controllers\PerhitunganController;
+use App\Http\Controllers\AboutController;
 use Route as GlobalRoute;
 
 /*
@@ -60,6 +61,8 @@ Route::get('/hasil/cetak/dwonload', [HasilController::class, 'pdfDwonload'])->mi
 Route::get('/hasil/excel', [HasilController::class, 'excel'])->middleware(['auth'])->name('hasil.excel');
 Route::get('/hasil/excel/dwonload', [HasilController::class, 'excelDwonload'])->middleware(['auth'])->name('hasil.excelDwonload');
 
+//ABout
+Route::resource('about', AboutController::class)->middleware(['auth']);
 
 // #Email Verification
 // Route::get('/email/verify', function () {
