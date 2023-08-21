@@ -8,13 +8,13 @@
                     <em class="fa fa-home"></em>
                 </a></li>
             <li class="breadcrumb-item"><a href="{{ route('nilaiIntensitas.index') }}">Nilai Intensitas</a></li>
-            <li class="breadcrumb-item active" aria-current="page"> Tambah Nilai Intensitas</li>
+            <li class="breadcrumb-item active" aria-current="page"> Edit Nilai Intensitas</li>
         </ol>
     </div>
     <!--/.row-->
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header">Tambah Nilai Intensitas</h2>
+            <h2 class="page-header">Edit Nilai Intensitas</h2>
         </div>
     </div>
 </div>
