@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\IntensitasController;
 use App\Http\Controllers\PerhitunganController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\BackupController;
 use Route as GlobalRoute;
 
 /*
@@ -63,6 +64,9 @@ Route::get('/hasil/excel/dwonload', [HasilController::class, 'excelDwonload'])->
 
 //ABout
 Route::resource('about', AboutController::class)->middleware(['auth']);
+
+//Backup
+Route::post('/cadangkan', [BackupController::class, 'cadangkanAlternatif'])->middleware(['auth'])->name('cadangkan');
 
 // #Email Verification
 // Route::get('/email/verify', function () {

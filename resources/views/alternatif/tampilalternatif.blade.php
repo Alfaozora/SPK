@@ -35,9 +35,6 @@
                                 <input id="floatingInputGroup1" name="cari" type="text" class="form-control" placeholder="Cari Nama, NIK, NKK">
                                 <button class="input-group-text btn btn-primary">Cari</button>
                             </div>
-                            <!-- <div class="form-group">
-                                <a type="button" class="btn btn-info" href="/alternatif-export"><i class="fa fa-print"></i> Cetak</a>
-                            </div> -->
                         </form>
                     </div>
                     <div class="table-responsive">
@@ -89,6 +86,12 @@
                     <div class="col-md-6 my-12">
                         {{ $alternatifs->links() }}
                     </div>
+                </div>
+                <div class="text-right">
+                    <form action="{{route('cadangkan')}}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Cadangkan Data</button>
+                    </form>
                 </div>
             </div>
             <div class="col-sm-12">
