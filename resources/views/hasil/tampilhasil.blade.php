@@ -31,9 +31,6 @@ use Carbon\Carbon;
                 <div class="form-group">
                     <a class="btn btn-danger mb-2" id="btnCetak" href="{{route('hasil.cetak')}}"><i class="fa fa-file-pdf-o"></i> Cetak PDF</a>
                 </div>
-                <div class="form-group">
-                    <a class="btn btn-success mb-2" id="btnCetak" href="{{route('hasil.excel')}}"><i class="fa fa-file-excel-o"></i> Cetak Excel</a>
-                </div>
             </form>
         </div>
         <div class="table-responsive" id="tableContainer">

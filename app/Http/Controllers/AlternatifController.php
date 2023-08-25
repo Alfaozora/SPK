@@ -144,4 +144,10 @@ class AlternatifController extends Controller
         $alternatifs->delete();
         return response()->json(['status' => 'Kriteria Berhasil di hapus!']);
     }
+
+    public function hapusSemua()
+    {
+        Alternatif::truncate();
+        return response()->json(['status' => 'Semua Data Alternatif Berhasil di Hapus!']);
+    }
 }
