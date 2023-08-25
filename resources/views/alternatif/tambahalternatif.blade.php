@@ -75,15 +75,13 @@
             </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-4 mb-3">
-            </br>
-            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Data</button>
-        </div>
+        </br>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Data</button>
     </div>
     </form>
 </div>
-<div class="col-sm-12">
+<div class="col-lg-12">
     <br>
-    <p class="back-link">Desa Gedongboyountung 2023</p>
+    <p class="back-link" style="text-align:center">Desa Gedongboyountung 2023</p>
 </div>
 @endsection

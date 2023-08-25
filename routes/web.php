@@ -43,7 +43,9 @@ Route::resource('crips', CripsController::class)->middleware(['auth']);
 
 #Alternatif
 Route::resource('alternatif', AlternatifController::class)->middleware(['auth']);
-Route::get('/alternatif-export', [AlternatifController::class, 'export'])->middleware(['auth']);
+#Hapus Semua Data Alternatif
+Route::delete('/alternatif/hapusSemua', [AlternatifController::class, 'hapusSemua'])->middleware(['auth'])->name('hapusSemua');
+
 
 #Register
 Route::resource('register', RegisterController::class)->middleware(['auth', 'admin']);
@@ -67,6 +69,11 @@ Route::resource('about', AboutController::class)->middleware(['auth']);
 
 //Backup
 Route::post('/cadangkan', [BackupController::class, 'cadangkanAlternatif'])->middleware(['auth'])->name('cadangkan');
+
+//Upload JSON
+Route::get('/upload', [BackupController::class, 'upload'])->middleware(['auth'])->name('upload.form');
+Route::post('/upload/file', [BackupController::class, 'uploadAlternatif'])->middleware(['auth'])->name('uploadFile');
+
 
 // #Email Verification
 // Route::get('/email/verify', function () {
