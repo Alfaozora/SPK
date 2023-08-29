@@ -15,6 +15,7 @@ use App\Http\Controllers\IntensitasController;
 use App\Http\Controllers\PerhitunganController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BackupController;
+use App\Http\Controllers\HistoryController;
 use Route as GlobalRoute;
 
 /*
@@ -44,7 +45,7 @@ Route::resource('crips', CripsController::class)->middleware(['auth']);
 #Alternatif
 Route::resource('alternatif', AlternatifController::class)->middleware(['auth']);
 #Hapus Semua Data Alternatif
-Route::delete('/alternatif/hapusSemua', [AlternatifController::class, 'hapusSemua'])->middleware(['auth'])->name('hapusSemua');
+Route::post('/alternatif/hapus_semua',  [AlternatifController::class, 'hapusSemua'])->middleware(['auth'])->name('alternatif.hapus_semua');
 
 
 #Register
@@ -63,12 +64,15 @@ Route::get('/hasil/cetak', [HasilController::class, 'cetak'])->middleware(['auth
 Route::get('/hasil/cetak/dwonload', [HasilController::class, 'pdfDwonload'])->middleware(['auth'])->name('hasil.pdfDwonload');
 Route::get('/hasil/excel', [HasilController::class, 'excel'])->middleware(['auth'])->name('hasil.excel');
 Route::get('/hasil/excel/dwonload', [HasilController::class, 'excelDwonload'])->middleware(['auth'])->name('hasil.excelDwonload');
+Route::get('/hasil/cari', [HasilController::class, 'cari'])->middleware(['auth'])->name('hasil.cari');
 
-//ABout
+//About
 Route::resource('about', AboutController::class)->middleware(['auth']);
 
 //Backup
 Route::post('/cadangkan', [BackupController::class, 'cadangkanAlternatif'])->middleware(['auth'])->name('cadangkan');
+Route::get('/cadangkan', [HistoryController::class, 'riwayat'])->middleware(['auth'])->name('riwayat');
+Route::get('/cadangan-alternatif', [HistoryController::class, 'riwayatAlternatif'])->middleware(['auth'])->name('riwayat.tampil');
 
 //Upload JSON
 Route::get('/upload', [BackupController::class, 'upload'])->middleware(['auth'])->name('upload.form');

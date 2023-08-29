@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Alternatif;
 use Alert;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AlternatifController extends Controller
@@ -148,6 +149,12 @@ class AlternatifController extends Controller
     public function hapusSemua()
     {
         Alternatif::truncate();
-        return response()->json(['status' => 'Semua Data Alternatif Berhasil di Hapus!']);
+        if (Alternatif::truncate()) {
+            Alert::success('Alternatif Berhasil Dihapus', 'Selamat');
+            return redirect()->route('alternatif.index');
+        } else {
+            Alert::error('Alternatif Gagal Dihapus', 'Maaf');
+            return redirect()->route('alternatif.index');
+        }
     }
 }
