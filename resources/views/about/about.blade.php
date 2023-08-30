@@ -32,17 +32,23 @@
                 <br>
                 <div class="alert bg-info kontak">
                     <div class="container">
-                        <div class="col-md-6 mb-6">
-                            <h3 class="mb-3 about">
+                        <div class="col-md-4 mb-4">
+                            <h3 class="mb-4 about">
                                 <i class="fa fa-building"></i> Alamat
                             </h3>
                             <p style="font-size: 16px; color:white; font-family:'poppins'">Dsn.Mlanggeng RT/RW 09/05 Ds.Gedongboyountung Kec.Turi Kabupaten Lamongan</p>
                         </div>
-                        <div class="col-md-6 mb-6">
-                            <h3 class="mb-3 about">
+                        <div class="col-md-4 mb-4">
+                            <h3 class="mb-4 about">
                                 <i class="fa fa-phone"></i> Contact
                             </h3>
                             <p style="font-size: 16px; color:white; font-family:'poppins'">+62 895 396 326 432<br>alfa.ozora89@gmail.com</p>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <h3 class="mb-4 about">
+                                <i class="fa fa-user"></i> Profil
+                            </h3>
+                            <p style="font-size: 16px; color:white; font-family:'poppins'">Hafiz Aria Alfaizi - 1918019<br>Institut Teknologi Nasional Malang</p>
                         </div>
                     </div>
                 </div>

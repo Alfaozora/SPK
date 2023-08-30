@@ -79,7 +79,7 @@
                         </div>
                         <div class="col-xs-10 col-md-10">
                             <h4>
-                                <a href="https://drive.google.com/file/d/1MFmTMqLZ_IJH3P-F2ATkxVwtjv1_vS1Q/view?usp=sharing" target="_blank">Pedoman Penggunaan Aplikasi</a>
+                                <a href="https://drive.google.com/file/d/1erWy9I2mRv0Skre5FcmVg2yy_miYTW_9/view?usp=sharing" target="_blank">Pedoman Penggunaan Aplikasi</a>
                             </h4>
                             <p>Berikut merupakan buku pedoman penggunaan aplikasi SPK BLT-DD yang dapat didwonload.</p>
                         </div>
