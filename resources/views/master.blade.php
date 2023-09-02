@@ -10,18 +10,6 @@
             <li class="wow fadeInLeft active">Dashboard</li>
         </ol>
     </div>
-    <!-- <div class="jumbotorn jumbotorn-fluid wow fadeInUp">
-        <div class="container">
-            <h1 class="display-4">Selamat Datang</h1>
-            <p class="lead">Sistem Pendukung Keputusan Penerimaan Bantuan Langsung Tunai Dana Desa</p>
-        </div>
-    </div> -->
-    <!-- <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">Selamat Datang</h1>
-            <p>Sistem Pendukung Keputusan Penerimaan Bantuan Langsung Tunai Dana Desa</p>
-        </div>
-    </div> -->
     <br>
     <div class="carousel-inner" role="listbox">
         <div class="item active">
@@ -91,7 +79,7 @@
                         </div>
                         <div class="col-xs-10 col-md-10">
                             <h4>
-                                <a href="https://drive.google.com/file/d/18PNlmMQ1rq08FESDoGDpD_9CK0648diC/view?usp=sharing" target="_blank">Pedoman Penggunaan Aplikasi</a>
+                                <a href="https://drive.google.com/file/d/1erWy9I2mRv0Skre5FcmVg2yy_miYTW_9/view?usp=sharing" target="_blank">Pedoman Penggunaan Aplikasi</a>
                             </h4>
                             <p>Berikut merupakan buku pedoman penggunaan aplikasi SPK BLT-DD yang dapat didwonload.</p>
                         </div>

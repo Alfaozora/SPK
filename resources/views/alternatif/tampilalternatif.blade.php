@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('container')
 @include('sweetalert::alert')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="wow fadeInLeft">
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         <div class="row">
@@ -35,9 +36,30 @@
                                 <input id="floatingInputGroup1" name="cari" type="text" class="form-control" placeholder="Cari Nama, NIK, NKK">
                                 <button class="input-group-text btn btn-primary">Cari</button>
                             </div>
-                            <div class="form-group">
-                                <a type="button" class="btn btn-success" href="{{route('upload.form')}}"><i class="fa fa-upload"></i> Upload File</a>
-                            </div>
+                            <ul class="pull-right panel-settings panel-button-tab-right">
+                                <li class="dropdown">
+                                    <a class="pull-right dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <em class="fa fa-cogs"></em>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li>
+                                            <ul class="dropdown-settings">
+                                                <li>
+                                                    <a href="{{route('riwayat')}}">
+                                                        <em class="fa fa-upload"></em> Cadangkan Alternatif
+                                                    </a>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <li>
+                                                    <a href="{{route('riwayat.tampil')}}">
+                                                        <em class="fa fa-bars"></em> Lihat Riwayat
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </form>
                     </div>
                     <div class="table-responsive">
@@ -45,7 +67,7 @@
                             <thead class="text-center" style="vertical-align:middle;">
                                 <tr>
                                     <th rowspan="2">No</th>
-                                    <th rowspan="2">Kode</th>
+                                    <th rowspan="2">Tahun</th>
                                     <th rowspan="2">NKK</th>
                                     <th rowspan="2">NIK</th>
                                     <th rowspan="2">Nama Penduduk</th>
@@ -63,7 +85,7 @@
                                 <tr>
                                     <input type="hidden" class="delete_id" value="{{ $a->id }}">
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $a->kode }}</td>
+                                    <td>{{$a->created_at->year }}</td>
                                     <td>{{$a->nkk}}</td>
                                     <td>{{ $a->nik }}</td>
                                     <td>{{ $a->nama }}</td>
@@ -89,13 +111,14 @@
                     <div class="col-md-6 my-12">
                         {{ $alternatifs->links() }}
                     </div>
+                    <div class="col-md-12 my-6 text-right">
+                        <form action="/alternatif/hapus_semua" method="POST" id="formHapusSemua">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Hapus Semua Data Alternatif</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="col-md-6 text-right">
-                    <form action="{{route('cadangkan')}}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">Cadangkan Data</button>
-                    </form>
-                </div>
+
             </div>
             <div class="col-sm-12">
                 <p class="back-link">Desa Gedongboyountung 2023</a></p>
@@ -151,25 +174,6 @@
                 });
         });
 
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $('#hapusSemuaBtn').on('click', function() {
-            if (confirm('Apakah Anda yakin ingin menghapus semua data alternatif?')) {
-                $.ajax({
-                    type: 'DELETE',
-                    url: '/alternatif/hapusSemua',
-                    success: function(response) {
-                        alert(response.message);
-                        // Lakukan refresh atau manipulasi tampilan sesuai kebutuhan
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(xhr.responseText);
-                    }
-                });
-            }
-        });
     });
 </script>
 @endsection
