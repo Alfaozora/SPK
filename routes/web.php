@@ -78,18 +78,5 @@ Route::get('/cadangan-alternatif', [HistoryController::class, 'riwayatAlternatif
 Route::get('/upload', [BackupController::class, 'upload'])->middleware(['auth'])->name('upload.form');
 Route::post('/upload/file', [BackupController::class, 'uploadAlternatif'])->middleware(['auth'])->name('uploadFile');
 
-
-// #Email Verification
-// Route::get('/email/verify', function () {
-//     return view('auth.verify-email');
-// })->middleware('auth')->name('verification.notice');
-// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-//     $request->fulfill();
-//     return redirect('/');
-// })->middleware(['auth', 'signed'])->name('verification.verify');
-
-#Send Email
-// Route::get('send-email', [SendEmailController::class, 'index']);
-
 #Profil
 Route::resource('profil', ProfilController::class)->middleware(['auth']);
